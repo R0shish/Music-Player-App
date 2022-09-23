@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/dimensions.dart';
-import 'widgets/bottom_tab_view/bottom_tab_view.dart';
-import 'widgets/now_playing_container/now_playing_container.dart';
-import 'widgets/top_widget.dart';
+import '../../../../constants/dimensions.dart';
+import '../widgets/bottom_tab_view/bottom_tab_view.dart';
+import '../widgets/now_playing_container/now_playing_container.dart';
+import '../widgets/top_widget.dart';
 
 class Homescreen extends StatelessWidget {
   const Homescreen({super.key});

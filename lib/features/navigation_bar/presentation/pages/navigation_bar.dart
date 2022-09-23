@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_player/features/navigation_bar/presentation/cubit/navbar_cubit.dart';
 
 import '../../../../constants/color_constant.dart';
-import '../../../homescreen/presentation/homescreen.dart';
+import '../../../homescreen/presentation/pages/homescreen.dart';
 
 class NavigationPage extends StatelessWidget {
   const NavigationPage({Key? key}) : super(key: key);
