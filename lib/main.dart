@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'constants/color_constant.dart';
 import 'constants/text_theme.dart';
-import 'features/navigation_bar/navigation_bar.dart';
+import 'features/navigation_bar/presentation/cubit/navbar_cubit.dart';
+import 'features/navigation_bar/presentation/pages/navigation_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +28,10 @@ class MyApp extends StatelessWidget {
             backgroundColor: AppColor.black,
             foregroundColor: AppColor.secondary,
           )),
-      home: const NavigationPage(),
+      home: BlocProvider<NavbarCubit>(
+        create: (_) => NavbarCubit(),
+        child: const NavigationPage(),
+      ),
     );
   }
 }

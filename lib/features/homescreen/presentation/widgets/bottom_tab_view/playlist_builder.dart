@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/dimensions.dart';
+import '../../../../../core/data/model/playlist_model.dart';
 import '../../../../../core/widgets/playlist_container.dart';
-import '../../../../../model/playlist_model.dart';
 
 class PlaylistBuilder extends StatelessWidget {
   final Map<String, dynamic> playlistData;
