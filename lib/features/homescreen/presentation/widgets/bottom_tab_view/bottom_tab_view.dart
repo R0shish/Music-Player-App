@@ -34,7 +34,7 @@ class BottomTabView extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.only(left: 16.0, top: 10),
-          height: deviceHeight * 0.82,
+          height: deviceHeight * 0.8,
           child: TabBarView(children: [
             const ForYouTab(),
             Container(color: Colors.red),

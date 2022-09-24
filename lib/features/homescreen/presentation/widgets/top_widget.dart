@@ -12,7 +12,7 @@ class TopWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-          top: deviceHeight * 0.07,
+          top: deviceHeight * 0.05,
           left: deviceWidth * 0.03,
           right: deviceWidth * 0.03),
       height: deviceHeight / 10,

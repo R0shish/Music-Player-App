@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/features/now_playing/presentation/cubit/now_playing_cubit.dart';
+import 'package:music_player/router/app_router.dart';
 
 import 'constants/color_constant.dart';
 import 'constants/text_theme.dart';
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppRouter appRouter = AppRouter();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Music Player',
@@ -23,13 +26,18 @@ class MyApp extends StatelessWidget {
           primaryColor: AppColor.primary,
           secondaryHeaderColor: AppColor.secondary,
           scaffoldBackgroundColor: AppColor.black,
+          iconTheme: const IconThemeData(color: AppColor.lightGrey),
           textTheme: textTheme(),
           appBarTheme: const AppBarTheme(
             backgroundColor: AppColor.black,
             foregroundColor: AppColor.secondary,
           )),
-      home: BlocProvider<NavbarCubit>(
-        create: (_) => NavbarCubit(),
+      onGenerateRoute: (settings) => appRouter.onGenerateRoute(settings),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => NavbarCubit()),
+          BlocProvider(create: (_) => NowPlayingCubit()),
+        ],
         child: const NavigationPage(),
       ),
     );

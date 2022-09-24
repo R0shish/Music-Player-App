@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/features/now_playing/presentation/cubit/now_playing_cubit.dart';
 
 import '../../../../constants/dimensions.dart';
 import '../widgets/bottom_tab_view/bottom_tab_view.dart';
@@ -17,10 +19,19 @@ class Homescreen extends StatelessWidget {
         child: Scaffold(
           body: SingleChildScrollView(
               child: Column(
-            children: const <Widget>[
-              TopWidget(),
-              NowPlayingContainer(),
-              BottomTabView(),
+            children: <Widget>[
+              const TopWidget(),
+              BlocBuilder<NowPlayingCubit, NowPlayingState>(
+                builder: (context, state) {
+                  if (state.song != null) {
+                    return const NowPlayingContainer();
+                  }
+                  return SizedBox(
+                    height: deviceHeight * 0.02,
+                  );
+                },
+              ),
+              const BottomTabView(),
             ],
           )),
         ));

@@ -7,11 +7,13 @@ class PlaylistContainer extends StatelessWidget {
   final String title;
   final String subTitle;
   final String image;
+  final VoidCallback onPlayTap;
   const PlaylistContainer(
       {Key? key,
       required this.title,
       required this.subTitle,
-      required this.image})
+      required this.image,
+      required this.onPlayTap})
       : super(key: key);
 
   @override
@@ -79,9 +81,12 @@ class PlaylistContainer extends StatelessWidget {
                 color: AppColor.lightBlack,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
-                Icons.play_arrow,
-                color: AppColor.lightGrey,
+              child: GestureDetector(
+                onTap: onPlayTap,
+                child: const Icon(
+                  Icons.play_arrow,
+                  color: AppColor.lightGrey,
+                ),
               ),
             ),
           )
