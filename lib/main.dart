@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'features/now_playing/presentation/cubit/now_playing_cubit.dart';
-import 'router/app_router.dart';
 
 import 'constants/color_constant.dart';
 import 'constants/text_theme.dart';
 import 'features/navigation_bar/presentation/cubit/navbar_cubit.dart';
 import 'features/navigation_bar/presentation/pages/navigation_bar.dart';
+import 'features/now_playing/presentation/cubit/now_playing_cubit.dart';
+import 'router/app_router.dart';
 
 void main() {
   runApp(const MyApp());

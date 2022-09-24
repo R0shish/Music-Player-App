@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/now_playing_cubit.dart';
 
-import '../../../../constants/dimensions.dart';
-
 class AlbumArtContainer extends StatelessWidget {
+  final double width;
+  final double height;
   const AlbumArtContainer({
     Key? key,
+    required this.width,
+    required this.height,
   }) : super(key: key);
 
   @override
@@ -15,8 +17,8 @@ class AlbumArtContainer extends StatelessWidget {
     return BlocBuilder<NowPlayingCubit, NowPlayingState>(
       builder: (context, state) {
         return Container(
-          width: deviceWidth,
-          height: deviceHeight * 0.4,
+          width: width,
+          height: height,
           decoration: BoxDecoration(
               image: DecorationImage(image: cubit.songImage, fit: BoxFit.cover),
               borderRadius: const BorderRadius.all(Radius.circular(20))),

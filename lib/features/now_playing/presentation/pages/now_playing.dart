@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/constants/dimensions.dart';
-import 'package:music_player/core/widgets/progress_bar.dart';
+import '../../../../constants/dimensions.dart';
+import '../../../../core/widgets/progress_bar.dart';
 import '../cubit/now_playing_cubit.dart';
 import '../widgets/album_art_container.dart';
 import '../widgets/control_row.dart';
@@ -22,10 +22,13 @@ class NowPlaying extends StatelessWidget {
                   height: deviceHeight,
                   padding: const EdgeInsets.all(18.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const NowPlayingTitleRow(),
-                      const AlbumArtContainer(),
+                      AlbumArtContainer(
+                        height: deviceHeight * 0.4,
+                        width: deviceWidth,
+                      ),
                       BlocBuilder<NowPlayingCubit, NowPlayingState>(
                         builder: (context, state) {
                           return Column(
@@ -40,9 +43,7 @@ class NowPlaying extends StatelessWidget {
                       ),
                       const ProgressBar(),
                       const ControlRow(),
-                      SizedBox(
-                        height: deviceHeight * 0.05,
-                      )
+                      SizedBox(height: deviceHeight * 0.05),
                     ],
                   ),
                 ),

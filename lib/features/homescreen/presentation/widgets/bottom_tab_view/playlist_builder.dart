@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
 
 import '../../../../../constants/dimensions.dart';
 import '../../../../../core/data/model/playlist_model.dart';
 import '../../../../../core/data/model/song_model.dart';
 import '../../../../../core/widgets/playlist_container.dart';
+import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
 
 class PlaylistBuilder extends StatelessWidget {
   final Map<String, dynamic> playlistData;
@@ -28,7 +28,8 @@ class PlaylistBuilder extends StatelessWidget {
           return PlaylistContainer(
               title: playlist.title,
               subTitle: playlist.subTitle,
-              image: playlist.image,
+              albumArt: playlist.image,
+              backgroundImage: null,
               onPlayTap: () => context.read<NowPlayingCubit>().updateSong(Song(
                     name: playlist.title,
                     artist: playlist.subTitle,

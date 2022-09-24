@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../playlist/presentation/pages/playlist.dart';
 import '../cubit/navbar_cubit.dart';
 
 import '../../../../constants/color_constant.dart';
@@ -13,7 +14,7 @@ class NavigationPage extends StatelessWidget {
   final List<Widget> screens = const <Widget>[
     Homescreen(),
     Homescreen(),
-    Homescreen(),
+    PlaylistPage(),
     Homescreen(),
   ];
 
