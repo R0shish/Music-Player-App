@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/core/data/datasource/playlist_data.dart';
 import '../../../../constants/dimensions.dart';
-import '../../../../core/data/model/playlist_model.dart';
-import '../../../../core/widgets/playlist_container.dart';
 
 import '../widgets/last_played_row.dart';
 import '../widgets/playlist_grid.dart';
