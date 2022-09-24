@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/color_constant.dart';
@@ -71,7 +72,7 @@ class PlaylistContainer extends StatelessWidget {
               color: AppColor.primary,
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
-                  image: NetworkImage(image), fit: BoxFit.cover),
+                  image: CachedNetworkImageProvider(image), fit: BoxFit.cover),
             ),
             child: Container(
               margin: const EdgeInsets.all(10),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/features/now_playing/presentation/cubit/now_playing_cubit.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
+import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
 import '../../../../../constants/color_constant.dart';
 import '../../../../../constants/dimensions.dart';
+import '../../../../../core/widgets/progress_bar.dart';
 import '../../../../now_playing/presentation/pages/now_playing.dart';
 import 'song_info_row.dart';
 
@@ -25,13 +25,13 @@ class NowPlayingContainer extends StatelessWidget {
       ),
       child: Container(
         margin: EdgeInsets.only(
-            top: deviceHeight * 0.03,
+            top: deviceHeight * 0.02,
             left: deviceWidth * 0.03,
             right: deviceWidth * 0.03),
         height: deviceHeight / 5,
         decoration: BoxDecoration(
-          color: AppColor.darkGrey,
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: AppColor.grey),
         ),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -40,26 +40,7 @@ class NowPlayingContainer extends StatelessWidget {
             children: [
               const SongInformationRow(),
               SizedBox(height: deviceHeight * 0.02),
-              LinearPercentIndicator(
-                lineHeight: 10,
-                percent: 0.5,
-                progressColor: AppColor.primary,
-                backgroundColor: AppColor.secondary,
-                barRadius: const Radius.circular(10),
-              ),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('1:50'),
-                      BlocBuilder<NowPlayingCubit, NowPlayingState>(
-                        builder: (context, state) {
-                          return Text(state.song!.duration);
-                        },
-                      ),
-                    ],
-                  )),
+              const ProgressBar(),
             ],
           ),
         ),

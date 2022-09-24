@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/color_constant.dart';
@@ -18,15 +19,15 @@ class TopWidget extends StatelessWidget {
       height: deviceHeight / 10,
       width: deviceWidth,
       decoration: BoxDecoration(
-        color: AppColor.darkGrey,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColor.grey),
       ),
       child: Row(children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: CircleAvatar(
             radius: deviceWidth * 0.05,
-            foregroundImage: const NetworkImage(
+            foregroundImage: const CachedNetworkImageProvider(
               'https://i.pinimg.com/originals/9d/0a/0e/9d0a0e0f1798ad455cb4be47f8da992d.jpg',
             ),
           ),
@@ -54,8 +55,10 @@ class TopWidget extends StatelessWidget {
           child: Container(
             width: deviceWidth * 0.13,
             height: deviceHeight * 0.06,
-            decoration: const BoxDecoration(
-                color: AppColor.grey, shape: BoxShape.circle),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColor.grey),
+            ),
             child: Icon(
               Icons.notifications_outlined,
               color: AppColor.secondary,

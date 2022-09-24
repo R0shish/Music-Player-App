@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/features/now_playing/presentation/cubit/now_playing_cubit.dart';
+import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
 
 import '../../../../../constants/color_constant.dart';
 import '../../../../../constants/dimensions.dart';
@@ -12,6 +12,7 @@ class SongInformationRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NowPlayingCubit cubit = context.read<NowPlayingCubit>();
     return Row(
       children: [
         BlocBuilder<NowPlayingCubit, NowPlayingState>(
@@ -20,9 +21,8 @@ class SongInformationRow extends StatelessWidget {
               width: deviceWidth * 0.17,
               height: deviceHeight * 0.08,
               decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(state.song!.albumArt),
-                    fit: BoxFit.cover),
+                image:
+                    DecorationImage(image: cubit.songImage, fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(10),
               ),
             );
@@ -65,9 +65,9 @@ class SongInformationRow extends StatelessWidget {
           margin: const EdgeInsets.only(left: 10.0),
           width: deviceWidth * 0.15,
           height: deviceHeight * 0.05,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColor.grey,
+            border: Border.all(color: AppColor.grey),
           ),
           child: GestureDetector(
             onTap: () => debugPrint('play/pause'),

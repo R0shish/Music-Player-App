@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,4 +12,7 @@ class NowPlayingCubit extends Cubit<NowPlayingState> {
   void updateSong(Song song) {
     emit(NowPlayingState(song: song));
   }
+
+  CachedNetworkImageProvider get songImage =>
+      CachedNetworkImageProvider(state.song!.albumArt);
 }

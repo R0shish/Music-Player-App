@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/features/now_playing/presentation/cubit/now_playing_cubit.dart';
-import 'package:music_player/router/app_router.dart';
+import 'features/now_playing/presentation/cubit/now_playing_cubit.dart';
+import 'router/app_router.dart';
 
 import 'constants/color_constant.dart';
 import 'constants/text_theme.dart';

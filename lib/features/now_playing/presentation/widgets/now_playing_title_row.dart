@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/constants/dimensions.dart';
+import '../../../../constants/dimensions.dart';
 
 import '../../../../constants/color_constant.dart';
 import '../../../../core/widgets/title_style_text.dart';
@@ -19,7 +19,7 @@ class NowPlayingTitleRow extends StatelessWidget {
             onTap: () => Navigator.pop(context),
             child: const Icon(
               Icons.keyboard_arrow_down,
-              size: 32,
+              size: 35,
             ),
           ),
           const Expanded(
@@ -33,7 +33,7 @@ class NowPlayingTitleRow extends StatelessWidget {
           ),
           const Icon(
             Icons.more_vert,
-            size: 32,
+            size: 35,
           ),
         ],
       ),

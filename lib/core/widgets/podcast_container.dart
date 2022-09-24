@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/color_constant.dart';
@@ -26,7 +27,8 @@ class PodcastContainer extends StatelessWidget {
             margin: const EdgeInsets.only(right: 16.0),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(image), fit: BoxFit.cover),
+                    image: CachedNetworkImageProvider(image),
+                    fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(25),
                 boxShadow: const [
                   BoxShadow(color: AppColor.lightGrey, blurRadius: 0.1)

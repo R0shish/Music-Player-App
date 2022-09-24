@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/features/now_playing/presentation/cubit/now_playing_cubit.dart';
+import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
 
 import '../../../../../constants/dimensions.dart';
 import '../../../../../core/data/model/playlist_model.dart';

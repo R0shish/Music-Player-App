@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/features/navigation_bar/presentation/cubit/navbar_cubit.dart';
+import '../cubit/navbar_cubit.dart';
 
 import '../../../../constants/color_constant.dart';
 import '../../../homescreen/presentation/pages/homescreen.dart';
