@@ -11,7 +11,7 @@ class TopListViewContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: deviceHeight * 0.2183,
+      height: deviceHeight * 0.23,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: 4,
