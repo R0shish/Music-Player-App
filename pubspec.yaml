@@ -18,7 +18,7 @@ dependencies:
   percent_indicator: ^4.2.2
   cached_network_image: ^3.2.2
   equatable: ^2.0.5
-  animations: ^2.0.5
+  audioplayers: ^1.0.1
 
 dev_dependencies:
   flutter_test:

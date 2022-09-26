@@ -11,18 +11,23 @@ class SearchRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: deviceHeight * 0.07,
+      height: deviceHeight * 0.06,
       child: Row(
         children: [
           Expanded(
-            flex: 4,
+            flex: 6,
             child: TextField(
+              textAlignVertical: TextAlignVertical.bottom,
+              style: Theme.of(context).textTheme.bodyText2,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: AppColor.grey,
                 hintText: 'Search Playlist',
                 hintStyle: Theme.of(context).textTheme.bodyText2,
-                prefixIcon: const Icon(Icons.search, color: AppColor.secondary),
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: AppColor.secondary,
+                ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(10),
@@ -30,7 +35,7 @@ class SearchRow extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: deviceWidth * 0.05),
+          SizedBox(width: deviceWidth * 0.04),
           Expanded(
             child: Container(
               height: deviceHeight * 0.07,
