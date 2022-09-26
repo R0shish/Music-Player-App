@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
@@ -12,6 +13,7 @@ class SongInformationRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AudioPlayer audioPlayer = AudioPlayer();
     NowPlayingCubit cubit = context.read<NowPlayingCubit>();
     return Row(
       children: [
@@ -70,7 +72,10 @@ class SongInformationRow extends StatelessWidget {
             border: Border.all(color: AppColor.grey),
           ),
           child: GestureDetector(
-            onTap: () => debugPrint('play/pause'),
+            onTap: () async {
+              await audioPlayer.play(UrlSource(
+                  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'));
+            },
             child: const Icon(
               Icons.play_arrow,
               color: AppColor.secondary,
