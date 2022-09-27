@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/color_constant.dart';
+import '../../../constants/color_constant.dart';
 
 class TitleStyleText extends StatelessWidget {
   final String text1;

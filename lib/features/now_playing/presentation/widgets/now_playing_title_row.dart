@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../constants/color_constant.dart';
 import '../../../../constants/dimensions.dart';
-import '../../../../core/widgets/title_style_text.dart';
+import '../../../../core/presentation/widgets/title_style_text.dart';
 
 class NowPlayingTitleRow extends StatelessWidget {
   const NowPlayingTitleRow({

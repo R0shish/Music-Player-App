@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../constants/dimensions.dart';
 import '../../../../../core/data/datasource/playlist_data.dart';
 import '../../../../../core/data/datasource/podcast_data.dart';
-import '../../../../../core/widgets/title_style_text.dart';
+import '../../../../../core/presentation/widgets/title_style_text.dart';
 import 'playlist_builder.dart';
 import 'podcast_builder.dart';
 

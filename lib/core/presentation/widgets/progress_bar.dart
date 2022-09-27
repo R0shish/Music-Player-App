@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-import '../../constants/color_constant.dart';
-import '../../constants/dimensions.dart';
-import '../../features/now_playing/presentation/cubit/now_playing_cubit.dart';
+import '../../../constants/color_constant.dart';
+import '../../../constants/dimensions.dart';
+import '../../../features/now_playing/presentation/cubit/now_playing_cubit.dart';
 
 class ProgressBar extends StatelessWidget {
   const ProgressBar({

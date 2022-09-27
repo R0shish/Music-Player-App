@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../constants/dimensions.dart';
 import '../../../../../core/data/model/podcast_model.dart';
-import '../../../../../core/widgets/podcast_container.dart';
+import '../../../../../core/presentation/widgets/podcast_container.dart';
 
 class PodcastBuilder extends StatelessWidget {
   final Map<String, dynamic> podcastData;

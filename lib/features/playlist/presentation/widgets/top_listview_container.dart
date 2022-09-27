@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../constants/dimensions.dart';
-import '../../../../core/widgets/playlist_container.dart';
+import '../../../../core/presentation/widgets/playlist_container.dart';
 
 class TopListViewContainer extends StatelessWidget {
   const TopListViewContainer({

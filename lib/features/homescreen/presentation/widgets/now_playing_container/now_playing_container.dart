@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
 import '../../../../../constants/color_constant.dart';
 import '../../../../../constants/dimensions.dart';
-import '../../../../../core/widgets/progress_bar.dart';
+import '../../../../../core/presentation/widgets/progress_bar.dart';
 import '../../../../now_playing/presentation/pages/now_playing.dart';
 import 'song_info_row.dart';
 
