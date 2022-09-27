@@ -7,8 +7,12 @@ import '../../../constants/color_constant.dart';
 import '../../../constants/dimensions.dart';
 
 class PlayPauseButton extends StatelessWidget {
+  final Color color;
+  final double size;
   const PlayPauseButton({
     Key? key,
+    this.color = AppColor.secondary,
+    this.size = 32,
   }) : super(key: key);
 
   @override
@@ -39,17 +43,11 @@ class PlayPauseButton extends StatelessWidget {
                       'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'));
                 }
               },
-              child: state is PlayingState
-                  ? const Icon(
-                      Icons.pause,
-                      color: AppColor.secondary,
-                      size: 32,
-                    )
-                  : const Icon(
-                      Icons.play_arrow,
-                      color: AppColor.secondary,
-                      size: 32,
-                    ),
+              child: Icon(
+                state is PlayingState ? Icons.pause : Icons.play_arrow,
+                color: color,
+                size: size,
+              ),
             );
           },
         ),
