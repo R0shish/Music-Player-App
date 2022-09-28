@@ -18,7 +18,7 @@ class ControlRow extends StatelessWidget {
     return BlocBuilder<NowPlayingCubit, NowPlayingState>(
       builder: (context, state) {
         Playlist playlist = Playlist.fromJson(
-          playlistData['data'][0],
+          playlistData['data'][state.playlistIndex!],
         );
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -26,24 +26,30 @@ class ControlRow extends StatelessWidget {
             _iconButtonBuilder(context,
                 onPressed: () {}, iconData: Icons.shuffle),
             _iconButtonBuilder(context, onPressed: () {
+              int previousSongIndex =
+                  (state.songIndex! - 1) % playlist.songs.length;
               context.read<NowPlayingCubit>().updateSong(
-                  song: playlist.songs[state.songIndex! - 1],
-                  songIndex: state.songIndex! - 1);
+                  song: playlist.songs[previousSongIndex],
+                  songIndex: previousSongIndex,
+                  playlistIndex: state.playlistIndex!);
               context
                   .read<PlayPauseCubit>()
-                  .play(playlist.songs[state.songIndex! - 1].url);
+                  .play(playlist.songs[previousSongIndex].url);
             }, iconData: Icons.skip_previous),
             PlayPauseButton(
               color: AppColor.primary,
               url: state.song!.url,
             ),
             _iconButtonBuilder(context, onPressed: () {
+              int nextSongIndex =
+                  (state.songIndex! + 1) % playlist.songs.length;
               context.read<NowPlayingCubit>().updateSong(
-                  song: playlist.songs[state.songIndex! + 1],
-                  songIndex: state.songIndex! + 1);
+                  song: playlist.songs[nextSongIndex],
+                  songIndex: nextSongIndex,
+                  playlistIndex: state.playlistIndex!);
               context
                   .read<PlayPauseCubit>()
-                  .play(playlist.songs[state.songIndex! + 1].url);
+                  .play(playlist.songs[nextSongIndex].url);
             }, iconData: Icons.skip_next),
             _iconButtonBuilder(context,
                 iconData: Icons.repeat, onPressed: () {}),

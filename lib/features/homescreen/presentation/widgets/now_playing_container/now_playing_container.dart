@@ -10,9 +10,7 @@ import '../../../../now_playing/presentation/pages/now_playing.dart';
 import 'song_info_row.dart';
 
 class NowPlayingContainer extends StatefulWidget {
-  const NowPlayingContainer({
-    Key? key,
-  }) : super(key: key);
+  const NowPlayingContainer({Key? key}) : super(key: key);
 
   @override
   State<NowPlayingContainer> createState() => _NowPlayingContainerState();
