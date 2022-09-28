@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../constants/dimensions.dart';
 import '../../../../core/presentation/widgets/progress_bar.dart';
 import '../cubit/now_playing_cubit.dart';

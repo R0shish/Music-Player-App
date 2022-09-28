@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
+
 import '../../../../../constants/color_constant.dart';
 import '../../../../../constants/dimensions.dart';
+import '../../../../../core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
 import '../../../../../core/presentation/widgets/progress_bar.dart';
+import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
 import '../../../../now_playing/presentation/pages/now_playing.dart';
 import 'song_info_row.dart';
 
-class NowPlayingContainer extends StatelessWidget {
+class NowPlayingContainer extends StatefulWidget {
   const NowPlayingContainer({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<NowPlayingContainer> createState() => _NowPlayingContainerState();
+}
+
+class _NowPlayingContainerState extends State<NowPlayingContainer> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,7 +27,10 @@ class NowPlayingContainer extends StatelessWidget {
         context: context,
         builder: (_) => BlocProvider<NowPlayingCubit>.value(
           value: context.read<NowPlayingCubit>(),
-          child: const NowPlaying(),
+          child: BlocProvider<PlayPauseCubit>.value(
+            value: context.read<PlayPauseCubit>(),
+            child: const NowPlaying(),
+          ),
         ),
       ),
       child: Container(
@@ -46,5 +56,12 @@ class NowPlayingContainer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    context.read<NowPlayingCubit>().close();
+    context.read<PlayPauseCubit>().close();
+    super.dispose();
   }
 }

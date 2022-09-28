@@ -62,7 +62,13 @@ class SongInformationRow extends StatelessWidget {
             color: AppColor.secondary,
           ),
         ),
-        const PlayPauseButton()
+        BlocBuilder<NowPlayingCubit, NowPlayingState>(
+          builder: (context, state) {
+            return PlayPauseButton(
+              url: state.song!.url,
+            );
+          },
+        )
       ],
     );
   }

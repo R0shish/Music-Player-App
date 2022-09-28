@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'constants/color_constant.dart';
 import 'constants/text_theme.dart';
+import 'core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
 import 'features/navigation_bar/presentation/cubit/navbar_cubit.dart';
 import 'features/navigation_bar/presentation/pages/navigation_bar.dart';
 import 'features/now_playing/presentation/cubit/now_playing_cubit.dart';
 import 'router/app_router.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (_) => NavbarCubit()),
           BlocProvider(create: (_) => NowPlayingCubit()),
+          BlocProvider(create: (_) => PlayPauseCubit()),
         ],
         child: const NavigationPage(),
       ),

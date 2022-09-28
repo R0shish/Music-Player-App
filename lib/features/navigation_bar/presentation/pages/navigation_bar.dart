@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../playlist/presentation/pages/playlist.dart';
-import '../cubit/navbar_cubit.dart';
 
 import '../../../../constants/color_constant.dart';
 import '../../../homescreen/presentation/pages/homescreen.dart';
+import '../../../playlist/presentation/pages/playlist.dart';
+import '../cubit/navbar_cubit.dart';
 
 class NavigationPage extends StatelessWidget {
   const NavigationPage({Key? key}) : super(key: key);

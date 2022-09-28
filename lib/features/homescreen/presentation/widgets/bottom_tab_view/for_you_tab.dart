@@ -24,9 +24,7 @@ class ForYouTab extends StatelessWidget {
         SizedBox(
           height: deviceHeight * 0.03,
         ),
-        PlaylistBuilder(
-          playlistData: playlistData,
-        ),
+        PlaylistBuilder(playlistData: playlistData),
         Padding(
           padding: EdgeInsets.symmetric(vertical: deviceHeight * 0.025),
           child: const TitleStyleText(
@@ -34,9 +32,7 @@ class ForYouTab extends StatelessWidget {
             text2: 'for you',
           ),
         ),
-        PodcastBuilder(
-          podcastData: podcastData,
-        ),
+        PodcastBuilder(podcastData: podcastData),
       ],
     );
   }

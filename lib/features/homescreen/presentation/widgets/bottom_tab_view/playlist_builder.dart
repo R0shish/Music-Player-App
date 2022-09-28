@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
 
 import '../../../../../constants/dimensions.dart';
 import '../../../../../core/data/model/playlist_model.dart';
@@ -30,12 +31,15 @@ class PlaylistBuilder extends StatelessWidget {
               subTitle: playlist.subTitle,
               albumArt: playlist.image,
               backgroundImage: null,
-              onPlayTap: () => context.read<NowPlayingCubit>().updateSong(Song(
-                    name: playlist.title,
-                    artist: playlist.subTitle,
-                    albumArt: playlist.image,
-                    duration: '3:00',
-                  )));
+              onPlayTap: () {
+                context.read<NowPlayingCubit>().updateSong(Song(
+                    name: playlist.songs.first.name,
+                    artist: playlist.songs.first.artist,
+                    albumArt: playlist.songs.first.albumArt,
+                    duration: playlist.songs.first.duration,
+                    url: playlist.songs.first.url));
+                context.read<PlayPauseCubit>().play(playlist.songs.first.url);
+              });
         }),
       ),
     );

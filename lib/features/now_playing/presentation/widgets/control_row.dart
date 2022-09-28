@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/core/presentation/widgets/play_pause.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/presentation/widgets/play_pause.dart';
+import '../cubit/now_playing_cubit.dart';
 
 import '../../../../constants/color_constant.dart';
 
@@ -16,7 +18,14 @@ class ControlRow extends StatelessWidget {
         _iconButtonBuilder(context, onPressed: () {}, iconData: Icons.shuffle),
         _iconButtonBuilder(context,
             onPressed: () {}, iconData: Icons.skip_previous),
-        const PlayPauseButton(color: AppColor.primary),
+        BlocBuilder<NowPlayingCubit, NowPlayingState>(
+          builder: (context, state) {
+            return PlayPauseButton(
+              color: AppColor.primary,
+              url: state.song!.url,
+            );
+          },
+        ),
         _iconButtonBuilder(context,
             onPressed: () {}, iconData: Icons.skip_next),
         _iconButtonBuilder(context, iconData: Icons.repeat, onPressed: () {}),
