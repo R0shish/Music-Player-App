@@ -37,6 +37,12 @@ class _SongsListViewState extends State<SongsListView>
   );
 
   @override
+  void didChangeDependencies() {
+    _controller.repeat(reverse: false);
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       key: _expandedKey,
