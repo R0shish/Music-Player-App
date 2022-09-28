@@ -33,12 +33,14 @@ class PlaylistBuilder extends StatelessWidget {
               albumArt: playlist.image,
               backgroundImage: null,
               onPlayTap: () {
-                context.read<NowPlayingCubit>().updateSong(Song(
-                    name: playlist.songs.first.name,
-                    artist: playlist.songs.first.artist,
-                    albumArt: playlist.songs.first.albumArt,
-                    duration: playlist.songs.first.duration,
-                    url: playlist.songs.first.url));
+                context.read<NowPlayingCubit>().updateSong(
+                    song: Song(
+                        name: playlist.songs.first.name,
+                        artist: playlist.songs.first.artist,
+                        albumArt: playlist.songs.first.albumArt,
+                        duration: playlist.songs.first.duration,
+                        url: playlist.songs.first.url),
+                    songIndex: 0);
                 context.read<PlayPauseCubit>().play(playlist.songs.first.url);
               });
         }),

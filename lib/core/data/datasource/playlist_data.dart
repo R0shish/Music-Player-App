@@ -14,6 +14,14 @@ final Map<String, dynamic> playlistData = {
           "url":
               "file:///Users/roshish/Desktop/Projects/MobileDevelopment/music_player/lib/core/data/datasource/songs_data/Justin%20Bieber%20-%20Intentions.mp3"
         },
+        {
+          "name": "Keep it Mellow",
+          "artist": "Marshmello",
+          "albumArt": "https://i.ytimg.com/vi/bvgfF-EMLaw/maxresdefault.jpg",
+          "duration": "4:07",
+          "url":
+              "file:///Users/roshish/Desktop/Projects/MobileDevelopment/music_player/lib/core/data/datasource/songs_data/Marshmello%20-%20Keep%20it%20Mello.mp3"
+        }
       ]
     },
     {
@@ -37,13 +45,12 @@ final Map<String, dynamic> playlistData = {
       "image": "https://wallpapercave.com/wp/wp4288355.jpg",
       "songs": [
         {
-          "name": "Intention",
-          "artist": "Justin Bieber",
-          "albumArt":
-              "https://images.genius.com/83f566ef0ef7295fa6fee24f09f975aa.1000x1000x1.png",
-          "duration": "3:45",
+          "name": "Stressed Out",
+          "artist": "Twenty One Pilots",
+          "albumArt": "https://i.ytimg.com/vi/Gc4sY98Jn9I/maxresdefault.jpg",
+          "duration": "3:23",
           "url":
-              "file:///Users/roshish/Desktop/Projects/MobileDevelopment/music_player/lib/core/data/datasource/songs_data/Justin%20Bieber%20-%20Intentions.mp3"
+              "file:///Users/roshish/Desktop/Projects/MobileDevelopment/music_player/lib/core/data/datasource/songs_data/twenty%20one%20pilots%20-%20Stressed%20Out.mp3"
         }
       ]
     }

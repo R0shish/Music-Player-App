@@ -9,8 +9,12 @@ part 'now_playing_state.dart';
 class NowPlayingCubit extends Cubit<NowPlayingState> {
   NowPlayingCubit() : super(const NowPlayingState());
 
-  void updateSong(Song song) {
-    emit(NowPlayingState(song: song));
+  void updateSong({required Song song, required int songIndex}) {
+    emit(NowPlayingState(song: song, songIndex: songIndex));
+  }
+
+  void playNext({required Song song, required int songIndex}) {
+    emit(NowPlayingState(song: song, songIndex: songIndex));
   }
 
   CachedNetworkImageProvider get songImage =>
