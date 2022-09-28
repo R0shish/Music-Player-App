@@ -32,25 +32,23 @@ class NowPlaying extends StatelessWidget {
                       ),
                       BlocBuilder<NowPlayingCubit, NowPlayingState>(
                         builder: (context, state) {
-                          return Container(
-                            constraints:
-                                BoxConstraints(maxWidth: deviceWidth * 0.8),
-                            child: Column(
-                              children: [
-                                Text(
-                                  state.song!.name,
-                                  style: Theme.of(context).textTheme.headline1,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Text(
-                                  state.song!.artist,
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
+                          return Column(
+                            children: [
+                              Text(
+                                state.song!.name,
+                                style: Theme.of(context).textTheme.headline1,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                state.song!.artist,
+                                style: Theme.of(context).textTheme.bodyText1,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           );
                         },
                       ),

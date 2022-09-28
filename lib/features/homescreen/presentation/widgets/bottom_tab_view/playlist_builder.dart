@@ -36,7 +36,10 @@ class PlaylistBuilder extends StatelessWidget {
                       value: context.read<NowPlayingCubit>(),
                       child: BlocProvider<PlayPauseCubit>.value(
                         value: context.read<PlayPauseCubit>(),
-                        child: SongsList(songsList: playlist.songs),
+                        child: SongsList(
+                            playlistTitle: playlist.title,
+                            playlistIndex: index,
+                            songsList: playlist.songs),
                       ),
                     ),
                   ),

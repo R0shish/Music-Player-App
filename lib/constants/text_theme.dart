@@ -53,3 +53,22 @@ TextTheme textTheme() {
     ),
   );
 }
+
+Text nowPlayingText({
+  required String text,
+  double fontSize = 20,
+  FontWeight fontWeight = FontWeight.bold,
+  Color? color,
+}) {
+  return Text(
+    text,
+    style: TextStyle(
+      color: color,
+      fontFamily: 'Montserrat',
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+    ),
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
+  );
+}

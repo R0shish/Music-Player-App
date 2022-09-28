@@ -19,4 +19,7 @@ class NowPlayingCubit extends Cubit<NowPlayingState> {
 
   CachedNetworkImageProvider get songImage =>
       CachedNetworkImageProvider(state.song!.albumArt);
+
+  bool isCurrentSongPlaying({required int songIndex, required playlistIndex}) =>
+      state.songIndex == songIndex && state.playlistIndex == playlistIndex;
 }

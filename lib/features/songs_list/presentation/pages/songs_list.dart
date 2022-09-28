@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 
 import '../../../../constants/dimensions.dart';
 import '../../../../core/data/model/song_model.dart';
+import '../widgets/songs_list_title_row.dart';
+import '../widgets/songs_list_view.dart';
 
 class SongsList extends StatelessWidget {
+  final String playlistTitle;
+  final int playlistIndex;
   final List<Song> songsList;
-  const SongsList({Key? key, required this.songsList}) : super(key: key);
+  const SongsList(
+      {Key? key,
+      required this.playlistTitle,
+      required this.playlistIndex,
+      required this.songsList})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,44 +25,15 @@ class SongsList extends StatelessWidget {
         builder: ((context, scrollController) => Scaffold(
               body: SingleChildScrollView(
                 child: Container(
+                  padding: const EdgeInsets.all(2),
                   height: deviceHeight,
-                  padding: const EdgeInsets.all(18.0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Songs',
-                                style: Theme.of(context).textTheme.headline1),
-                            IconButton(
-                              onPressed: () => Navigator.pop(context),
-                              icon: Icon(Icons.close,
-                                  color: Theme.of(context).iconTheme.color),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: deviceHeight * 0.03),
-                        Expanded(
-                          child: ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: songsList.length,
-                            itemBuilder: ((context, index) {
-                              return ListTile(
-                                title: Text(songsList[index].name,
-                                    style:
-                                        Theme.of(context).textTheme.headline1),
-                                subtitle: Text(songsList[index].artist,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText2),
-                              );
-                            }),
-                          ),
-                        ),
-                      ],
-                    ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SongsListTitleRow(playlistTitle: playlistTitle),
+                      SongsListView(
+                          songsList: songsList, playlistIndex: playlistIndex),
+                    ],
                   ),
                 ),
               ),
