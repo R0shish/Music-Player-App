@@ -21,6 +21,14 @@ final Map<String, dynamic> playlistData = {
           "duration": "4:07",
           "url":
               "file:///Users/roshish/Desktop/Projects/MobileDevelopment/music_player/lib/core/data/datasource/songs_data/Marshmello%20-%20Keep%20it%20Mello.mp3"
+        },
+        {
+          "name": "Kho Gaye Hum Kahan (Live in Ahmedabad)",
+          "artist": "Prateek Kuhad",
+          "albumArt": "https://i.ytimg.com/vi/VA0V8rQpqwQ/maxresdefault.jpg",
+          "duration": "3:58",
+          "url":
+              "file:///Users/roshish/Desktop/Projects/MobileDevelopment/music_player/lib/core/data/datasource/songs_data/Kho%20Gaye%20Hum%20Kahaan%20-%20Prateek%20Kuhad.mp3"
         }
       ]
     },

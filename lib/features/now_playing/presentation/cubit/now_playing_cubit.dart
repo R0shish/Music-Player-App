@@ -13,10 +13,6 @@ class NowPlayingCubit extends Cubit<NowPlayingState> {
     emit(NowPlayingState(song: song, songIndex: songIndex));
   }
 
-  void playNext({required Song song, required int songIndex}) {
-    emit(NowPlayingState(song: song, songIndex: songIndex));
-  }
-
   CachedNetworkImageProvider get songImage =>
       CachedNetworkImageProvider(state.song!.albumArt);
 }
