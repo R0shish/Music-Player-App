@@ -59,6 +59,24 @@ final Map<String, dynamic> playlistData = {
           "duration": "3:23",
           "url":
               "file:///Users/roshish/Desktop/Projects/MobileDevelopment/music_player/lib/core/data/datasource/songs_data/twenty%20one%20pilots%20-%20Stressed%20Out.mp3"
+        },
+        {
+          "name": "I Ain't Worried",
+          "artist": "One Republic",
+          "albumArt":
+              "https://upload.wikimedia.org/wikipedia/en/c/cf/I_Ain%27t_Worried_-_OneRepublic.jpg",
+          "duration": "2:35",
+          "url":
+              "file:///Users/roshish/Desktop/Projects/MobileDevelopment/music_player/lib/core/data/datasource/songs_data/OneRepublic%20-%20I%20Ain%E2%80%99t%20Worried.mp3"
+        },
+        {
+          "name": "Night Changes",
+          "artist": "One Direction",
+          "albumArt":
+              "https://upload.wikimedia.org/wikipedia/en/d/d1/One_Direction_-_Night_Changes_Single_Cover.png",
+          "duration": "4:01",
+          "url":
+              "file:///Users/roshish/Desktop/Projects/MobileDevelopment/music_player/lib/core/data/datasource/songs_data/One%20Direction%20-%20Night%20Changes.mp3"
         }
       ]
     }

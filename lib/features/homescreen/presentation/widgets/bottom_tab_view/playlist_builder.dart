@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_player/core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
+import 'package:music_player/features/songs_list/presentation/pages/songs_list.dart';
 
 import '../../../../../constants/dimensions.dart';
 import '../../../../../core/data/model/playlist_model.dart';
@@ -27,24 +28,38 @@ class PlaylistBuilder extends StatelessWidget {
             playlistData['data'][index],
           );
           int noOfSongs = playlist.songs.length;
-          return PlaylistContainer(
-              title: playlist.title,
-              subTitle: '$noOfSongs Song${noOfSongs > 1 ? 's' : ''}',
-              albumArt: playlist.image,
-              backgroundImage: null,
-              onPlayTap: () {
-                context.read<NowPlayingCubit>().updateSong(
-                      song: Song(
-                          name: playlist.songs.first.name,
-                          artist: playlist.songs.first.artist,
-                          albumArt: playlist.songs.first.albumArt,
-                          duration: playlist.songs.first.duration,
-                          url: playlist.songs.first.url),
-                      songIndex: 0,
-                      playlistIndex: index,
-                    );
-                context.read<PlayPauseCubit>().play(playlist.songs.first.url);
-              });
+          return GestureDetector(
+              onTap: () => showModalBottomSheet(
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (_) => BlocProvider<NowPlayingCubit>.value(
+                      value: context.read<NowPlayingCubit>(),
+                      child: BlocProvider<PlayPauseCubit>.value(
+                        value: context.read<PlayPauseCubit>(),
+                        child: SongsList(songsList: playlist.songs),
+                      ),
+                    ),
+                  ),
+              child: PlaylistContainer(
+                  title: playlist.title,
+                  subTitle: '$noOfSongs Song${noOfSongs > 1 ? 's' : ''}',
+                  albumArt: playlist.image,
+                  backgroundImage: null,
+                  onPlayTap: () {
+                    context.read<NowPlayingCubit>().updateSong(
+                          song: Song(
+                              name: playlist.songs.first.name,
+                              artist: playlist.songs.first.artist,
+                              albumArt: playlist.songs.first.albumArt,
+                              duration: playlist.songs.first.duration,
+                              url: playlist.songs.first.url),
+                          songIndex: 0,
+                          playlistIndex: index,
+                        );
+                    context
+                        .read<PlayPauseCubit>()
+                        .play(playlist.songs.first.url);
+                  }));
         }),
       ),
     );
