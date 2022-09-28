@@ -37,9 +37,14 @@ class SongInformationRow extends StatelessWidget {
             children: [
               BlocBuilder<NowPlayingCubit, NowPlayingState>(
                 builder: (context, state) {
-                  return Text(
-                    state.song!.name,
-                    style: Theme.of(context).textTheme.headline2,
+                  return Container(
+                    constraints: BoxConstraints(maxWidth: deviceWidth * 0.5),
+                    child: Text(
+                      state.song!.name,
+                      style: Theme.of(context).textTheme.headline2,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   );
                 },
               ),
