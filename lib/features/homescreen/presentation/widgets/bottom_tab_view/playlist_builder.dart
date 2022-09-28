@@ -26,9 +26,10 @@ class PlaylistBuilder extends StatelessWidget {
           Playlist playlist = Playlist.fromJson(
             playlistData['data'][index],
           );
+          int noOfSongs = playlist.songs.length;
           return PlaylistContainer(
               title: playlist.title,
-              subTitle: playlist.subTitle,
+              subTitle: '$noOfSongs Song${noOfSongs > 1 ? 's' : ''}',
               albumArt: playlist.image,
               backgroundImage: null,
               onPlayTap: () {
