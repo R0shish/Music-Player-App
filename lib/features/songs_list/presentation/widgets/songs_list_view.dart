@@ -113,7 +113,9 @@ class _SongsListViewState extends State<SongsListView>
                       songIndex: index,
                       playlistIndex: widget.playlistIndex);
 
-                  playPauseCubit.play(widget.songsList[index].url);
+                  playPauseCubit.play(
+                      nowPlayingCubit: context.read<NowPlayingCubit>(),
+                      url: widget.songsList[index].url);
                 },
               );
             },

@@ -6,6 +6,18 @@ class NowPlayingState extends Equatable {
   final int? playlistIndex;
   const NowPlayingState({this.song, this.songIndex, this.playlistIndex});
 
+  NowPlayingState copyWith({
+    Song? song,
+    int? songIndex,
+    int? playlistIndex,
+  }) {
+    return NowPlayingState(
+      song: song ?? this.song,
+      songIndex: songIndex ?? this.songIndex,
+      playlistIndex: playlistIndex ?? this.playlistIndex,
+    );
+  }
+
   @override
   List<Object?> get props => [song];
 }

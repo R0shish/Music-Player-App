@@ -58,7 +58,7 @@ class SongInformationRow extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () => debugPrint('add to favorite'),
+          onTap: () => debugPrint('TO:DO - add to favorite'),
           child: const Icon(
             Icons.favorite_border,
             color: AppColor.secondary,

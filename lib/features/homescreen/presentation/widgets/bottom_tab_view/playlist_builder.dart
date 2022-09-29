@@ -58,9 +58,9 @@ class PlaylistBuilder extends StatelessWidget {
                           songIndex: 0,
                           playlistIndex: index,
                         );
-                    context
-                        .read<PlayPauseCubit>()
-                        .play(playlist.songs.first.url);
+                    context.read<PlayPauseCubit>().play(
+                        nowPlayingCubit: context.read<NowPlayingCubit>(),
+                        url: playlist.songs.first.url);
                   }));
         }),
       ),

@@ -13,7 +13,7 @@ class NowPlayingCubit extends Cubit<NowPlayingState> {
       {required Song song,
       required int songIndex,
       required int playlistIndex}) {
-    emit(NowPlayingState(
+    emit(state.copyWith(
         song: song, songIndex: songIndex, playlistIndex: playlistIndex));
   }
 
