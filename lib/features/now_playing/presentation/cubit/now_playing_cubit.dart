@@ -22,4 +22,7 @@ class NowPlayingCubit extends Cubit<NowPlayingState> {
 
   bool isCurrentSongPlaying({required int songIndex, required playlistIndex}) =>
       state.songIndex == songIndex && state.playlistIndex == playlistIndex;
+
+  int get songIndex => state.songIndex!;
+  int get playlistIndex => state.playlistIndex!;
 }

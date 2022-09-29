@@ -25,32 +25,18 @@ class ControlRow extends StatelessWidget {
           children: [
             _iconButtonBuilder(context,
                 onPressed: () {}, iconData: Icons.shuffle),
-            _iconButtonBuilder(context, onPressed: () {
-              int previousSongIndex =
-                  (state.songIndex! - 1) % playlist.songs.length;
-              context.read<NowPlayingCubit>().updateSong(
-                  song: playlist.songs[previousSongIndex],
-                  songIndex: previousSongIndex,
-                  playlistIndex: state.playlistIndex!);
-              context
-                  .read<PlayPauseCubit>()
-                  .play(playlist.songs[previousSongIndex].url);
-            }, iconData: Icons.skip_previous),
+            _iconButtonBuilder(context,
+                onPressed: () =>
+                    context.read<PlayPauseCubit>().playPrev(context, playlist),
+                iconData: Icons.skip_previous),
             PlayPauseButton(
               color: AppColor.primary,
               url: state.song!.url,
             ),
-            _iconButtonBuilder(context, onPressed: () {
-              int nextSongIndex =
-                  (state.songIndex! + 1) % playlist.songs.length;
-              context.read<NowPlayingCubit>().updateSong(
-                  song: playlist.songs[nextSongIndex],
-                  songIndex: nextSongIndex,
-                  playlistIndex: state.playlistIndex!);
-              context
-                  .read<PlayPauseCubit>()
-                  .play(playlist.songs[nextSongIndex].url);
-            }, iconData: Icons.skip_next),
+            _iconButtonBuilder(context,
+                onPressed: () =>
+                    context.read<PlayPauseCubit>().playNext(context, playlist),
+                iconData: Icons.skip_next),
             _iconButtonBuilder(context,
                 iconData: Icons.repeat, onPressed: () {}),
           ],
