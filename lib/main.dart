@@ -43,11 +43,12 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => NavbarCubit()),
           BlocProvider(create: (context) => NowPlayingCubit()),
-          BlocProvider(create: (context) => RepeatCubit()),
           BlocProvider(
               create: (context) => PlayPauseCubit(
-                  nowPlayingCubit: context.read<NowPlayingCubit>(),
-                  repeatCubit: context.read<RepeatCubit>())),
+                  nowPlayingCubit: context.read<NowPlayingCubit>())),
+          BlocProvider(
+              create: (context) =>
+                  RepeatCubit(playPauseCubit: context.read<PlayPauseCubit>())),
         ],
         child: const NavigationPage(),
       ),

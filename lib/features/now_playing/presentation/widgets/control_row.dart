@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubit/repeat_cubit.dart';
@@ -16,6 +17,7 @@ class ControlRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final PlayPauseCubit playPauseCubit = context.read<PlayPauseCubit>();
     final NowPlayingCubit nowPlayingCubit = context.read<NowPlayingCubit>();
+    final RepeatCubit repeatCubit = context.read<RepeatCubit>();
 
     return BlocBuilder<NowPlayingCubit, NowPlayingState>(
       builder: (_, state) {
@@ -24,20 +26,24 @@ class ControlRow extends StatelessWidget {
           children: [
             _iconButtonBuilder(context,
                 onPressed: () {}, iconData: Icons.shuffle),
-            _iconButtonBuilder(context,
-                onPressed: () => playPauseCubit.playPrev(nowPlayingCubit),
-                iconData: Icons.skip_previous),
+            _iconButtonBuilder(context, onPressed: () {
+              repeatCubit.resetRepeat();
+              playPauseCubit.playPrev(nowPlayingCubit);
+            }, iconData: Icons.skip_previous),
             PlayPauseButton(
               color: AppColor.primary,
               url: state.song!.url,
             ),
-            _iconButtonBuilder(context,
-                onPressed: () => playPauseCubit.playNext(nowPlayingCubit),
-                iconData: Icons.skip_next),
+            _iconButtonBuilder(context, onPressed: () {
+              repeatCubit.resetRepeat();
+              playPauseCubit.playNext(nowPlayingCubit);
+            }, iconData: Icons.skip_next),
             _iconButtonBuilder(context,
                 iconData: context.watch<RepeatCubit>().repeatIcon,
                 iconColor: context.watch<RepeatCubit>().repeatIconColor,
-                onPressed: () => context.read<RepeatCubit>().toggleRepeat()),
+                onPressed: () {
+              context.read<RepeatCubit>().toggleRepeat();
+            }),
           ],
         );
       },

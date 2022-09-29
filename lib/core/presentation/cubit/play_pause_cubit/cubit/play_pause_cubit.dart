@@ -11,9 +11,8 @@ part 'play_pause_state.dart';
 
 class PlayPauseCubit extends Cubit<PlayPauseState> {
   final NowPlayingCubit nowPlayingCubit;
-  final RepeatCubit repeatCubit;
 
-  PlayPauseCubit({required this.nowPlayingCubit, required this.repeatCubit})
+  PlayPauseCubit({required this.nowPlayingCubit})
       : super(const PlayPauseState(
             duration: Duration.zero,
             position: Duration.zero,
@@ -33,8 +32,6 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     audioPlayer.onPlayerComplete.listen((event) {
       playNext(nowPlayingCubit);
     });
-
-    audioPlayer.setReleaseMode(repeatCubit.releaseMode);
   }
 
   void pause() async {
@@ -56,8 +53,6 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     );
     int nextSongIndex = (nowPlayingCubit.songIndex + 1) % playlist.songs.length;
 
-    repeatCubit.resetRepeat();
-
     nowPlayingCubit.updateSong(
         song: playlist.songs[nextSongIndex],
         songIndex: nextSongIndex,
@@ -71,8 +66,6 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
       playlistData['data'][nowPlayingCubit.playlistIndex],
     );
     int prevSongIndex = (nowPlayingCubit.songIndex - 1) % playlist.songs.length;
-
-    repeatCubit.resetRepeat();
 
     nowPlayingCubit.updateSong(
         song: playlist.songs[prevSongIndex],
