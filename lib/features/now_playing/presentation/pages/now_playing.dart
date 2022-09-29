@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubit/repeat_cubit.dart';
 
 import '../../../../constants/dimensions.dart';
 import '../../../../core/presentation/widgets/progress_bar.dart';
-import '../cubit/now_playing_cubit.dart';
+import '../cubit/now_playing_cubit/now_playing_cubit.dart';
 import '../widgets/album_art_container.dart';
 import '../widgets/control_row.dart';
 import '../widgets/now_playing_title_row.dart';

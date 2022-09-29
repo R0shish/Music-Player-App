@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubit/now_playing_cubit.dart';
+import '../cubit/now_playing_cubit/now_playing_cubit.dart';
 
 class AlbumArtContainer extends StatelessWidget {
   final double width;

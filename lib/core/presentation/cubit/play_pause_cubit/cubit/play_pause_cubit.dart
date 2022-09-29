@@ -1,15 +1,19 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/core/data/model/playlist_model.dart';
+import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubit/repeat_cubit.dart';
+import '../../../../../features/now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
+import '../../../../data/model/playlist_model.dart';
 
-import '../../../../../features/now_playing/presentation/cubit/now_playing_cubit.dart';
 import '../../../../data/datasource/playlist_data.dart';
 
 part 'play_pause_state.dart';
 
 class PlayPauseCubit extends Cubit<PlayPauseState> {
-  PlayPauseCubit()
+  final NowPlayingCubit nowPlayingCubit;
+  final RepeatCubit repeatCubit;
+
+  PlayPauseCubit({required this.nowPlayingCubit, required this.repeatCubit})
       : super(const PlayPauseState(
             duration: Duration.zero,
             position: Duration.zero,
@@ -17,17 +21,20 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
 
   final AudioPlayer audioPlayer = AudioPlayer();
 
-  void play(
-      {required NowPlayingCubit nowPlayingCubit, required String url}) async {
+  void play(String url) async {
     emit(state.copyWith(isPlaying: true));
+
     await audioPlayer.play(UrlSource(url));
+
     await audioPlayer.getDuration().then((value) {
       updateTotalDuration(Duration(milliseconds: value!.inMilliseconds));
     });
+
     audioPlayer.onPlayerComplete.listen((event) {
       playNext(nowPlayingCubit);
     });
-    audioPlayer.setReleaseMode(ReleaseMode.stop);
+
+    audioPlayer.setReleaseMode(repeatCubit.releaseMode);
   }
 
   void pause() async {
@@ -35,14 +42,11 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     await audioPlayer.pause();
   }
 
-  void playPauseButtonPress(
-      {required NowPlayingCubit nowPlayingCubit,
-      required Playlist playlist,
-      required String url}) {
+  void playPauseButtonPress(String url) {
     if (state.isPlaying) {
       pause();
     } else {
-      play(nowPlayingCubit: nowPlayingCubit, url: url);
+      play(url);
     }
   }
 
@@ -52,14 +56,14 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     );
     int nextSongIndex = (nowPlayingCubit.songIndex + 1) % playlist.songs.length;
 
+    repeatCubit.resetRepeat();
+
     nowPlayingCubit.updateSong(
         song: playlist.songs[nextSongIndex],
         songIndex: nextSongIndex,
         playlistIndex: nowPlayingCubit.playlistIndex);
 
-    play(
-        nowPlayingCubit: nowPlayingCubit,
-        url: playlist.songs[nextSongIndex].url);
+    play(playlist.songs[nextSongIndex].url);
   }
 
   void playPrev(NowPlayingCubit nowPlayingCubit) {
@@ -68,14 +72,14 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     );
     int prevSongIndex = (nowPlayingCubit.songIndex - 1) % playlist.songs.length;
 
+    repeatCubit.resetRepeat();
+
     nowPlayingCubit.updateSong(
         song: playlist.songs[prevSongIndex],
         songIndex: prevSongIndex,
         playlistIndex: nowPlayingCubit.playlistIndex);
 
-    play(
-        nowPlayingCubit: nowPlayingCubit,
-        url: playlist.songs[prevSongIndex].url);
+    play(playlist.songs[prevSongIndex].url);
   }
 
   void updatePosition(Duration position) {

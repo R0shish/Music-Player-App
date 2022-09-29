@@ -6,7 +6,7 @@ import '../../../../constants/color_constant.dart';
 import '../../../../constants/text_theme.dart';
 import '../../../../core/data/model/song_model.dart';
 import '../../../../core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
-import '../../../now_playing/presentation/cubit/now_playing_cubit.dart';
+import '../../../now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
 
 class SongsListView extends StatefulWidget {
   const SongsListView({
@@ -113,9 +113,7 @@ class _SongsListViewState extends State<SongsListView>
                       songIndex: index,
                       playlistIndex: widget.playlistIndex);
 
-                  playPauseCubit.play(
-                      nowPlayingCubit: context.read<NowPlayingCubit>(),
-                      url: widget.songsList[index].url);
+                  playPauseCubit.play(widget.songsList[index].url);
                 },
               );
             },

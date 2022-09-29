@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
-import '../../../../core/presentation/widgets/play_pause.dart';
-import '../cubit/now_playing_cubit.dart';
+import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubit/repeat_cubit.dart';
 
 import '../../../../constants/color_constant.dart';
+import '../../../../core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
+import '../../../../core/presentation/widgets/play_pause.dart';
+import '../cubit/now_playing_cubit/now_playing_cubit.dart';
 
 class ControlRow extends StatelessWidget {
   const ControlRow({
@@ -14,10 +15,10 @@ class ControlRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PlayPauseCubit playPauseCubit = context.read<PlayPauseCubit>();
-    final nowPlayingCubit = context.read<NowPlayingCubit>();
+    final NowPlayingCubit nowPlayingCubit = context.read<NowPlayingCubit>();
 
     return BlocBuilder<NowPlayingCubit, NowPlayingState>(
-      builder: (context, state) {
+      builder: (_, state) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -34,7 +35,9 @@ class ControlRow extends StatelessWidget {
                 onPressed: () => playPauseCubit.playNext(nowPlayingCubit),
                 iconData: Icons.skip_next),
             _iconButtonBuilder(context,
-                iconData: Icons.repeat, onPressed: () {}),
+                iconData: context.watch<RepeatCubit>().repeatIcon,
+                iconColor: context.watch<RepeatCubit>().repeatIconColor,
+                onPressed: () => context.read<RepeatCubit>().toggleRepeat()),
           ],
         );
       },
@@ -47,9 +50,10 @@ IconButton _iconButtonBuilder(
   required VoidCallback onPressed,
   required IconData iconData,
   double iconSize = 25,
+  Color iconColor = AppColor.lightGrey,
 }) {
   return IconButton(
       iconSize: iconSize,
       onPressed: onPressed,
-      icon: Icon(iconData, color: AppColor.lightGrey));
+      icon: Icon(iconData, color: iconColor));
 }

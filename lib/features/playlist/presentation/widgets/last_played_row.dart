@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../constants/color_constant.dart';
 import '../../../../constants/dimensions.dart';
-import '../../../now_playing/presentation/cubit/now_playing_cubit.dart';
+import '../../../now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
 import '../../../now_playing/presentation/widgets/album_art_container.dart';
 
 class LastPlayedRow extends StatelessWidget {

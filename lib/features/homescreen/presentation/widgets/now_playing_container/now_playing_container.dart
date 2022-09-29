@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubit/repeat_cubit.dart';
 
 import '../../../../../constants/color_constant.dart';
 import '../../../../../constants/dimensions.dart';
 import '../../../../../core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
 import '../../../../../core/presentation/widgets/progress_bar.dart';
-import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
+import '../../../../now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
 import '../../../../now_playing/presentation/pages/now_playing.dart';
 import 'song_info_row.dart';
 
@@ -27,7 +28,10 @@ class _NowPlayingContainerState extends State<NowPlayingContainer> {
           value: context.read<NowPlayingCubit>(),
           child: BlocProvider<PlayPauseCubit>.value(
             value: context.read<PlayPauseCubit>(),
-            child: const NowPlaying(),
+            child: BlocProvider.value(
+              value: context.read<RepeatCubit>(),
+              child: const NowPlaying(),
+            ),
           ),
         ),
       ),
@@ -60,6 +64,7 @@ class _NowPlayingContainerState extends State<NowPlayingContainer> {
   void dispose() {
     context.read<NowPlayingCubit>().close();
     context.read<PlayPauseCubit>().close();
+    context.read<RepeatCubit>().close();
     super.dispose();
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../constants/dimensions.dart';
 
+import '../../../../constants/dimensions.dart';
 import '../widgets/last_played_row.dart';
 import '../widgets/playlist_grid.dart';
 import '../widgets/search_row.dart';

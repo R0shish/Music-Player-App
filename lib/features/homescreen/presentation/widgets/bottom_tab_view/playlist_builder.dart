@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
-import 'package:music_player/features/songs_list/presentation/pages/songs_list.dart';
+import '../../../../../core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
+import '../../../../now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
+import '../../../../songs_list/presentation/pages/songs_list.dart';
 
 import '../../../../../constants/dimensions.dart';
 import '../../../../../core/data/model/playlist_model.dart';
 import '../../../../../core/data/model/song_model.dart';
 import '../../../../../core/presentation/widgets/playlist_container.dart';
-import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
 
 class PlaylistBuilder extends StatelessWidget {
   final Map<String, dynamic> playlistData;
@@ -58,9 +58,9 @@ class PlaylistBuilder extends StatelessWidget {
                           songIndex: 0,
                           playlistIndex: index,
                         );
-                    context.read<PlayPauseCubit>().play(
-                        nowPlayingCubit: context.read<NowPlayingCubit>(),
-                        url: playlist.songs.first.url);
+                    context
+                        .read<PlayPauseCubit>()
+                        .play(playlist.songs.first.url);
                   }));
         }),
       ),

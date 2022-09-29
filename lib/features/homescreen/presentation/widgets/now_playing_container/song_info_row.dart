@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/presentation/widgets/play_pause.dart';
-import '../../../../now_playing/presentation/cubit/now_playing_cubit.dart';
 
 import '../../../../../constants/color_constant.dart';
 import '../../../../../constants/dimensions.dart';
+import '../../../../../core/presentation/widgets/play_pause.dart';
+import '../../../../now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
 
 class SongInformationRow extends StatelessWidget {
   const SongInformationRow({
