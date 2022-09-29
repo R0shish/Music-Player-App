@@ -75,7 +75,7 @@ class _SongsListViewState extends State<SongsListView>
                 leading: isPlaying
                     ? BlocBuilder<PlayPauseCubit, PlayPauseState>(
                         builder: (context, state) {
-                          if (state is PlayingState) {
+                          if (state.isPlaying) {
                             _controller.repeat(reverse: false);
                           } else {
                             _controller.stop();
@@ -97,9 +97,7 @@ class _SongsListViewState extends State<SongsListView>
                     ? BlocBuilder<PlayPauseCubit, PlayPauseState>(
                         builder: (context, state) {
                           return nowPlayingText(
-                              text: state is PlayingState
-                                  ? 'Now Playing'
-                                  : 'Paused',
+                              text: state.isPlaying ? 'Now Playing' : 'Paused',
                               fontSize: 14,
                               color: Colors.teal);
                         },
@@ -111,7 +109,6 @@ class _SongsListViewState extends State<SongsListView>
                           name: widget.songsList[index].name,
                           artist: widget.songsList[index].artist,
                           albumArt: widget.songsList[index].albumArt,
-                          duration: widget.songsList[index].duration,
                           url: widget.songsList[index].url),
                       songIndex: index,
                       playlistIndex: widget.playlistIndex);

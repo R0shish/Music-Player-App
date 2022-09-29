@@ -28,11 +28,11 @@ class PlayPauseButton extends StatelessWidget {
       ),
       child: BlocBuilder<PlayPauseCubit, PlayPauseState>(
         builder: (context, state) {
-          PlayPauseCubit cubit = context.read<PlayPauseCubit>();
           return GestureDetector(
-            onTap: () => cubit.playPauseButtonPress(url),
+            onTap: () =>
+                context.read<PlayPauseCubit>().playPauseButtonPress(url),
             child: Icon(
-              state is PlayingState ? Icons.pause : Icons.play_arrow,
+              state.isPlaying ? Icons.pause : Icons.play_arrow,
               color: color,
               size: size,
             ),

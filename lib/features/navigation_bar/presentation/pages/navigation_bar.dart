@@ -35,7 +35,6 @@ class NavigationPage extends StatelessWidget {
                 ),
                 child: BlocBuilder<NavbarCubit, NavbarState>(
                   builder: (context, state) {
-                    var cubit = context.read<NavbarCubit>();
                     return BottomNavigationBar(
                         elevation: 1,
                         iconSize: 30,
@@ -45,29 +44,30 @@ class NavigationPage extends StatelessWidget {
                         selectedItemColor: AppColor.primary,
                         unselectedItemColor: AppColor.lightGrey,
                         currentIndex: state.currentIndex,
-                        onTap: (index) => cubit.changePage(index),
+                        onTap: (index) =>
+                            context.read<NavbarCubit>().changePage(index),
                         type: BottomNavigationBarType.fixed,
                         items: [
                           BottomNavigationBarItem(
-                              icon: cubit.getIcon(
+                              icon: context.read<NavbarCubit>().getIcon(
                                   index: 0,
                                   selectedIcon: Icons.home,
                                   unselectedIcon: Icons.home_outlined),
                               label: "Home"),
                           BottomNavigationBarItem(
-                              icon: cubit.getIcon(
+                              icon: context.read<NavbarCubit>().getIcon(
                                   index: 1,
                                   selectedIcon: Icons.search,
                                   unselectedIcon: Icons.search_outlined),
                               label: "Explore"),
                           BottomNavigationBarItem(
-                              icon: cubit.getIcon(
+                              icon: context.read<NavbarCubit>().getIcon(
                                   index: 2,
                                   selectedIcon: Icons.bookmark,
                                   unselectedIcon: Icons.bookmark_outline),
                               label: "Playlist"),
                           BottomNavigationBarItem(
-                              icon: cubit.getIcon(
+                              icon: context.read<NavbarCubit>().getIcon(
                                   index: 3,
                                   selectedIcon: Icons.person,
                                   unselectedIcon: Icons.person_outline),

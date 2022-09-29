@@ -13,7 +13,6 @@ class SongInformationRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NowPlayingCubit cubit = context.read<NowPlayingCubit>();
     return Row(
       children: [
         BlocBuilder<NowPlayingCubit, NowPlayingState>(
@@ -22,8 +21,9 @@ class SongInformationRow extends StatelessWidget {
               width: deviceWidth * 0.17,
               height: deviceHeight * 0.08,
               decoration: BoxDecoration(
-                image:
-                    DecorationImage(image: cubit.songImage, fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: context.read<NowPlayingCubit>().songImage,
+                    fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(10),
               ),
             );

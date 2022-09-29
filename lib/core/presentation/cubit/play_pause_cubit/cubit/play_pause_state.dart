@@ -1,30 +1,27 @@
 part of 'play_pause_cubit.dart';
 
-abstract class PlayPauseState extends Equatable {
-  const PlayPauseState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class PlayingState extends PlayPauseState {
+class PlayPauseState extends Equatable {
   final Duration position;
   final Duration duration;
   final bool isPlaying;
-  const PlayingState({
-    this.position = Duration.zero,
-    this.duration = Duration.zero,
-    this.isPlaying = true,
-  });
-}
-
-class PausedState extends PlayPauseState {
-  final Duration position;
-  final Duration duration;
-  final bool isPlaying;
-  const PausedState({
+  const PlayPauseState({
     this.position = Duration.zero,
     this.duration = Duration.zero,
     this.isPlaying = false,
   });
+
+  PlayPauseState copyWith({
+    Duration? position,
+    Duration? duration,
+    bool? isPlaying,
+  }) {
+    return PlayPauseState(
+      position: position ?? this.position,
+      duration: duration ?? this.duration,
+      isPlaying: isPlaying ?? this.isPlaying,
+    );
+  }
+
+  @override
+  List<Object> get props => [position, duration, isPlaying];
 }

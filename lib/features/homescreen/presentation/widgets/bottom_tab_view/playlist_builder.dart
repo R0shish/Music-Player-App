@@ -54,7 +54,6 @@ class PlaylistBuilder extends StatelessWidget {
                               name: playlist.songs.first.name,
                               artist: playlist.songs.first.artist,
                               albumArt: playlist.songs.first.albumArt,
-                              duration: playlist.songs.first.duration,
                               url: playlist.songs.first.url),
                           songIndex: 0,
                           playlistIndex: index,

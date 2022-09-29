@@ -14,14 +14,15 @@ class AlbumArtContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NowPlayingCubit cubit = context.read<NowPlayingCubit>();
     return BlocBuilder<NowPlayingCubit, NowPlayingState>(
       builder: (context, state) {
         return Container(
           width: width,
           height: height,
           decoration: BoxDecoration(
-              image: DecorationImage(image: cubit.songImage, fit: BoxFit.cover),
+              image: DecorationImage(
+                  image: context.read<NowPlayingCubit>().songImage,
+                  fit: BoxFit.cover),
               borderRadius: const BorderRadius.all(Radius.circular(20))),
         );
       },

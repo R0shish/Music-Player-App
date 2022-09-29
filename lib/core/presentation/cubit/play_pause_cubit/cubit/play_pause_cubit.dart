@@ -5,25 +5,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'play_pause_state.dart';
 
 class PlayPauseCubit extends Cubit<PlayPauseState> {
-  PlayPauseCubit() : super(const PausedState());
+  PlayPauseCubit()
+      : super(const PlayPauseState(
+            duration: Duration.zero,
+            position: Duration.zero,
+            isPlaying: false));
 
   final AudioPlayer audioPlayer = AudioPlayer();
 
   void play(String url) async {
+    emit(state.copyWith(isPlaying: true));
     await audioPlayer.play(UrlSource(url));
-    emit(const PlayingState());
   }
 
   void pause() async {
+    emit(state.copyWith(isPlaying: false));
     await audioPlayer.pause();
-    emit(const PausedState());
   }
 
   void playPauseButtonPress(String url) {
-    if (state is PlayingState) {
+    if (state.isPlaying) {
       pause();
     } else {
       play(url);
     }
+  }
+
+  void updatePosition(Duration position) {
+    emit(state.copyWith(position: position));
+  }
+
+  void updateTotalDuration(Duration duration) {
+    emit(state.copyWith(duration: duration));
   }
 }
