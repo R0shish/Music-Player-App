@@ -11,8 +11,9 @@ part 'play_pause_state.dart';
 
 class PlayPauseCubit extends Cubit<PlayPauseState> {
   final NowPlayingCubit nowPlayingCubit;
+  final RepeatCubit repeatCubit;
 
-  PlayPauseCubit({required this.nowPlayingCubit})
+  PlayPauseCubit({required this.nowPlayingCubit, required this.repeatCubit})
       : super(const PlayPauseState(
             duration: Duration.zero,
             position: Duration.zero,
@@ -30,7 +31,11 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     });
 
     audioPlayer.onPlayerComplete.listen((event) {
-      playNext(nowPlayingCubit);
+      if (repeatCubit.state.isRepeat) {
+        play(url);
+      } else {
+        playNext(nowPlayingCubit);
+      }
     });
   }
 
