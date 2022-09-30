@@ -4,7 +4,8 @@ An aesthetic music player app made with flutter.
 
 ## Screenshots
 
-<img src="https://user-images.githubusercontent.com/92678280/192115339-2aee8078-f644-4769-8f3d-a5ef5fe910f5.png" alt="Homescreen screenshot" width="250"/> <img src="https://user-images.githubusercontent.com/92678280/192115342-67327797-3e20-4752-969b-f349a85f4341.png" alt="Homescreen screenshot" width="250"/> <img src="https://user-images.githubusercontent.com/92678280/192599017-4fe7e7c3-b331-4a42-8a96-ced877fa7860.png" alt="Homescreen screenshot" width="250"/>
+<img src="https://user-images.githubusercontent.com/92678280/193353751-e08e74bb-0246-405d-8e89-c01812d35bc0.png" alt="Homescreen (Now Playing Empty)" width="250"/> <img src="https://user-images.githubusercontent.com/92678280/193353761-d77a22f4-861a-43d1-8aaa-9cac885922e4.png" alt="Homescreen (With Now Playing)" width="250"/> <br><br>
+<img src="https://user-images.githubusercontent.com/92678280/193353771-e8c03c37-ddf0-4f4f-9c76-ef06130782b6.png" alt="Now Playing Screen" width="250"/> <img src="https://user-images.githubusercontent.com/92678280/193353777-658621bb-4871-4c2a-8971-8fa11d6b31d3.png" alt="Playlist Tab" width="250"/>
 
 ## Credits
 
