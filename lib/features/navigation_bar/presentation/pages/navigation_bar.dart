@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../constants/color_constant.dart';
 import '../../../homescreen/presentation/pages/homescreen.dart';
-import '../../../playlist/presentation/pages/playlist.dart';
+import '../../../playlist_tab/presentation/pages/playlist.dart';
 import '../cubit/navbar_cubit.dart';
 
 class NavigationPage extends StatelessWidget {

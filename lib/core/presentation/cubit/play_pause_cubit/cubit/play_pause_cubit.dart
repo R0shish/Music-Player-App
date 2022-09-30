@@ -6,6 +6,7 @@ import '../../../../../features/now_playing/presentation/cubit/now_playing_cubit
 import '../../../../data/model/playlist_model.dart';
 
 import '../../../../data/datasource/playlist_data.dart';
+import '../../../../data/model/song_model.dart';
 
 part 'play_pause_state.dart';
 
@@ -87,4 +88,7 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
   void updateTotalDuration(Duration duration) {
     emit(state.copyWith(duration: duration));
   }
+
+  bool get isPlaying => state.isPlaying;
+  Song get currentSong => nowPlayingCubit.song;
 }

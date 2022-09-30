@@ -84,7 +84,7 @@ class PlaylistContainer extends StatelessWidget {
           const Spacer(),
           Container(
             alignment: Alignment.bottomRight,
-            height: deviceHeight * 0.12,
+            height: deviceHeight * 0.11,
             width: deviceWidth * 0.4,
             decoration: albumArt != null
                 ? BoxDecoration(
