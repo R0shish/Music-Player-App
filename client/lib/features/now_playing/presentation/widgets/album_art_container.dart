@@ -18,11 +18,7 @@ class AlbumArtContainer extends StatelessWidget {
       builder: (context, state) {
         return Container(
           width: width,
-<<<<<<< Updated upstream:client/lib/features/now_playing/presentation/widgets/album_art_container.dart
           height: height,
-=======
-          height: width,
->>>>>>> Stashed changes:lib/features/now_playing/presentation/widgets/album_art_container.dart
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: context.read<NowPlayingCubit>().songImage,

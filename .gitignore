@@ -45,3 +45,4 @@ client/android/app/release
 
 # Node Modules
 server/node_modules
+server/.env
