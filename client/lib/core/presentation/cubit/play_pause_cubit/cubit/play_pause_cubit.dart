@@ -23,13 +23,10 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
   final AudioPlayer audioPlayer = AudioPlayer();
 
   void play(String url) async {
-    emit(state.copyWith(isPlaying: true));
+    emit(state.copyWith(
+        isPlaying: true, position: Duration.zero, duration: Duration.zero));
 
     await audioPlayer.play(UrlSource(url));
-
-    await audioPlayer.getDuration().then((value) {
-      updateTotalDuration(Duration(milliseconds: value!.inMilliseconds));
-    });
 
     audioPlayer.onPlayerComplete.listen((event) {
       if (repeatCubit.state.isRepeat) {
@@ -87,12 +84,6 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
 
   void updateTotalDuration(Duration duration) {
     emit(state.copyWith(duration: duration));
-  }
-
-  void resetRepeat() {
-    emit(state.copyWith(duration: Duration.zero, position: Duration.zero));
-    audioPlayer.pause();
-    repeatCubit.emit(const RepeatState(isRepeat: false));
   }
 
   bool get isPlaying => state.isPlaying;

@@ -23,6 +23,9 @@ class _ProgressBarState extends State<ProgressBar> {
     cubit.audioPlayer.onPositionChanged.listen((Duration currentPosition) {
       cubit.updatePosition(currentPosition);
     });
+    cubit.audioPlayer.onDurationChanged.listen((Duration totalDuration) {
+      cubit.updateTotalDuration(totalDuration);
+    });
   }
 
   @override
@@ -32,16 +35,15 @@ class _ProgressBarState extends State<ProgressBar> {
       children: [
         BlocBuilder<PlayPauseCubit, PlayPauseState>(
           builder: (context, state) {
-            Duration totalDuration = state.duration == Duration.zero
-                ? const Duration(seconds: 1)
-                : state.duration;
             return LinearPercentIndicator(
               animation: true,
               animationDuration: 1000,
               animateFromLastPercent: true,
               curve: Curves.easeInOut,
               lineHeight: 10,
-              percent: state.position.inSeconds / totalDuration.inSeconds,
+              percent: state.duration == Duration.zero
+                  ? state.position.inSeconds / 1
+                  : state.position.inSeconds / state.duration.inSeconds,
               progressColor: AppColor.primary,
               backgroundColor: AppColor.secondary,
               barRadius: const Radius.circular(10),
