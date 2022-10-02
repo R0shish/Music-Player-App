@@ -1,11 +1,11 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/core/presentation/cubit/playlist_cubit/playlist_cubit.dart';
 import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubit/repeat_cubit.dart';
 import '../../../../../features/now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
 import '../../../../data/model/playlist_model.dart';
 
-import '../../../../data/datasource/playlist_data.dart';
 import '../../../../data/model/song_model.dart';
 
 part 'play_pause_state.dart';
@@ -13,9 +13,13 @@ part 'play_pause_state.dart';
 class PlayPauseCubit extends Cubit<PlayPauseState> {
   final NowPlayingCubit nowPlayingCubit;
   final RepeatCubit repeatCubit;
+  final PlaylistCubit playlistCubit;
 
-  PlayPauseCubit({required this.nowPlayingCubit, required this.repeatCubit})
-      : super(const PlayPauseState(
+  PlayPauseCubit({
+    required this.nowPlayingCubit,
+    required this.repeatCubit,
+    required this.playlistCubit,
+  }) : super(const PlayPauseState(
             duration: Duration.zero,
             position: Duration.zero,
             isPlaying: false));
@@ -32,7 +36,7 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
       if (repeatCubit.state.isRepeat) {
         play(url);
       } else {
-        playNext(nowPlayingCubit);
+        playNext();
       }
     });
   }
@@ -50,9 +54,9 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     }
   }
 
-  void playNext(NowPlayingCubit nowPlayingCubit) {
+  void playNext() {
     Playlist playlist = Playlist.fromJson(
-      playlistData['data'][nowPlayingCubit.playlistIndex],
+      playlistCubit.playlist[nowPlayingCubit.playlistIndex],
     );
     int nextSongIndex = (nowPlayingCubit.songIndex + 1) % playlist.songs.length;
 
@@ -64,9 +68,9 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     play(playlist.songs[nextSongIndex].url);
   }
 
-  void playPrev(NowPlayingCubit nowPlayingCubit) {
+  void playPrev() {
     Playlist playlist = Playlist.fromJson(
-      playlistData['data'][nowPlayingCubit.playlistIndex],
+      playlistCubit.playlist[nowPlayingCubit.playlistIndex],
     );
     int prevSongIndex = (nowPlayingCubit.songIndex - 1) % playlist.songs.length;
 

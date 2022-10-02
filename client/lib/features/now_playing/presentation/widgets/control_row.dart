@@ -15,7 +15,6 @@ class ControlRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PlayPauseCubit playPauseCubit = context.read<PlayPauseCubit>();
-    final NowPlayingCubit nowPlayingCubit = context.read<NowPlayingCubit>();
     final RepeatCubit repeatCubit = context.read<RepeatCubit>();
 
     return BlocBuilder<NowPlayingCubit, NowPlayingState>(
@@ -27,7 +26,7 @@ class ControlRow extends StatelessWidget {
                 onPressed: () {}, iconData: Icons.shuffle),
             _iconButtonBuilder(context, onPressed: () {
               repeatCubit.resetRepeat();
-              playPauseCubit.playPrev(nowPlayingCubit);
+              playPauseCubit.playPrev();
             }, iconData: Icons.skip_previous),
             PlayPauseButton(
               color: AppColor.primary,
@@ -35,7 +34,7 @@ class ControlRow extends StatelessWidget {
             ),
             _iconButtonBuilder(context, onPressed: () {
               repeatCubit.resetRepeat();
-              playPauseCubit.playNext(nowPlayingCubit);
+              playPauseCubit.playNext();
             }, iconData: Icons.skip_next),
             _iconButtonBuilder(context,
                 iconData: context.watch<RepeatCubit>().repeatIcon,

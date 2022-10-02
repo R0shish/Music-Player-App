@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/core/presentation/cubit/playlist_cubit/playlist_cubit.dart';
 import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubit/repeat_cubit.dart';
 
 import 'constants/color_constant.dart';
@@ -44,10 +45,17 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => NavbarCubit()),
           BlocProvider(create: (context) => NowPlayingCubit()),
           BlocProvider(create: (context) => RepeatCubit()),
+          BlocProvider(create: (context) {
+            final cubit = PlaylistCubit();
+            cubit.getPlaylist();
+            return cubit;
+          }),
           BlocProvider(
               create: (context) => PlayPauseCubit(
-                  nowPlayingCubit: context.read<NowPlayingCubit>(),
-                  repeatCubit: context.read<RepeatCubit>())),
+                    nowPlayingCubit: context.read<NowPlayingCubit>(),
+                    repeatCubit: context.read<RepeatCubit>(),
+                    playlistCubit: context.read<PlaylistCubit>(),
+                  )),
         ],
         child: const NavigationPage(),
       ),

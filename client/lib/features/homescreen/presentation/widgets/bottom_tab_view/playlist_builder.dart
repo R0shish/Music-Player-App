@@ -10,7 +10,7 @@ import '../../../../../core/data/model/song_model.dart';
 import '../../../../../core/presentation/widgets/playlist_container.dart';
 
 class PlaylistBuilder extends StatelessWidget {
-  final Map<String, dynamic> playlistData;
+  final List<dynamic> playlistData;
   const PlaylistBuilder({
     Key? key,
     required this.playlistData,
@@ -22,10 +22,10 @@ class PlaylistBuilder extends StatelessWidget {
       height: deviceHeight * 0.23,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: playlistData['data'].length,
+        itemCount: playlistData.length,
         itemBuilder: ((context, index) {
           Playlist playlist = Playlist.fromJson(
-            playlistData['data'][index],
+            playlistData[index],
           );
           int noOfSongs = playlist.songs.length;
           return GestureDetector(
