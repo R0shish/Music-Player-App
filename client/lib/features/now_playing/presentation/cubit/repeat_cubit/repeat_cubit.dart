@@ -12,10 +12,6 @@ class RepeatCubit extends Cubit<RepeatState> {
     emit(RepeatState(isRepeat: !state.isRepeat));
   }
 
-  void resetRepeat() {
-    emit(const RepeatState(isRepeat: false));
-  }
-
   Color get repeatIconColor =>
       state.isRepeat ? AppColor.primary : AppColor.lightGrey;
 

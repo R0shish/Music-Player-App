@@ -26,7 +26,7 @@ class ControlRow extends StatelessWidget {
             _iconButtonBuilder(context,
                 onPressed: () {}, iconData: Icons.shuffle),
             _iconButtonBuilder(context, onPressed: () {
-              repeatCubit.resetRepeat();
+              playPauseCubit.resetRepeat();
               playPauseCubit.playPrev(nowPlayingCubit);
             }, iconData: Icons.skip_previous),
             PlayPauseButton(
@@ -34,7 +34,7 @@ class ControlRow extends StatelessWidget {
               url: state.song!.url,
             ),
             _iconButtonBuilder(context, onPressed: () {
-              repeatCubit.resetRepeat();
+              playPauseCubit.resetRepeat();
               playPauseCubit.playNext(nowPlayingCubit);
             }, iconData: Icons.skip_next),
             _iconButtonBuilder(context,

@@ -89,6 +89,12 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     emit(state.copyWith(duration: duration));
   }
 
+  void resetRepeat() {
+    emit(state.copyWith(duration: Duration.zero, position: Duration.zero));
+    audioPlayer.pause();
+    repeatCubit.emit(const RepeatState(isRepeat: false));
+  }
+
   bool get isPlaying => state.isPlaying;
   Song get currentSong => nowPlayingCubit.song;
 }
