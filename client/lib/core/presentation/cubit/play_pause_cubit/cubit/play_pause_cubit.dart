@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +57,7 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
   }
 
   void playNext() {
-    audioPlayer.stop();
+    Platform.isIOS ? audioPlayer.stop() : null;
     Playlist playlist = Playlist.fromJson(
       playlistCubit.playlist[nowPlayingCubit.playlistIndex],
     );
@@ -70,7 +72,7 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
   }
 
   void playPrev() {
-    audioPlayer.stop();
+    Platform.isIOS ? audioPlayer.stop() : null;
     Playlist playlist = Playlist.fromJson(
       playlistCubit.playlist[nowPlayingCubit.playlistIndex],
     );
