@@ -12,8 +12,12 @@ class PlaylistCubit extends Cubit<PlaylistState> {
   late final PlaylistDataSource playlistDataSource = PlaylistDataSourceImpl();
 
   void getPlaylist() async {
-    final playlist = await playlistDataSource.getPlaylist();
-    emit(PlaylistLoaded(playlistData: playlist));
+    try {
+      final playlist = await playlistDataSource.getPlaylist();
+      emit(PlaylistLoaded(playlistData: playlist));
+    } catch (e) {
+      emit(PlaylistError(playlist: playlist, error: e.toString()));
+    }
   }
 
   List get playlist => state.playlist;

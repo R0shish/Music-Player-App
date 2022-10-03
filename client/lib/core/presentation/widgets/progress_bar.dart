@@ -42,7 +42,7 @@ class _ProgressBarState extends State<ProgressBar> {
               curve: Curves.easeInOut,
               lineHeight: 10,
               percent: state.duration == Duration.zero
-                  ? state.position.inSeconds / 1
+                  ? 0
                   : state.position.inSeconds / state.duration.inSeconds,
               progressColor: AppColor.primary,
               backgroundColor: AppColor.secondary,

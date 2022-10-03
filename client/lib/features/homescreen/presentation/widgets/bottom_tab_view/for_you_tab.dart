@@ -33,6 +33,10 @@ class ForYouTab extends StatelessWidget {
               );
             } else if (state is PlaylistLoaded) {
               return PlaylistBuilder(playlistData: state.playlist);
+            } else if (state is PlaylistError) {
+              return Center(
+                child: Text(state.error),
+              );
             }
             return const Center(
               child: Text('Something went wrong'),

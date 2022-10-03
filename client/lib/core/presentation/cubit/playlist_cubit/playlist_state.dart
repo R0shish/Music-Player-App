@@ -14,7 +14,7 @@ class PlaylistLoading extends PlaylistState {
   const PlaylistLoading({required super.playlist});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [playlist];
 }
 
 class PlaylistLoaded extends PlaylistState {
@@ -24,4 +24,12 @@ class PlaylistLoaded extends PlaylistState {
 
   @override
   List<Object> get props => [playlist];
+}
+
+class PlaylistError extends PlaylistState {
+  final String error;
+  const PlaylistError({required super.playlist, required this.error});
+
+  @override
+  List<Object> get props => [playlist, error];
 }
