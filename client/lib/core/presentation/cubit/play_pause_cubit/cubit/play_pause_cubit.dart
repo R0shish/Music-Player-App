@@ -55,6 +55,7 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
   }
 
   void playNext() {
+    audioPlayer.stop();
     Playlist playlist = Playlist.fromJson(
       playlistCubit.playlist[nowPlayingCubit.playlistIndex],
     );
@@ -69,6 +70,7 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
   }
 
   void playPrev() {
+    audioPlayer.stop();
     Playlist playlist = Playlist.fromJson(
       playlistCubit.playlist[nowPlayingCubit.playlistIndex],
     );
