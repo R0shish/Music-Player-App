@@ -7,8 +7,10 @@ import '../../../constants/color_constant.dart';
 import '../../../constants/dimensions.dart';
 
 class ProgressBar extends StatefulWidget {
+  final bool isHomescreen;
   const ProgressBar({
     Key? key,
+    this.isHomescreen = false,
   }) : super(key: key);
 
   @override
@@ -20,11 +22,13 @@ class _ProgressBarState extends State<ProgressBar> {
   void initState() {
     super.initState();
     PlayPauseCubit cubit = context.read<PlayPauseCubit>();
-    cubit.audioPlayer.onPositionChanged.listen((Duration currentPosition) {
-      cubit.updatePosition(currentPosition);
+
+    cubit.audioPlayer.positionStream.listen((Duration position) {
+      cubit.updatePosition(position);
     });
-    cubit.audioPlayer.onDurationChanged.listen((Duration totalDuration) {
-      cubit.updateTotalDuration(totalDuration);
+
+    cubit.audioPlayer.durationStream.listen((Duration? duration) {
+      cubit.updateTotalDuration(duration);
     });
   }
 
@@ -35,18 +39,33 @@ class _ProgressBarState extends State<ProgressBar> {
       children: [
         BlocBuilder<PlayPauseCubit, PlayPauseState>(
           builder: (context, state) {
-            return LinearPercentIndicator(
-              animation: true,
-              animationDuration: 1000,
-              animateFromLastPercent: true,
-              curve: Curves.easeInOut,
-              lineHeight: 10,
-              percent: state.duration == Duration.zero
-                  ? 0
-                  : state.position.inSeconds / state.duration.inSeconds,
-              progressColor: AppColor.primary,
-              backgroundColor: AppColor.secondary,
-              barRadius: const Radius.circular(10),
+            if (widget.isHomescreen) {
+              return LinearPercentIndicator(
+                animation: true,
+                animationDuration: 1000,
+                animateFromLastPercent: true,
+                curve: Curves.easeInOut,
+                lineHeight: 10,
+                percent: state.duration == Duration.zero
+                    ? 0
+                    : state.position.inSeconds / state.duration.inSeconds,
+                progressColor: AppColor.primary,
+                backgroundColor: AppColor.secondary,
+                barRadius: const Radius.circular(10),
+              );
+            }
+            return Slider(
+              value: state.position.inSeconds.toDouble(),
+              min: 0,
+              max: state.duration.inSeconds.toDouble(),
+              activeColor: AppColor.primary,
+              inactiveColor: AppColor.secondary,
+              onChanged: (value) {
+                context
+                    .read<PlayPauseCubit>()
+                    .audioPlayer
+                    .seek(Duration(seconds: value.toInt()));
+              },
             );
           },
         ),

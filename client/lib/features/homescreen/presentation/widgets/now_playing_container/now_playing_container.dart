@@ -52,7 +52,7 @@ class _NowPlayingContainerState extends State<NowPlayingContainer> {
             children: [
               const SongInformationRow(),
               SizedBox(height: deviceHeight * 0.02),
-              const ProgressBar(),
+              const ProgressBar(isHomescreen: true),
             ],
           ),
         ),

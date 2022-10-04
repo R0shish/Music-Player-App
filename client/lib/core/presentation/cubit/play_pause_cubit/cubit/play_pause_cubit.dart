@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:music_player/core/presentation/cubit/playlist_cubit/playlist_cubit.dart';
 import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubit/repeat_cubit.dart';
 import '../../../../../features/now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
@@ -16,30 +16,42 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
   final NowPlayingCubit nowPlayingCubit;
   final RepeatCubit repeatCubit;
   final PlaylistCubit playlistCubit;
+  final AudioPlayer audioPlayer;
 
   PlayPauseCubit({
     required this.nowPlayingCubit,
     required this.repeatCubit,
     required this.playlistCubit,
+    required this.audioPlayer,
   }) : super(const PlayPauseState(
             duration: Duration.zero,
             position: Duration.zero,
             isPlaying: false));
 
-  final AudioPlayer audioPlayer = AudioPlayer();
-
   void play(String url) async {
+    Playlist playlist = Playlist.fromJson(
+      playlistCubit.playlist[nowPlayingCubit.playlistIndex],
+    );
     emit(state.copyWith(
         isPlaying: true, position: Duration.zero, duration: Duration.zero));
 
-    await audioPlayer.play(UrlSource(url));
+    List<AudioSource> audioSources = playlist.songs
+        .map((Song song) => AudioSource.uri(Uri.parse(song.url)))
+        .toList();
 
-    audioPlayer.onPlayerComplete.listen((event) {
-      if (repeatCubit.state.isRepeat) {
-        play(url);
-      } else {
-        playNext();
-      }
+    ConcatenatingAudioSource playlistSource = ConcatenatingAudioSource(
+        useLazyPreparation: false, children: audioSources);
+
+    audioPlayer.setAudioSource(playlistSource,
+        initialIndex: nowPlayingCubit.songIndex);
+
+    await audioPlayer.play();
+
+    audioPlayer.currentIndexStream.listen((index) {
+      nowPlayingCubit.updateSong(
+          song: playlist.songs[index!],
+          songIndex: index,
+          playlistIndex: nowPlayingCubit.playlistIndex);
     });
   }
 
@@ -56,8 +68,7 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     }
   }
 
-  void playNext() {
-    Platform.isIOS ? audioPlayer.stop() : null;
+  void nextSongCover() {
     Playlist playlist = Playlist.fromJson(
       playlistCubit.playlist[nowPlayingCubit.playlistIndex],
     );
@@ -67,30 +78,23 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
         song: playlist.songs[nextSongIndex],
         songIndex: nextSongIndex,
         playlistIndex: nowPlayingCubit.playlistIndex);
+  }
 
-    play(playlist.songs[nextSongIndex].url);
+  void playNext() {
+    Platform.isIOS ? audioPlayer.stop() : null;
+    audioPlayer.seekToNext();
   }
 
   void playPrev() {
     Platform.isIOS ? audioPlayer.stop() : null;
-    Playlist playlist = Playlist.fromJson(
-      playlistCubit.playlist[nowPlayingCubit.playlistIndex],
-    );
-    int prevSongIndex = (nowPlayingCubit.songIndex - 1) % playlist.songs.length;
-
-    nowPlayingCubit.updateSong(
-        song: playlist.songs[prevSongIndex],
-        songIndex: prevSongIndex,
-        playlistIndex: nowPlayingCubit.playlistIndex);
-
-    play(playlist.songs[prevSongIndex].url);
+    audioPlayer.seekToPrevious();
   }
 
   void updatePosition(Duration position) {
     emit(state.copyWith(position: position));
   }
 
-  void updateTotalDuration(Duration duration) {
+  void updateTotalDuration(Duration? duration) {
     emit(state.copyWith(duration: duration));
   }
 

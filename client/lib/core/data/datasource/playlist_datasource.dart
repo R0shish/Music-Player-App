@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:music_player/constants/api_constant.dart';
 
 abstract class PlaylistDataSource {
   Future<List<dynamic>> getPlaylist();
@@ -11,10 +11,7 @@ class PlaylistDataSourceImpl implements PlaylistDataSource {
 
   @override
   Future<List<dynamic>> getPlaylist() async {
-    final response = await http.get(
-        Platform.isAndroid
-            ? Uri.parse('http://10.0.2.2:3500/api/playlist/getPlaylist')
-            : Uri.parse('http://localhost:3500/api/playlist/getPlaylist'),
+    final response = await http.get(Uri.parse(Api.getPlaylist),
         headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
       return Future.value(json.decode(response.body));

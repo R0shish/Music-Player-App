@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:music_player/core/presentation/cubit/playlist_cubit/playlist_cubit.dart';
 import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubit/repeat_cubit.dart';
 
@@ -13,12 +14,20 @@ import 'router/app_router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  final AudioPlayer audioPlayer = AudioPlayer();
+  audioPlayer.setAutomaticallyWaitsToMinimizeStalling(false);
+  runApp(MyApp(audioPlayer: audioPlayer));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  final AudioPlayer audioPlayer;
+  const MyApp({super.key, required this.audioPlayer});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     AppRouter appRouter = AppRouter();
@@ -44,7 +53,9 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => NavbarCubit()),
           BlocProvider(create: (context) => NowPlayingCubit()),
-          BlocProvider(create: (context) => RepeatCubit()),
+          BlocProvider(
+              create: (context) =>
+                  RepeatCubit(audioPlayer: widget.audioPlayer)),
           BlocProvider(create: (context) {
             final cubit = PlaylistCubit();
             cubit.getPlaylist();
@@ -55,10 +66,17 @@ class MyApp extends StatelessWidget {
                     nowPlayingCubit: context.read<NowPlayingCubit>(),
                     repeatCubit: context.read<RepeatCubit>(),
                     playlistCubit: context.read<PlaylistCubit>(),
+                    audioPlayer: widget.audioPlayer,
                   )),
         ],
         child: const NavigationPage(),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    widget.audioPlayer.dispose();
+    super.dispose();
   }
 }
