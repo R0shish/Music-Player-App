@@ -27,9 +27,9 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
             isPlaying: false));
 
   void play(String url) async {
-    Playlist playlist = Playlist.fromJson(
-      playlistCubit.playlist[nowPlayingCubit.playlistIndex],
-    );
+    Playlist playlist =
+        playlistCubit.getCurrentPlaylist(nowPlayingCubit.playlistIndex);
+
     emit(state.copyWith(
         isPlaying: true, position: Duration.zero, duration: Duration.zero));
 
@@ -43,7 +43,7 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     audioPlayer.setAudioSource(playlistSource,
         initialIndex: nowPlayingCubit.songIndex);
 
-    audioPlayer.play();
+    await audioPlayer.play();
 
     audioPlayer.currentIndexStream.listen((index) {
       nowPlayingCubit.updateSong(
@@ -58,11 +58,16 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     await audioPlayer.pause();
   }
 
+  void resume() async {
+    emit(state.copyWith(isPlaying: true));
+    await audioPlayer.play();
+  }
+
   void playPauseButtonPress(String url) {
     if (state.isPlaying) {
       pause();
     } else {
-      play(url);
+      resume();
     }
   }
 

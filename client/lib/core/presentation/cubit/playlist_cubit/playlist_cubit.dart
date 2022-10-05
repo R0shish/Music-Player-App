@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/datasource/playlist_datasource.dart';
+import '../../../data/model/playlist_model.dart';
 
 part 'playlist_state.dart';
 
@@ -19,6 +20,10 @@ class PlaylistCubit extends Cubit<PlaylistState> {
       emit(PlaylistError(playlist: playlist, error: e.toString()));
     }
   }
+
+  Playlist getCurrentPlaylist(index) => Playlist.fromJson(
+        state.playlist[index],
+      );
 
   List get playlist => state.playlist;
 }
