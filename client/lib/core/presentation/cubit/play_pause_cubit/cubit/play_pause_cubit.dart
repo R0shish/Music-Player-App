@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
@@ -45,7 +43,7 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     audioPlayer.setAudioSource(playlistSource,
         initialIndex: nowPlayingCubit.songIndex);
 
-    await audioPlayer.play();
+    audioPlayer.play();
 
     audioPlayer.currentIndexStream.listen((index) {
       nowPlayingCubit.updateSong(
@@ -68,25 +66,11 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
     }
   }
 
-  void nextSongCover() {
-    Playlist playlist = Playlist.fromJson(
-      playlistCubit.playlist[nowPlayingCubit.playlistIndex],
-    );
-    int nextSongIndex = (nowPlayingCubit.songIndex + 1) % playlist.songs.length;
-
-    nowPlayingCubit.updateSong(
-        song: playlist.songs[nextSongIndex],
-        songIndex: nextSongIndex,
-        playlistIndex: nowPlayingCubit.playlistIndex);
-  }
-
   void playNext() {
-    Platform.isIOS ? audioPlayer.stop() : null;
     audioPlayer.seekToNext();
   }
 
   void playPrev() {
-    Platform.isIOS ? audioPlayer.stop() : null;
     audioPlayer.seekToPrevious();
   }
 
