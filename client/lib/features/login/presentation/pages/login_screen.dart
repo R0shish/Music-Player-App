@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/constants/constants.dart';
+import '../../../../constants/constants.dart';
 
 import '../../../../core/presentation/widgets/widgets.dart';
 
@@ -55,7 +55,10 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: const Text('Login'),
+                child: Text(
+                  'Login',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
               ),
               SizedBox(height: deviceHeight * 0.02),
               Row(

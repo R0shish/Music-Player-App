@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubit/repeat_cubit.dart';
+import '../../../../core/presentation/cubit/cubit.dart';
 
-import '../../../../constants/color_constant.dart';
-import '../../../../core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
+import '../../../../constants/constants.dart';
 import '../../../../core/presentation/widgets/widgets.dart';
-import '../cubit/now_playing_cubit/now_playing_cubit.dart';
 
 class ControlRow extends StatelessWidget {
   const ControlRow({

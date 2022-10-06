@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:music_player/constants/color_constant.dart';
+import '../../../../../constants/constants.dart';
 
 part 'repeat_state.dart';
 

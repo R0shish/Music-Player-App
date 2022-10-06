@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
+import '../cubit/cubit.dart';
 
 import '../../../constants/constants.dart';
 

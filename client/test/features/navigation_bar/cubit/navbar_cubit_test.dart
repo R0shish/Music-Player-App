@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:music_player/features/navigation_bar/presentation/cubit/navbar_cubit.dart';
+import 'package:music_player/core/presentation/cubit/cubit.dart';
 
 void main() {
   group('navbarCubit', () {

@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../core/presentation/widgets/widgets.dart';
-import '../cubit/now_playing_cubit/now_playing_cubit.dart';
+import '../../../../core/presentation/cubit/cubit.dart';
+
 import '../widgets/album_art_container.dart';
 import '../widgets/control_row.dart';
 import '../widgets/now_playing_title_row.dart';

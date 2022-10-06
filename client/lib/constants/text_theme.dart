@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'color_constant.dart';
+import 'constants.dart';
 
 TextTheme textTheme() {
   return const TextTheme(

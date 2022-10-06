@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/features/login/presentation/pages/login_screen.dart';
+import '../../../login/presentation/pages/login_screen.dart';
 
-import '../../../../constants/color_constant.dart';
+import '../../../../constants/constants.dart';
 import '../../../homescreen/presentation/pages/homescreen.dart';
 import '../../../playlist_tab/presentation/pages/playlist.dart';
-import '../cubit/navbar_cubit.dart';
+import '../../../../core/presentation/cubit/cubit.dart';
 
 class NavigationPage extends StatelessWidget {
   const NavigationPage({Key? key}) : super(key: key);

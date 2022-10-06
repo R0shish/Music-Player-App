@@ -2,11 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../constants/color_constant.dart';
-import '../../../../constants/text_theme.dart';
+import '../../../../constants/constants.dart';
 import '../../../../core/data/model/song_model.dart';
-import '../../../../core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
-import '../../../now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
+import '../../../../core/presentation/cubit/cubit.dart';
 
 class SongsListView extends StatefulWidget {
   const SongsListView({

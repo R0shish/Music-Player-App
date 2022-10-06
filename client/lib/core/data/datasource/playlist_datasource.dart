@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:music_player/constants/api_constant.dart';
+import '../../../constants/constants.dart';
 
 abstract class PlaylistDataSource {
   Future<List<dynamic>> getPlaylist();
