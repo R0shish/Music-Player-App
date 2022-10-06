@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/features/login/presentation/pages/login_screen.dart';
 
 import '../../../../constants/color_constant.dart';
 import '../../../homescreen/presentation/pages/homescreen.dart';
@@ -15,7 +16,7 @@ class NavigationPage extends StatelessWidget {
     Homescreen(),
     Homescreen(),
     PlaylistPage(),
-    Homescreen(),
+    LoginScreen(),
   ];
 
   @override
