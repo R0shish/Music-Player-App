@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_player/core/presentation/cubit/playlist_cubit/playlist_cubit.dart';
 
-import '../../../../../constants/dimensions.dart';
+import '../../../../../constants/constants.dart';
 import '../../../../../core/data/datasource/podcast_data.dart';
 import '../../../../../core/presentation/widgets/title_style_text.dart';
 import 'playlist_builder.dart';

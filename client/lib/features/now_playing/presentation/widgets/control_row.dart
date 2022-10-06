@@ -4,7 +4,7 @@ import 'package:music_player/features/now_playing/presentation/cubit/repeat_cubi
 
 import '../../../../constants/color_constant.dart';
 import '../../../../core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
-import '../../../../core/presentation/widgets/play_pause.dart';
+import '../../../../core/presentation/widgets/widgets.dart';
 import '../cubit/now_playing_cubit/now_playing_cubit.dart';
 
 class ControlRow extends StatelessWidget {

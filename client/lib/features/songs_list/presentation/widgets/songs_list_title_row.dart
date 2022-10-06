@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/dimensions.dart';
+import '../../../../constants/constants.dart';
 
 class SongsListTitleRow extends StatelessWidget {
   const SongsListTitleRow({

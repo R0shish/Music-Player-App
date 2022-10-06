@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../constants/dimensions.dart';
+import '../../../../constants/constants.dart';
 import '../../../now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
 import '../widgets/bottom_tab_view/bottom_tab_view.dart';
 import '../widgets/now_playing_container/now_playing_container.dart';

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
 
-import '../../../constants/color_constant.dart';
-import '../../../constants/dimensions.dart';
+import '../../../constants/constants.dart';
 
 class PlayPauseButton extends StatelessWidget {
   final Color color;

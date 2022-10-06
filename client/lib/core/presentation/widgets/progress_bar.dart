@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-
-import '../../../constants/color_constant.dart';
-import '../../../constants/dimensions.dart';
+import '../../../../constants/constants.dart';
 
 class ProgressBar extends StatefulWidget {
   final bool isHomescreen;

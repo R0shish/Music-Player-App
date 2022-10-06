@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../constants/dimensions.dart';
-import '../../../../core/presentation/widgets/progress_bar.dart';
+import '../../../../constants/constants.dart';
+import '../../../../core/presentation/widgets/widgets.dart';
 import '../cubit/now_playing_cubit/now_playing_cubit.dart';
 import '../widgets/album_art_container.dart';
 import '../widgets/control_row.dart';

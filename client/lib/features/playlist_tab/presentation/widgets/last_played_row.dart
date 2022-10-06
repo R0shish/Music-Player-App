@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_player/core/presentation/cubit/play_pause_cubit/cubit/play_pause_cubit.dart';
 
-import '../../../../constants/color_constant.dart';
-import '../../../../constants/dimensions.dart';
+import '../../../../constants/constants.dart';
 import '../../../now_playing/presentation/cubit/now_playing_cubit/now_playing_cubit.dart';
 import '../../../now_playing/presentation/widgets/album_art_container.dart';
 

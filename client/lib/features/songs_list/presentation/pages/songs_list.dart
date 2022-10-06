@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/dimensions.dart';
+import '../../../../constants/constants.dart';
 import '../../../../core/data/model/song_model.dart';
 import '../widgets/songs_list_title_row.dart';
 import '../widgets/songs_list_view.dart';

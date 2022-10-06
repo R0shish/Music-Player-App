@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/color_constant.dart';
-import '../../../../constants/dimensions.dart';
+import '../../../../constants/constants.dart';
 
 class TopWidget extends StatelessWidget {
   const TopWidget({

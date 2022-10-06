@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../constants/color_constant.dart';
-import '../../../../constants/dimensions.dart';
+import '../../../../constants/constants.dart';
 
 class SearchRow extends StatelessWidget {
   const SearchRow({

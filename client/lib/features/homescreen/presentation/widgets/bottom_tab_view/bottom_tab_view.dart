@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../constants/color_constant.dart';
-import '../../../../../constants/dimensions.dart';
+import '../../../../../constants/constants.dart';
 import 'for_you_tab.dart';
 
 class BottomTabView extends StatelessWidget {

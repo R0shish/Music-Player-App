@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../constants/dimensions.dart';
+import '../../../../../constants/constants.dart';
 import '../../../../../core/data/model/podcast_model.dart';
 import '../../../../../core/presentation/widgets/podcast_container.dart';
 
