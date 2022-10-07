@@ -1,6 +1,8 @@
-const express = require("express");
-const app = express();
 require("dotenv").config();
+const express = require("express");
+
+const app = express();
+app.use(express.json());
 
 const PORT = process.env.PORT || 3500;
 
@@ -18,5 +20,8 @@ app.use(cors({origin: '*'}));
 
 const playlistRouter = require("./routes/playlistRouter");
 app.use("/api/playlist", playlistRouter);
+
+const authRouter = require("./routes/authRouter");
+app.use("/api/auth", authRouter);
 
 app.listen(PORT, () => console.log(`Listening to port ${PORT}`))
