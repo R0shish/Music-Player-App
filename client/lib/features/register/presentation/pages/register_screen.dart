@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/core/presentation/cubit/cubit.dart';
 import '../../../../constants/constants.dart';
 
 import '../../../../core/presentation/widgets/widgets.dart';
