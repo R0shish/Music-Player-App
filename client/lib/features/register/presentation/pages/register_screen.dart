@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/core/presentation/cubit/cubit.dart';
 import '../../../../constants/constants.dart';
 
 import '../../../../core/presentation/widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               SizedBox(height: deviceHeight * 0.02),
               Image.asset('assets/images/unboxing.png'),
-              const Text('Login',
+              const Text('Register',
                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
               SizedBox(height: deviceHeight * 0.02),
               const CustomTextFormField(
@@ -34,17 +36,13 @@ class LoginScreen extends StatelessWidget {
                 obscureText: true,
               ),
               SizedBox(height: deviceHeight * 0.01),
-              Container(
-                alignment: Alignment.centerRight,
-                width: deviceWidth,
-                child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Forgot Password?',
-                      style: Theme.of(context).textTheme.headline4,
-                    )),
+              const CustomTextFormField(
+                hintText: 'Confirm your password',
+                iconData: Icons.lock,
+                labelText: 'Confirm Password',
+                obscureText: true,
               ),
-              SizedBox(height: deviceHeight * 0.01),
+              SizedBox(height: deviceHeight * 0.02),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(deviceWidth * 0.9, deviceHeight * 0.06),
@@ -56,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 onPressed: () {},
                 child: Text(
-                  'Login',
+                  'Register',
                   style: Theme.of(context).textTheme.headline2,
                 ),
               ),
@@ -64,11 +62,11 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Don\'t have an account?'),
+                  const Text('Already have an account?'),
                   TextButton(
-                    onPressed: () => Navigator.pushNamed(context, '/register'),
+                    onPressed: () => Navigator.pop(context),
                     child: const Text(
-                      'Register',
+                      'Login',
                       style: TextStyle(color: AppColor.primary, fontSize: 16),
                     ),
                   ),

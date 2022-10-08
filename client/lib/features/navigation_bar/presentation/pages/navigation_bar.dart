@@ -2,22 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../login/presentation/pages/login_screen.dart';
 
 import '../../../../constants/constants.dart';
-import '../../../homescreen/presentation/pages/homescreen.dart';
-import '../../../playlist_tab/presentation/pages/playlist.dart';
 import '../../../../core/presentation/cubit/cubit.dart';
 
 class NavigationPage extends StatelessWidget {
   const NavigationPage({Key? key}) : super(key: key);
-
-  final List<Widget> screens = const <Widget>[
-    Homescreen(),
-    Homescreen(),
-    PlaylistPage(),
-    LoginScreen(),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +15,8 @@ class NavigationPage extends StatelessWidget {
         extendBody: true,
         body: BlocBuilder<NavbarCubit, NavbarState>(
           builder: (context, state) {
-            return IndexedStack(index: state.currentIndex, children: screens);
+            return IndexedStack(
+                index: state.currentIndex, children: state.screens);
           },
         ),
         bottomNavigationBar: ClipRect(
