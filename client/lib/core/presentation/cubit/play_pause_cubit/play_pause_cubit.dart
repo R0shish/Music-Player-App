@@ -53,7 +53,7 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
 
   void pause() async {
     emit(state.copyWith(isPlaying: false));
-    await audioPlayer.pause();
+    audioPlayer.pause();
   }
 
   void resume() async {

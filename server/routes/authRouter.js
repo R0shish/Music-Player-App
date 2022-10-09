@@ -45,13 +45,13 @@ router.post("/login", (req, res) => {
             if (err) {
                 res.status(500).send(err);
             } else if (!data) {
-                res.status(400).send("Email address not found");
+                res.status(200).json({message:"Email address not found"});
             } else {
                 // Check if password is correct
                 if (bcrypt.compareSync(req.body.password, data.password)) {
-                    res.status(200).send("Login successful");
+                    res.status(200).json({message: "Login successful"});
                 } else {
-                    res.status(400).send("Incorrect password");
+                    res.status(200).json({message : "Incorrect password"});
                 }
             }
         });

@@ -26,16 +26,16 @@ class RegisterScreen extends StatelessWidget {
         SizedBox(height: deviceHeight * 0.02),
         const CustomTextFormField(
           hintText: 'Enter your password',
-          iconData: Icons.lock,
+          iconData: Icons.lock_outline,
           labelText: 'Password',
-          obscureText: true,
+          isPassword: true,
         ),
         SizedBox(height: deviceHeight * 0.01),
         const CustomTextFormField(
           hintText: 'Confirm your password',
-          iconData: Icons.lock,
+          iconData: Icons.check,
           labelText: 'Confirm Password',
-          obscureText: true,
+          isPassword: true,
         ),
         SizedBox(height: deviceHeight * 0.02),
         ElevatedButton(

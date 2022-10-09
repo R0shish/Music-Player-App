@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:music_player/features/authentication/presentation/pages/authentication.dart';
 import '../../../../constants/constants.dart';
 
 import '../../../../core/presentation/cubit/cubit.dart';
 import '../../../../core/presentation/widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,17 +25,19 @@ class LoginScreen extends StatelessWidget {
         const Text('Login',
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
         SizedBox(height: deviceHeight * 0.02),
-        const CustomTextFormField(
+        CustomTextFormField(
+          controller: _emailController,
           hintText: 'Enter your email ID',
           iconData: Icons.alternate_email_outlined,
           labelText: 'Email ID',
         ),
         SizedBox(height: deviceHeight * 0.02),
-        const CustomTextFormField(
+        CustomTextFormField(
+          controller: _passwordController,
           hintText: 'Enter your password',
-          iconData: Icons.lock,
+          iconData: Icons.lock_outline,
           labelText: 'Password',
-          obscureText: true,
+          isPassword: true,
         ),
         SizedBox(height: deviceHeight * 0.01),
         Container(
@@ -45,14 +53,16 @@ class LoginScreen extends StatelessWidget {
         SizedBox(height: deviceHeight * 0.01),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            fixedSize: Size(deviceWidth * 0.9, deviceHeight * 0.06),
-            backgroundColor: AppColor.primary,
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-          ),
-          onPressed: () {},
+              fixedSize: Size(deviceWidth * 0.9, deviceHeight * 0.06),
+              backgroundColor: AppColor.primary,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              )),
+          onPressed: () => context.read<AuthenticationCubit>().login(
+              context: context,
+              email: _emailController.text.toLowerCase(),
+              password: _passwordController.text),
           child: Text(
             'Login',
             style: Theme.of(context).textTheme.headline2,
@@ -75,5 +85,12 @@ class LoginScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }
