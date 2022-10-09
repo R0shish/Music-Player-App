@@ -5,14 +5,14 @@ const bcrypt = require('bcrypt');
 router.post("/register", (req, res) => {
     // Validation
     if (!req.body.name || !req.body.email || !req.body.password) {
-        res.status(400).send("Please fill out all fields");
+        res.status(200).json({message:"Please fill out all fields"});
     } else {
         // Check if user already exists
         user.findOne({ email: req.body.email }, (err, data) => {
             if (err) {
                 res.status(500).send(err);
             } else if (data) {
-                res.status(400).send("Email address already in use");
+                res.status(200).json({message:"Email address already in use"});
             } else {
                 // Create new user
                 hashedPassword = bcrypt.hashSync(req.body.password, 10);
@@ -27,7 +27,7 @@ router.post("/register", (req, res) => {
                         res.status(500).send(err);
                     } else {
                         console.log(data);
-                        res.status(201).send(`Succesfully registered : ${data}`);
+                        res.status(200).send(data);
                     }
                 });
             }
@@ -38,7 +38,7 @@ router.post("/register", (req, res) => {
 router.post("/login", (req, res) => {
     // Validation
     if (!req.body.email || !req.body.password) {
-        res.status(400).send("Please fill out all fields");
+        res.status(200).json({message:"Please fill out all fields"});
     } else {
         // Check if user exists
         user.findOne({ email: req.body.email }, (err, data) => {
