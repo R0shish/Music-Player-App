@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:music_player/features/authentication/presentation/cubit/authentication_cubit.dart';
 
 import 'constants/constants.dart';
 import 'core/presentation/cubit/cubit.dart';
@@ -56,6 +57,7 @@ class _MyAppState extends State<MyApp> {
             cubit.getPlaylist();
             return cubit;
           }),
+          BlocProvider(create: (context) => AuthenticationCubit()),
           BlocProvider(
               create: (context) => PlayPauseCubit(
                     nowPlayingCubit: context.read<NowPlayingCubit>(),

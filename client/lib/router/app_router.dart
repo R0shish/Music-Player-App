@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/features/register/presentation/pages/register_screen.dart';
+import 'package:music_player/features/authentication/presentation/widgets/register_screen.dart';
 
 import '../features/homescreen/presentation/pages/homescreen.dart';
-import '../features/login/presentation/pages/login_screen.dart';
+import '../features/authentication/presentation/widgets/login_screen.dart';
 
 class AppRouter {
   onGenerateRoute(RouteSettings settings) {
