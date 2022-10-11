@@ -20,8 +20,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: deviceHeight * 0.02),
+        SizedBox(height: deviceHeight * 0.04),
         Image.asset('assets/images/unboxing.png'),
+        SizedBox(height: deviceHeight * 0.05),
         const Text('Login',
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
         SizedBox(height: deviceHeight * 0.02),

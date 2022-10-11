@@ -28,6 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Center(
             child: Image.asset('assets/images/unboxing.png',
                 height: deviceHeight * 0.2)),
+        SizedBox(height: deviceHeight * 0.04),
         const Text('Register',
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
         SizedBox(height: deviceHeight * 0.02),
