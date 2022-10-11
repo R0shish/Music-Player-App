@@ -76,7 +76,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     try {
       var jsonResponse = await apiHandler(Api.register, 'POST', body: {
         'name': name!,
-        'email': email!,
+        'email': email,
         'password': password!,
       });
       if (!mounted) return;
