@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/core/presentation/widgets/elevated_button_style.dart';
 import '../../../../constants/constants.dart';
 
 import '../../../../core/presentation/cubit/cubit.dart';
@@ -33,56 +34,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
         SizedBox(height: deviceHeight * 0.02),
         CustomTextFormField(
-          controller: _nameController,
-          hintText: 'Enter your name',
-          iconData: Icons.person,
-          labelText: 'Name',
-        ),
+            controller: _nameController,
+            hintText: 'Enter your name',
+            iconData: Icons.person,
+            labelText: 'Name'),
         SizedBox(height: deviceHeight * 0.02),
         CustomTextFormField(
-          controller: _emailController,
-          hintText: 'Enter your email ID',
-          iconData: Icons.alternate_email_outlined,
-          labelText: 'Email ID',
-        ),
+            controller: _emailController,
+            hintText: 'Enter your email ID',
+            iconData: Icons.alternate_email_outlined,
+            labelText: 'Email ID'),
         SizedBox(height: deviceHeight * 0.02),
         CustomTextFormField(
-          controller: _passwordController,
-          hintText: 'Enter your password',
-          iconData: Icons.lock_outline,
-          labelText: 'Password',
-          isPassword: true,
-        ),
+            controller: _passwordController,
+            hintText: 'Enter your password',
+            iconData: Icons.lock_outline,
+            labelText: 'Password',
+            isPassword: true),
         SizedBox(height: deviceHeight * 0.01),
         CustomTextFormField(
-          controller: _confirmationPasswordController,
-          hintText: 'Confirm your password',
-          iconData: Icons.check,
-          labelText: 'Confirm Password',
-          isPassword: true,
-        ),
-        SizedBox(height: deviceHeight * 0.02),
+            controller: _confirmationPasswordController,
+            hintText: 'Confirm your password',
+            iconData: Icons.check,
+            labelText: 'Confirm Password',
+            isPassword: true),
+        SizedBox(height: deviceHeight * 0.03),
         ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            fixedSize: Size(deviceWidth * 0.9, deviceHeight * 0.06),
-            backgroundColor: AppColor.primary,
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-          ),
+          style: buttonStyle(),
           onPressed: () => context.read<AuthenticationCubit>().register(
               context: context,
               name: _nameController.text,
               email: _emailController.text.toLowerCase(),
               password: _passwordController.text,
               confirmPassword: _confirmationPasswordController.text),
-          child: Text(
-            'Register',
-            style: Theme.of(context).textTheme.headline2,
-          ),
+          child: Text('Register', style: Theme.of(context).textTheme.headline2),
         ),
-        SizedBox(height: deviceHeight * 0.02),
+        SizedBox(height: deviceHeight * 0.01),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

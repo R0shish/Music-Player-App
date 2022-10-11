@@ -41,7 +41,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       });
       if (!mounted) return;
       if (jsonResponse == 'Login successful') {
-        emit(const AuthenticationState(currentScreen: ProfileScreen()));
+        emit(const AuthenticationState(
+            currentScreen: ProfileScreen(), isLoggedIn: true));
       } else {
         CustomSnackBars.showErrorSnackBar(context, jsonResponse);
       }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/core/presentation/widgets/elevated_button_style.dart';
 import '../../../../constants/constants.dart';
 
 import '../../../../core/presentation/cubit/cubit.dart';
@@ -27,47 +28,34 @@ class _LoginScreenState extends State<LoginScreen> {
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
         SizedBox(height: deviceHeight * 0.02),
         CustomTextFormField(
-          controller: _emailController,
-          hintText: 'Enter your email ID',
-          iconData: Icons.alternate_email_outlined,
-          labelText: 'Email ID',
-        ),
+            controller: _emailController,
+            hintText: 'Enter your email ID',
+            iconData: Icons.alternate_email_outlined,
+            labelText: 'Email ID'),
         SizedBox(height: deviceHeight * 0.02),
         CustomTextFormField(
-          controller: _passwordController,
-          hintText: 'Enter your password',
-          iconData: Icons.lock_outline,
-          labelText: 'Password',
-          isPassword: true,
-        ),
+            controller: _passwordController,
+            hintText: 'Enter your password',
+            iconData: Icons.lock_outline,
+            labelText: 'Password',
+            isPassword: true),
         SizedBox(height: deviceHeight * 0.01),
         Container(
           alignment: Alignment.centerRight,
           width: deviceWidth,
           child: TextButton(
               onPressed: () {},
-              child: Text(
-                'Forgot Password?',
-                style: Theme.of(context).textTheme.headline4,
-              )),
+              child: Text('Forgot Password?',
+                  style: Theme.of(context).textTheme.headline4)),
         ),
         SizedBox(height: deviceHeight * 0.01),
         ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              fixedSize: Size(deviceWidth * 0.9, deviceHeight * 0.06),
-              backgroundColor: AppColor.primary,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              )),
+          style: buttonStyle(),
           onPressed: () => context.read<AuthenticationCubit>().login(
               context: context,
               email: _emailController.text.toLowerCase(),
               password: _passwordController.text),
-          child: Text(
-            'Login',
-            style: Theme.of(context).textTheme.headline2,
-          ),
+          child: Text('Login', style: Theme.of(context).textTheme.headline2),
         ),
         SizedBox(height: deviceHeight * 0.02),
         Row(

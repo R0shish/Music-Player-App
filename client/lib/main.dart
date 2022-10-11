@@ -1,33 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:music_player/features/onboarding/presentation/pages/onboarding_screen.dart';
 
 import 'constants/constants.dart';
-import 'core/presentation/cubit/cubit.dart';
-import 'features/navigation_bar/presentation/pages/navigation_bar.dart';
 import 'router/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final AudioPlayer audioPlayer = AudioPlayer();
-  audioPlayer.setAutomaticallyWaitsToMinimizeStalling(false);
   await Hive.initFlutter();
-  runApp(MyApp(audioPlayer: audioPlayer));
+  runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  final AudioPlayer audioPlayer;
-  const MyApp({super.key, required this.audioPlayer});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     AppRouter appRouter = AppRouter();
+
+    // Precache story onboarding images
+    for (int i = 1; i < 4; i++) {
+      precacheImage(
+          Image.asset('assets/images/onboarding_$i.png').image, context);
+    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -46,35 +41,7 @@ class _MyAppState extends State<MyApp> {
             foregroundColor: AppColor.secondary,
           )),
       onGenerateRoute: (settings) => appRouter.onGenerateRoute(settings),
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => NavbarCubit()),
-          BlocProvider(create: (context) => NowPlayingCubit()),
-          BlocProvider(
-              create: (context) =>
-                  RepeatCubit(audioPlayer: widget.audioPlayer)),
-          BlocProvider(create: (context) {
-            final cubit = PlaylistCubit();
-            cubit.getPlaylist();
-            return cubit;
-          }),
-          BlocProvider(create: (context) => AuthenticationCubit()),
-          BlocProvider(
-              create: (context) => PlayPauseCubit(
-                    nowPlayingCubit: context.read<NowPlayingCubit>(),
-                    repeatCubit: context.read<RepeatCubit>(),
-                    playlistCubit: context.read<PlaylistCubit>(),
-                    audioPlayer: widget.audioPlayer,
-                  )),
-        ],
-        child: const NavigationPage(),
-      ),
+      home: const OnboardingScreen(),
     );
-  }
-
-  @override
-  void dispose() {
-    widget.audioPlayer.dispose();
-    super.dispose();
   }
 }

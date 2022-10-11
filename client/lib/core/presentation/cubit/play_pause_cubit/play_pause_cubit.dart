@@ -35,8 +35,8 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
         .map((Song song) => AudioSource.uri(Uri.parse(song.url)))
         .toList();
 
-    ConcatenatingAudioSource playlistSource = ConcatenatingAudioSource(
-        useLazyPreparation: false, children: audioSources);
+    ConcatenatingAudioSource playlistSource =
+        ConcatenatingAudioSource(children: audioSources);
 
     audioPlayer.setAudioSource(playlistSource,
         initialIndex: nowPlayingCubit.songIndex);
@@ -70,11 +70,15 @@ class PlayPauseCubit extends Cubit<PlayPauseState> {
   }
 
   void playNext() {
+    pause();
     audioPlayer.seekToNext();
+    resume();
   }
 
   void playPrev() {
+    pause();
     audioPlayer.seekToPrevious();
+    resume();
   }
 
   void updatePosition(Duration position) {

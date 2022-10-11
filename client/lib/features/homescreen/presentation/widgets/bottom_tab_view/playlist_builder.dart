@@ -8,7 +8,7 @@ import '../../../../../core/data/model/playlist_model.dart';
 import '../../../../../core/data/model/song_model.dart';
 import '../../../../../core/presentation/widgets/widgets.dart';
 
-class PlaylistBuilder extends StatelessWidget {
+class PlaylistBuilder extends StatefulWidget {
   final List<dynamic> playlistData;
   const PlaylistBuilder({
     Key? key,
@@ -16,15 +16,20 @@ class PlaylistBuilder extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<PlaylistBuilder> createState() => _PlaylistBuilderState();
+}
+
+class _PlaylistBuilderState extends State<PlaylistBuilder> {
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: deviceHeight * 0.23,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: playlistData.length,
+        itemCount: widget.playlistData.length,
         itemBuilder: ((context, index) {
           Playlist playlist = Playlist.fromJson(
-            playlistData[index],
+            widget.playlistData[index],
           );
           int noOfSongs = playlist.songs.length;
           return GestureDetector(
@@ -64,5 +69,12 @@ class PlaylistBuilder extends StatelessWidget {
         }),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    context.read<NowPlayingCubit>().close();
+    context.read<PlayPauseCubit>().close();
+    super.dispose();
   }
 }
