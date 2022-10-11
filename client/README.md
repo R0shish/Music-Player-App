@@ -7,6 +7,7 @@ Make sure you have Flutter installed on your local machine. For more instruction
 
 ```
 git clone https://github.com/R0shish/Music-Player-App.git
+cd client
 flutter pub get
 flutter run
 ```
