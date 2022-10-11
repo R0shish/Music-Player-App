@@ -27,7 +27,7 @@ router.post("/register", (req, res) => {
                         res.status(500).send(err);
                     } else {
                         console.log(data);
-                        res.status(200).send(data);
+                        res.status(200).json({message: 'Registered successfully'});
                     }
                 });
             }

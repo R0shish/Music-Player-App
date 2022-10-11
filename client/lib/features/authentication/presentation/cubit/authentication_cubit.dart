@@ -30,21 +30,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     String? password,
     bool mounted = true,
   }) async {
-    if (email!.isEmpty) {
-      CustomSnackBars.showErrorSnackBar(
-        context,
-        'Please enter your email address!',
-      );
-      return;
-    }
+    _checkEmpty(email!, context: context, fieldName: 'email');
+    if (!_validateEmail(email, context: context)) return;
+    _checkEmpty(password!, context: context, fieldName: 'password');
 
-    if (password!.isEmpty) {
-      CustomSnackBars.showErrorSnackBar(
-        context,
-        'Please enter your password!',
-      );
-      return;
-    }
     try {
       var jsonResponse = await apiHandler(Api.login, 'POST', body: {
         'email': email,
@@ -60,5 +49,68 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       CustomSnackBars.showErrorSnackBar(
           context, 'Error 500: Internal Server Error');
     }
+  }
+
+  void register({
+    required BuildContext context,
+    String? name,
+    String? email,
+    String? password,
+    String? confirmPassword,
+    bool mounted = true,
+  }) async {
+    // Validation
+    if (!_checkEmpty(name, context: context, fieldName: 'name')) return;
+    if (!_checkEmpty(email, context: context, fieldName: 'email address')) {
+      return;
+    }
+    if (!_validateEmail(email!, context: context)) return;
+    if (!_checkEmpty(password, context: context, fieldName: 'password')) return;
+    if (!_checkEmpty(confirmPassword,
+        context: context, fieldName: 'confirmation password')) return;
+    if (password != confirmPassword) {
+      CustomSnackBars.showErrorSnackBar(context, 'Passwords do not match');
+      return;
+    }
+
+    try {
+      var jsonResponse = await apiHandler(Api.register, 'POST', body: {
+        'name': name!,
+        'email': email!,
+        'password': password!,
+      });
+      if (!mounted) return;
+      if (jsonResponse == 'Registered successfully') {
+        CustomSnackBars.showSuccessSnackBar(context, jsonResponse);
+        emit(const AuthenticationState(currentScreen: LoginScreen()));
+      } else {
+        CustomSnackBars.showErrorSnackBar(context, jsonResponse);
+      }
+    } catch (e) {
+      CustomSnackBars.showErrorSnackBar(
+          context, 'Error 500: Internal Server Error');
+    }
+  }
+
+  bool _checkEmpty(String? field,
+      {required BuildContext context, required String fieldName}) {
+    if (field!.isEmpty) {
+      CustomSnackBars.showErrorSnackBar(
+          context, 'Please enter your $fieldName');
+      return false;
+    }
+    return true;
+  }
+
+  bool _validateEmail(String value, {required BuildContext context}) {
+    String pattern =
+        r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      CustomSnackBars.showErrorSnackBar(
+          context, 'Please enter a valid email address');
+      return false;
+    }
+    return true;
   }
 }

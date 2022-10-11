@@ -27,4 +27,30 @@ class CustomSnackBars {
         ),
       ));
   }
+
+  static void showSuccessSnackBar(BuildContext context, String message,
+      {Color color = Colors.green, IconData icon = Icons.check}) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        backgroundColor: AppColor.black,
+        dismissDirection: DismissDirection.none,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              icon,
+              color: color,
+            ),
+            SizedBox(
+              width: deviceWidth * 0.01,
+            ),
+            Text(
+              message,
+              style: TextStyle(color: color),
+            )
+          ],
+        ),
+      ));
+  }
 }
