@@ -4,9 +4,13 @@ Backend for the Music Player app. It is a REST API written with Node.js and Expr
 
 ## Setup
 
-1. Install Node.js and npm
-2. Install dependencies: `npm install`
-3. Start the server: `npm run dev`
+Make sure you have Node.js and npm installed on your local machine.
+```
+git clone https://github.com/R0shish/Music-Player-App.git
+cd server
+npm install
+npm run dev
+```
 
 ## API
 
