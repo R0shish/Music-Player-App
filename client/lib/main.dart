@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 
 import 'constants/constants.dart';
@@ -7,10 +8,11 @@ import 'core/presentation/cubit/cubit.dart';
 import 'features/navigation_bar/presentation/pages/navigation_bar.dart';
 import 'router/app_router.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final AudioPlayer audioPlayer = AudioPlayer();
   audioPlayer.setAutomaticallyWaitsToMinimizeStalling(false);
+  await Hive.initFlutter();
   runApp(MyApp(audioPlayer: audioPlayer));
 }
 
