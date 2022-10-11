@@ -1,6 +1,6 @@
 ## Music Player App
 
-An aesthetic music player app made with flutter.
+An aesthetic music player app made with Flutter, Node.js, Express.js and MongoDB.
 
 ## Screenshots
 
