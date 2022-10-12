@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 part 'onboarding_state.dart';
 
@@ -30,7 +31,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       emit(state.copyWith(isLastPage: true));
     }
     if (state.currentPage == onboardingImages.length - 1) {
-      Navigator.pushReplacementNamed(context, '/home');
+      endOnboarding(context);
     } else {
       emit(state.copyWith(currentPage: state.currentPage + 1));
     }
@@ -40,7 +41,9 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     emit(state.copyWith(currentPage: state.currentPage - 1));
   }
 
-  void skipOnboarding(BuildContext context) {
+  void endOnboarding(BuildContext context) async {
+    Box settingBox = Hive.box('SETTINGS');
+    settingBox.put('firstTimeInit', false);
     Navigator.pushReplacementNamed(context, '/home');
   }
 

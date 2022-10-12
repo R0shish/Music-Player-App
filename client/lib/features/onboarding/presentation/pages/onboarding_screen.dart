@@ -23,7 +23,7 @@ class OnboardingScreen extends StatelessWidget {
               builder: (context, state) {
                 cubit = context.read<OnboardingCubit>();
                 return TextButton(
-                    onPressed: () => cubit.skipOnboarding(context),
+                    onPressed: () => cubit.endOnboarding(context),
                     child: Padding(
                       padding: EdgeInsets.all(deviceWidth * 0.05),
                       child: Text(state.isLastPage ? 'Get Started' : 'Skip',

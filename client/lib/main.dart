@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:music_player/features/navigation_bar/presentation/pages/navigation_bar.dart';
 import 'package:music_player/features/onboarding/presentation/pages/onboarding_screen.dart';
 
 import 'constants/constants.dart';
@@ -8,6 +9,7 @@ import 'router/app_router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  await Hive.openBox('SETTINGS');
   runApp(const MyApp());
 }
 
@@ -23,6 +25,9 @@ class MyApp extends StatelessWidget {
       precacheImage(
           Image.asset('assets/images/onboarding_$i.png').image, context);
     }
+
+    Box settingBox = Hive.box('SETTINGS');
+    bool firstTimeInit = settingBox.get('firstTimeInit') ?? true;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -41,7 +46,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: AppColor.secondary,
           )),
       onGenerateRoute: (settings) => appRouter.onGenerateRoute(settings),
-      home: const OnboardingScreen(),
+      home: firstTimeInit ? const OnboardingScreen() : const NavigationPage(),
     );
   }
 }
