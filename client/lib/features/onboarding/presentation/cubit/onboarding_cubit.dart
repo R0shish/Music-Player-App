@@ -37,7 +37,16 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     }
   }
 
+  void swipeNext(BuildContext context) =>
+      !state.isLastPage ? nextPage(context) : null;
+
+  void swipePrev(BuildContext context) =>
+      state.currentPage == 0 ? null : previousPage();
+
   void previousPage() {
+    if (state.currentPage != onboardingImages.length - 2) {
+      emit(state.copyWith(isLastPage: false));
+    }
     emit(state.copyWith(currentPage: state.currentPage - 1));
   }
 

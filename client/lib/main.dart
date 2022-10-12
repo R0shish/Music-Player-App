@@ -8,8 +8,11 @@ import 'router/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize hiveDB
   await Hive.initFlutter();
   await Hive.openBox('SETTINGS');
+
   runApp(const MyApp());
 }
 
@@ -26,6 +29,7 @@ class MyApp extends StatelessWidget {
           Image.asset('assets/images/onboarding_$i.png').image, context);
     }
 
+    // Check user first time init
     Box settingBox = Hive.box('SETTINGS');
     bool firstTimeInit = settingBox.get('firstTimeInit') ?? true;
 
