@@ -20,6 +20,8 @@ dependencies:
   equatable: ^2.0.5
   just_audio: ^0.9.29
   http: ^0.13.5
+  liquid_swipe: ^3.0.0
+  smooth_page_indicator: ^1.0.0+2
 
   # Local database
   hive: ^2.2.3

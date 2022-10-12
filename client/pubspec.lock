@@ -401,6 +401,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  liquid_swipe:
+    dependency: "direct main"
+    description:
+      name: liquid_swipe
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   logging:
     dependency: transitive
     description:
@@ -630,6 +637,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      name: smooth_page_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0+2"
   source_gen:
     dependency: transitive
     description:
