@@ -25,6 +25,7 @@ class OnboardingScreen extends StatelessWidget {
               LiquidSwipe(
                   liquidController: controller,
                   enableLoop: false,
+                  ignoreUserGestureWhileAnimating: true,
                   onPageChangeCallback: (page) => cubit.currentPage = page,
                   pages: onboardingPage(
                       context: context, onboardingData: cubit.onboardingData)),
