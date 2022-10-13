@@ -23,12 +23,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppRouter appRouter = AppRouter();
 
-    // Precache story onboarding images
-    for (int i = 1; i < 4; i++) {
-      precacheImage(
-          Image.asset('assets/images/onboarding_$i.png').image, context);
-    }
-
     // Check user first time init
     Box settingBox = Hive.box('SETTINGS');
     bool firstTimeInit = settingBox.get('firstTimeInit') ?? true;
@@ -43,7 +37,9 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: AppColor.black,
           iconTheme: const IconThemeData(color: AppColor.lightGrey),
           textTheme: textTheme(),
+          focusColor: Colors.transparent,
           splashColor: Colors.transparent,
+          hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
           appBarTheme: const AppBarTheme(
             backgroundColor: AppColor.black,

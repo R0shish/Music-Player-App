@@ -20,6 +20,7 @@ dependencies:
   equatable: ^2.0.5
   just_audio: ^0.9.29
   http: ^0.13.5
+  lottie:
   liquid_swipe: ^3.0.0
   smooth_page_indicator: ^1.0.0+2
 
@@ -39,6 +40,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/lottie/
 
   fonts:
     - family: Montserrat

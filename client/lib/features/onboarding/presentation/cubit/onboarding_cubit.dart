@@ -28,5 +28,6 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     }
   }
 
+  int get currentPage => state.currentPage;
   bool get isLastPage => state.isLastPage;
 }

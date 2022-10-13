@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import '../../../../../core/presentation/cubit/playlist_cubit/playlist_cubit.dart';
 
 import '../../../../../constants/constants.dart';
@@ -28,9 +29,9 @@ class ForYouTab extends StatelessWidget {
         BlocBuilder<PlaylistCubit, PlaylistState>(
           builder: (context, state) {
             if (state is PlaylistLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return Center(
+                  child: Lottie.asset('assets/lottie/loading.json',
+                      height: deviceHeight * 0.2, fit: BoxFit.cover));
             } else if (state is PlaylistLoaded) {
               return PlaylistBuilder(playlistData: state.playlist);
             } else if (state is PlaylistError) {

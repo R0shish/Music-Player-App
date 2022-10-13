@@ -26,7 +26,7 @@ class BottomIndicator extends StatelessWidget {
               activeDotColor: AppColor.primary,
               dotColor: AppColor.lightGrey),
           onDotClicked: (index) => controller.animateToPage(page: index),
-          activeIndex: controller.currentPage,
+          activeIndex: cubit.currentPage,
           count: cubit.onboardingData.length),
     );
   }

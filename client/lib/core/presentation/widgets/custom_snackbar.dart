@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:music_player/constants/constants.dart';
 
 class CustomSnackBars {
   static void showErrorSnackBar(BuildContext context, String message,
-      {Color color = Colors.red, IconData icon = Icons.error}) {
+      {Color color = Colors.red}) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(
@@ -12,13 +13,9 @@ class CustomSnackBars {
         content: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(
-              icon,
-              color: color,
-            ),
-            SizedBox(
-              width: deviceWidth * 0.01,
-            ),
+            Lottie.asset('assets/lottie/error.json',
+                height: deviceHeight * 0.032, repeat: false),
+            SizedBox(width: deviceWidth * 0.01),
             Text(
               message,
               style: TextStyle(color: color),
@@ -28,29 +25,51 @@ class CustomSnackBars {
       ));
   }
 
-  static void showSuccessSnackBar(BuildContext context, String message,
-      {Color color = Colors.green, IconData icon = Icons.check}) {
+  static void showSuccessSnackBar(
+    BuildContext context,
+    String message, {
+    Color color = Colors.green,
+    IconData icon = Icons.check,
+    bool showConfetti = false,
+  }) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(
-        backgroundColor: AppColor.black,
+        backgroundColor: Colors.transparent,
         dismissDirection: DismissDirection.none,
-        content: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              icon,
-              color: color,
-            ),
-            SizedBox(
-              width: deviceWidth * 0.01,
-            ),
-            Text(
-              message,
-              style: TextStyle(color: color),
-            )
-          ],
-        ),
+        content: showConfetti
+            ? Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Lottie.asset('assets/lottie/confetti.json',
+                      height: deviceHeight * 0.9,
+                      fit: BoxFit.fill,
+                      repeat: false),
+                  Container(
+                    color: AppColor.black,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(icon, color: color),
+                        SizedBox(width: deviceWidth * 0.01),
+                        Text(message, style: TextStyle(color: color))
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            : Container(
+                color: AppColor.black,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(icon, color: color),
+                    SizedBox(width: deviceWidth * 0.01),
+                    Text(message, style: TextStyle(color: color))
+                  ],
+                ),
+              ),
       ));
   }
 }

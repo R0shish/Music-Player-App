@@ -30,17 +30,22 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     String? password,
     bool mounted = true,
   }) async {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    // Validation
     _checkEmpty(email!, context: context, fieldName: 'email');
     if (!_validateEmail(email, context: context)) return;
     _checkEmpty(password!, context: context, fieldName: 'password');
 
     try {
+      emit(state.copyWith(isLoading: true));
       var jsonResponse = await apiHandler(Api.login, 'POST', body: {
         'email': email,
         'password': password,
       });
+      emit(state.copyWith(isLoading: false));
       if (!mounted) return;
       if (jsonResponse == 'Login successful') {
+        CustomSnackBars.showSuccessSnackBar(context, jsonResponse);
         emit(const AuthenticationState(
             currentScreen: ProfileScreen(), isLoggedIn: true));
       } else {
@@ -60,6 +65,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     String? confirmPassword,
     bool mounted = true,
   }) async {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     // Validation
     if (!_checkEmpty(name, context: context, fieldName: 'name')) return;
     if (!_checkEmpty(email, context: context, fieldName: 'email address')) {
@@ -75,14 +81,17 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
 
     try {
+      emit(state.copyWith(isLoading: true));
       var jsonResponse = await apiHandler(Api.register, 'POST', body: {
         'name': name!,
         'email': email,
         'password': password!,
       });
+      emit(state.copyWith(isLoading: false));
       if (!mounted) return;
       if (jsonResponse == 'Registered successfully') {
-        CustomSnackBars.showSuccessSnackBar(context, jsonResponse);
+        CustomSnackBars.showSuccessSnackBar(context, jsonResponse,
+            showConfetti: true);
         emit(const AuthenticationState(currentScreen: LoginScreen()));
       } else {
         CustomSnackBars.showErrorSnackBar(context, jsonResponse);

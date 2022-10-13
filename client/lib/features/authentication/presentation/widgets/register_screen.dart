@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:music_player/core/presentation/widgets/elevated_button_style.dart';
 import '../../../../constants/constants.dart';
 
@@ -32,58 +33,86 @@ class _RegisterScreenState extends State<RegisterScreen> {
         SizedBox(height: deviceHeight * 0.04),
         const Text('Register',
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
-        SizedBox(height: deviceHeight * 0.02),
-        CustomTextFormField(
-            controller: _nameController,
-            hintText: 'Enter your name',
-            iconData: Icons.person,
-            labelText: 'Name'),
-        SizedBox(height: deviceHeight * 0.02),
-        CustomTextFormField(
-            controller: _emailController,
-            hintText: 'Enter your email ID',
-            iconData: Icons.alternate_email_outlined,
-            labelText: 'Email ID'),
-        SizedBox(height: deviceHeight * 0.02),
-        CustomTextFormField(
-            controller: _passwordController,
-            hintText: 'Enter your password',
-            iconData: Icons.lock_outline,
-            labelText: 'Password',
-            isPassword: true),
-        SizedBox(height: deviceHeight * 0.01),
-        CustomTextFormField(
-            controller: _confirmationPasswordController,
-            hintText: 'Confirm your password',
-            iconData: Icons.check,
-            labelText: 'Confirm Password',
-            isPassword: true),
-        SizedBox(height: deviceHeight * 0.03),
-        ElevatedButton(
-          style: buttonStyle(),
-          onPressed: () => context.read<AuthenticationCubit>().register(
-              context: context,
-              name: _nameController.text,
-              email: _emailController.text.toLowerCase(),
-              password: _passwordController.text,
-              confirmPassword: _confirmationPasswordController.text),
-          child: Text('Register', style: Theme.of(context).textTheme.headline2),
-        ),
-        SizedBox(height: deviceHeight * 0.01),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Already have an account?'),
-            TextButton(
-              onPressed: () =>
-                  context.read<AuthenticationCubit>().goToLoginScreen(),
-              child: const Text(
-                'Login',
-                style: TextStyle(color: AppColor.primary, fontSize: 16),
-              ),
-            ),
-          ],
-        ),
+        BlocBuilder<AuthenticationCubit, AuthenticationState>(
+            builder: (context, state) {
+          return state.isLoading
+              ? Column(
+                  children: [
+                    Lottie.asset('assets/lottie/paperplane_loading.json',
+                        fit: BoxFit.fill),
+                    Text(
+                      'Please Wait While We\nRegister Your Account',
+                      style: Theme.of(context).textTheme.displayMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    // Precaching loading animation
+                    Lottie.asset('assets/lottie/paperplane_loading.json',
+                        width: 0, height: 0),
+                    SizedBox(height: deviceHeight * 0.02),
+                    CustomTextFormField(
+                        controller: _nameController,
+                        hintText: 'Enter your name',
+                        iconData: Icons.person,
+                        labelText: 'Name'),
+                    SizedBox(height: deviceHeight * 0.02),
+                    CustomTextFormField(
+                        controller: _emailController,
+                        hintText: 'Enter your email ID',
+                        iconData: Icons.alternate_email_outlined,
+                        labelText: 'Email ID'),
+                    SizedBox(height: deviceHeight * 0.02),
+                    CustomTextFormField(
+                        controller: _passwordController,
+                        hintText: 'Enter your password',
+                        iconData: Icons.lock_outline,
+                        labelText: 'Password',
+                        isPassword: true),
+                    SizedBox(height: deviceHeight * 0.01),
+                    CustomTextFormField(
+                        controller: _confirmationPasswordController,
+                        hintText: 'Confirm your password',
+                        iconData: Icons.check,
+                        labelText: 'Confirm Password',
+                        isPassword: true),
+                    SizedBox(height: deviceHeight * 0.03),
+                    ElevatedButton(
+                      style: buttonStyle(),
+                      onPressed: () => context
+                          .read<AuthenticationCubit>()
+                          .register(
+                              context: context,
+                              name: _nameController.text,
+                              email: _emailController.text.toLowerCase(),
+                              password: _passwordController.text,
+                              confirmPassword:
+                                  _confirmationPasswordController.text),
+                      child: Text('Register',
+                          style: Theme.of(context).textTheme.headline2),
+                    ),
+                    SizedBox(height: deviceHeight * 0.01),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Already have an account?'),
+                        TextButton(
+                          onPressed: () => context
+                              .read<AuthenticationCubit>()
+                              .goToLoginScreen(),
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                                color: AppColor.primary, fontSize: 16),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+        })
       ],
     );
   }

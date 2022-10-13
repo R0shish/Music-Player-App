@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:music_player/core/presentation/widgets/elevated_button_style.dart';
 import '../../../../constants/constants.dart';
 
@@ -26,51 +27,79 @@ class _LoginScreenState extends State<LoginScreen> {
         SizedBox(height: deviceHeight * 0.05),
         const Text('Login',
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
-        SizedBox(height: deviceHeight * 0.02),
-        CustomTextFormField(
-            controller: _emailController,
-            hintText: 'Enter your email ID',
-            iconData: Icons.alternate_email_outlined,
-            labelText: 'Email ID'),
-        SizedBox(height: deviceHeight * 0.02),
-        CustomTextFormField(
-            controller: _passwordController,
-            hintText: 'Enter your password',
-            iconData: Icons.lock_outline,
-            labelText: 'Password',
-            isPassword: true),
-        SizedBox(height: deviceHeight * 0.01),
-        Container(
-          alignment: Alignment.centerRight,
-          width: deviceWidth,
-          child: TextButton(
-              onPressed: () {},
-              child: Text('Forgot Password?',
-                  style: Theme.of(context).textTheme.headline4)),
-        ),
-        SizedBox(height: deviceHeight * 0.01),
-        ElevatedButton(
-          style: buttonStyle(),
-          onPressed: () => context.read<AuthenticationCubit>().login(
-              context: context,
-              email: _emailController.text.toLowerCase(),
-              password: _passwordController.text),
-          child: Text('Login', style: Theme.of(context).textTheme.headline2),
-        ),
-        SizedBox(height: deviceHeight * 0.02),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Don\'t have an account?'),
-            TextButton(
-              onPressed: () =>
-                  context.read<AuthenticationCubit>().goToRegisterScreen(),
-              child: const Text(
-                'Register',
-                style: TextStyle(color: AppColor.primary, fontSize: 16),
-              ),
-            ),
-          ],
+        BlocBuilder<AuthenticationCubit, AuthenticationState>(
+          builder: (context, state) {
+            return state.isLoading
+                ? Column(
+                    children: [
+                      Lottie.asset('assets/lottie/paperplane_loading.json',
+                          fit: BoxFit.fill),
+                      Text(
+                        'Please Wait While We\nCheck Your Credentials',
+                        style: Theme.of(context).textTheme.displayMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  )
+                : Column(
+                    children: [
+                      // Precaching loading animation
+                      Lottie.asset('assets/lottie/paperplane_loading.json',
+                          width: 0, height: 0),
+                      SizedBox(height: deviceHeight * 0.02),
+                      CustomTextFormField(
+                          controller: _emailController,
+                          hintText: 'Enter your email ID',
+                          iconData: Icons.alternate_email_outlined,
+                          labelText: 'Email ID'),
+                      SizedBox(height: deviceHeight * 0.02),
+                      CustomTextFormField(
+                          controller: _passwordController,
+                          hintText: 'Enter your password',
+                          iconData: Icons.lock_outline,
+                          labelText: 'Password',
+                          isPassword: true),
+                      SizedBox(height: deviceHeight * 0.01),
+                      Container(
+                        alignment: Alignment.centerRight,
+                        width: deviceWidth,
+                        child: TextButton(
+                            onPressed: () {},
+                            child: Text('Forgot Password?',
+                                style: Theme.of(context).textTheme.headline4)),
+                      ),
+                      SizedBox(height: deviceHeight * 0.01),
+                      ElevatedButton(
+                        style: buttonStyle(),
+                        onPressed: () => context
+                            .read<AuthenticationCubit>()
+                            .login(
+                                context: context,
+                                email: _emailController.text.toLowerCase(),
+                                password: _passwordController.text),
+                        child: Text('Login',
+                            style: Theme.of(context).textTheme.headline2),
+                      ),
+                      SizedBox(height: deviceHeight * 0.02),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Don\'t have an account?'),
+                          TextButton(
+                            onPressed: () => context
+                                .read<AuthenticationCubit>()
+                                .goToRegisterScreen(),
+                            child: const Text(
+                              'Register',
+                              style: TextStyle(
+                                  color: AppColor.primary, fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+          },
         ),
       ],
     );
