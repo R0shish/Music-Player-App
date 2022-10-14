@@ -33,7 +33,6 @@ class _NavigationPageState extends State<NavigationPage> {
             cubit.getPlaylist();
             return cubit;
           }),
-          BlocProvider(create: (context) => UserDataCubit()),
           BlocProvider(
               create: (context) =>
                   AuthenticationCubit(userDataBox: userDataBox)),
