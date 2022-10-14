@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:music_player/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 
@@ -17,6 +18,7 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState extends State<NavigationPage> {
   final AudioPlayer audioPlayer = AudioPlayer();
+  final Box userDataBox = Hive.box('user_data');
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,9 @@ class _NavigationPageState extends State<NavigationPage> {
             cubit.getPlaylist();
             return cubit;
           }),
-          BlocProvider(create: (context) => AuthenticationCubit()),
+          BlocProvider(
+              create: (context) =>
+                  AuthenticationCubit(userDataBox: userDataBox)),
           BlocProvider(
               create: (context) => PlayPauseCubit(
                     nowPlayingCubit: context.read<NowPlayingCubit>(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:music_player/constants/constants.dart';
 import 'package:music_player/core/presentation/widgets/custom_snackbar.dart';
 import 'package:music_player/features/authentication/presentation/widgets/login_screen.dart';
@@ -11,8 +12,12 @@ import '../widgets/register_screen.dart';
 part 'authentication_state.dart';
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
-  AuthenticationCubit()
-      : super(const AuthenticationState(currentScreen: LoginScreen()));
+  final Box userDataBox;
+  AuthenticationCubit({required this.userDataBox})
+      : super(AuthenticationState(
+            currentScreen: userDataBox.containsKey('access_token')
+                ? const ProfileScreen()
+                : const LoginScreen()));
 
   Widget get currentScreen => state.currentScreen;
 
@@ -45,6 +50,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       emit(state.copyWith(isLoading: false));
       if (!mounted) return;
       if (jsonResponse['message'] == 'Login successful') {
+        // Store JWT token
+        userDataBox.put('access_token', jsonResponse['access_token']);
+        userDataBox.put('refresh_token', jsonResponse['refresh_token']);
+
         CustomSnackBars.showSuccessSnackBar(context, jsonResponse['message']);
         emit(const AuthenticationState(
             currentScreen: ProfileScreen(), isLoggedIn: true));
@@ -122,5 +131,11 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       return false;
     }
     return true;
+  }
+
+  void logout(BuildContext context) {
+    userDataBox.clear();
+    CustomSnackBars.showSuccessSnackBar(context, 'Logged out successfully');
+    goToLoginScreen();
   }
 }

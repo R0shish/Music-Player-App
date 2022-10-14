@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:music_player/core/presentation/widgets/elevated_button_style.dart';
 import '../../../../constants/constants.dart';
 
 import '../../../../core/presentation/cubit/cubit.dart';

@@ -12,6 +12,7 @@ void main() async {
   // Initialize hiveDB
   await Hive.initFlutter();
   await Hive.openBox('SETTINGS');
+  await Hive.openBox('USER_DATA');
 
   runApp(const MyApp());
 }
@@ -46,7 +47,9 @@ class MyApp extends StatelessWidget {
             foregroundColor: AppColor.secondary,
           )),
       onGenerateRoute: (settings) => appRouter.onGenerateRoute(settings),
-      home: firstTimeInit ? const OnboardingScreen() : const NavigationPage(),
+      home: firstTimeInit
+          ? OnboardingScreen(settingBox: settingBox)
+          : const NavigationPage(),
     );
   }
 }

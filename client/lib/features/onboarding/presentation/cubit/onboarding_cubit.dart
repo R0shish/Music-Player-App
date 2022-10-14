@@ -9,12 +9,12 @@ import '../../data/datasource/onboarding_data.dart';
 part 'onboarding_state.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
-  OnboardingCubit() : super(const OnboardingState());
+  final Box settingBox;
+  OnboardingCubit({required this.settingBox}) : super(const OnboardingState());
 
   List<Onboarding> get onboardingData => onboardingPageData;
 
   void endOnboarding(BuildContext context) async {
-    Box settingBox = Hive.box('SETTINGS');
     settingBox.put('firstTimeInit', false);
     Navigator.pushReplacementNamed(context, '/home');
   }

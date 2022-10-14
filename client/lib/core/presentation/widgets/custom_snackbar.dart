@@ -35,18 +35,21 @@ class CustomSnackBars {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: showConfetti ? Colors.transparent : AppColor.black,
+        padding: EdgeInsets.zero,
         dismissDirection: DismissDirection.none,
         content: showConfetti
             ? Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Lottie.asset('assets/lottie/confetti.json',
-                      height: deviceHeight * 0.9,
-                      fit: BoxFit.fill,
-                      repeat: false),
+                  Expanded(
+                    child: Lottie.asset('assets/lottie/confetti.json',
+                        fit: BoxFit.fill, repeat: false),
+                  ),
                   Container(
+                    padding:
+                        EdgeInsets.symmetric(vertical: deviceHeight * 0.015),
                     color: AppColor.black,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -59,8 +62,8 @@ class CustomSnackBars {
                   ),
                 ],
               )
-            : Container(
-                color: AppColor.black,
+            : Padding(
+                padding: EdgeInsets.symmetric(vertical: deviceHeight * 0.015),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
