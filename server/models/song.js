@@ -11,7 +11,6 @@ const songSchema = new mongoose.Schema(
     },
     albumArt: {
         type: String,
-        required: true,
     },
     url: {
         type: String,

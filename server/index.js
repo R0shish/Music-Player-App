@@ -1,15 +1,18 @@
 require("dotenv").config();
 const express = require("express");
+const auth = require('./middleware/auth');
+const authRouter = require("./routes/authRouter");
+const userRouter = require("./routes/userRouter");
+const playlistRouter = require("./routes/playlistRouter");
+const suggestedPlaylist = require("./routes/suggestedRoute");
 
 const app = express();
 app.use(express.json());
 
-const PORT = process.env.PORT || 3500;
-
 const { default : mongoose} = require("mongoose");
 const cors = require("cors");
 
-app.get("/", (req, res) => res.json("Server is running..."))
+const PORT = process.env.PORT || 3500;
 
 mongoose.connect(process.env.DATABASE_STRING, {useNewURLParser: true, useUnifiedTopology: true})
 mongoose.connection
@@ -18,14 +21,11 @@ mongoose.connection
 
 app.use(cors({origin: '*'}));
 
-const auth = require('./middleware/auth');
-const playlistRouter = require("./routes/playlistRouter");
-app.use("/api/playlist", auth, playlistRouter);
+app.get("/", (req, res) => res.json("Server is running..."))
 
-const authRouter = require("./routes/authRouter");
 app.use("/api/auth", authRouter);
-
-const suggestedPlaylist = require("./routes/suggestedRoute");
+app.use("/api/user", auth, userRouter);
+app.use("/api/playlist", auth, playlistRouter);
 app.use("/api/suggestion", suggestedPlaylist);
 
 app.listen(PORT, () => console.log(`Listening to port ${PORT}`))
