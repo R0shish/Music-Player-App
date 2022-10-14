@@ -13,9 +13,9 @@ class Api {
   static String register = "$baseURL/api/auth/register";
   static String regenerateToken = "$baseURL/api/auth/regenerateToken";
 
-  // Playlist
-  static String playlist = "$baseURL/api/playlist";
-  static String getPlaylist = "$playlist/getPlaylist";
+  // User
+  static String user = "$baseURL/api/user";
+  static String userData = "$baseURL/api/user/getUserData";
 
   // Suggested
   static String suggestion = "$baseURL/api/suggestion";

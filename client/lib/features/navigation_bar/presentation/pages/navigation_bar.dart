@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:music_player/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../core/presentation/cubit/cubit.dart';
@@ -34,6 +33,7 @@ class _NavigationPageState extends State<NavigationPage> {
             cubit.getPlaylist();
             return cubit;
           }),
+          BlocProvider(create: (context) => UserDataCubit()),
           BlocProvider(
               create: (context) =>
                   AuthenticationCubit(userDataBox: userDataBox)),

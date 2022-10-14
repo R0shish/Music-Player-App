@@ -55,6 +55,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         userDataBox.put('refresh_token', jsonResponse['refresh_token']);
 
         CustomSnackBars.showSuccessSnackBar(context, jsonResponse['message']);
+
         emit(const AuthenticationState(
             currentScreen: ProfileScreen(), isLoggedIn: true));
       } else {
