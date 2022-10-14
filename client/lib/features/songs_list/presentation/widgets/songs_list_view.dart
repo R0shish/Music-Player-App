@@ -22,8 +22,6 @@ class SongsListView extends StatefulWidget {
 
 class _SongsListViewState extends State<SongsListView>
     with TickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _expandedKey = GlobalKey<ScaffoldState>();
-
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 5),
     vsync: this,
@@ -43,7 +41,6 @@ class _SongsListViewState extends State<SongsListView>
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      key: _expandedKey,
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         itemCount: widget.songsList.length,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:music_player/constants/constants.dart';
+import 'package:music_player/core/presentation/cubit/cubit.dart';
 import 'package:music_player/core/presentation/widgets/custom_snackbar.dart';
 import 'package:music_player/features/authentication/presentation/widgets/login_screen.dart';
 import 'package:music_player/features/profile/presentation/profile.dart';
@@ -48,17 +49,20 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         'password': password,
       });
       emit(state.copyWith(isLoading: false));
-      if (!mounted) return;
+
       if (jsonResponse['message'] == 'Login successful') {
         // Store JWT token
-        userDataBox.put('access_token', jsonResponse['access_token']);
-        userDataBox.put('refresh_token', jsonResponse['refresh_token']);
+        await userDataBox.put('access_token', jsonResponse['access_token']);
+        await userDataBox.put('refresh_token', jsonResponse['refresh_token']);
 
+        if (!mounted) return;
         CustomSnackBars.showSuccessSnackBar(context, jsonResponse['message']);
+        context.read<UserDataCubit>().getUserData(context);
 
         emit(const AuthenticationState(
             currentScreen: ProfileScreen(), isLoggedIn: true));
       } else {
+        if (!mounted) return;
         CustomSnackBars.showErrorSnackBar(context, jsonResponse['message']);
       }
     } catch (e) {
@@ -136,6 +140,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void logout(BuildContext context) {
     userDataBox.clear();
+    context.read<UserDataCubit>().clearUserData();
     CustomSnackBars.showSuccessSnackBar(context, 'Logged out successfully');
     goToLoginScreen();
   }

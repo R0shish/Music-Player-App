@@ -18,9 +18,12 @@ class UserDataCubit extends Cubit<UserDataState> {
       emit(UserDataLoaded(userData: User.fromJson(userData)));
     } catch (e) {
       emit(UserDataError(
-          user: User(name: '', email: '', playlists: []),
-          error: e.toString().split('Exception: ')[1]));
+          user: User(name: '', email: '', playlists: []), error: e.toString()));
     }
+  }
+
+  void clearUserData() {
+    emit(UserDataLoading(user: User(name: '', email: '', playlists: [])));
   }
 
   User get userData => state.user;

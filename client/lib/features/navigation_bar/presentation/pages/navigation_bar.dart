@@ -43,6 +43,13 @@ class _NavigationPageState extends State<NavigationPage> {
                     playlistCubit: context.read<PlaylistCubit>(),
                     audioPlayer: audioPlayer,
                   )),
+          BlocProvider(
+            create: (context) {
+              final cubit = UserDataCubit();
+              cubit.getUserData(context);
+              return cubit;
+            },
+          ),
         ],
         child: Scaffold(
             extendBody: true,

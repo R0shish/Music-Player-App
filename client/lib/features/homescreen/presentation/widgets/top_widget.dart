@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:music_player/core/presentation/cubit/cubit.dart';
 
 import '../../../../constants/constants.dart';
 
@@ -41,9 +43,19 @@ class TopWidget extends StatelessWidget {
                 'Good Morning,',
                 style: Theme.of(context).textTheme.bodyText1,
               ),
-              Text(
-                'Roshish Shrestha',
-                style: Theme.of(context).textTheme.headline2,
+              BlocBuilder<UserDataCubit, UserDataState>(
+                builder: (context, state) {
+                  if (state is UserDataLoading) {
+                    return Text(
+                      'Loading...',
+                      style: Theme.of(context).textTheme.headline2,
+                    );
+                  }
+                  return Text(
+                    state.user.name == '' ? 'Guest User' : state.user.name,
+                    style: Theme.of(context).textTheme.headline2,
+                  );
+                },
               ),
               SizedBox(height: deviceWidth * 0.01),
             ],

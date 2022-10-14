@@ -19,6 +19,6 @@ class UserDataSourceImpl implements UserDataSource {
             .read<AuthenticationCubit>()
             .userDataBox
             .get('access_token'));
-    return Future.value(response);
+    return response;
   }
 }

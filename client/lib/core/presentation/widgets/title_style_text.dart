@@ -33,6 +33,7 @@ class TitleStyleText extends StatelessWidget {
                 color: color1,
                 fontSize: fontSize,
                 fontWeight: fontWeight,
+                fontFamily: 'Montserrat',
               ),
             ),
             TextSpan(
@@ -41,6 +42,7 @@ class TitleStyleText extends StatelessWidget {
                   color: color2,
                   fontSize: fontSize,
                   fontWeight: fontWeight,
+                  fontFamily: 'Montserrat',
                 )),
           ],
         ));
