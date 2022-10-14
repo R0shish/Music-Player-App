@@ -44,12 +44,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       });
       emit(state.copyWith(isLoading: false));
       if (!mounted) return;
-      if (jsonResponse == 'Login successful') {
-        CustomSnackBars.showSuccessSnackBar(context, jsonResponse);
+      if (jsonResponse['message'] == 'Login successful') {
+        CustomSnackBars.showSuccessSnackBar(context, jsonResponse['message']);
         emit(const AuthenticationState(
             currentScreen: ProfileScreen(), isLoggedIn: true));
       } else {
-        CustomSnackBars.showErrorSnackBar(context, jsonResponse);
+        CustomSnackBars.showErrorSnackBar(context, jsonResponse['message']);
       }
     } catch (e) {
       CustomSnackBars.showErrorSnackBar(
@@ -89,12 +89,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       });
       emit(state.copyWith(isLoading: false));
       if (!mounted) return;
-      if (jsonResponse == 'Registered successfully') {
-        CustomSnackBars.showSuccessSnackBar(context, jsonResponse,
+      if (jsonResponse['message'] == 'Registered successfully') {
+        CustomSnackBars.showSuccessSnackBar(context, jsonResponse['message'],
             showConfetti: true);
         emit(const AuthenticationState(currentScreen: LoginScreen()));
       } else {
-        CustomSnackBars.showErrorSnackBar(context, jsonResponse);
+        CustomSnackBars.showErrorSnackBar(context, jsonResponse['message']);
       }
     } catch (e) {
       CustomSnackBars.showErrorSnackBar(

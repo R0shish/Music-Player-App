@@ -10,14 +10,16 @@ part 'playlist_state.dart';
 class PlaylistCubit extends Cubit<PlaylistState> {
   PlaylistCubit() : super(const PlaylistLoading(playlist: []));
 
-  late final PlaylistDataSource playlistDataSource = PlaylistDataSourceImpl();
+  late final PlaylistDataSource playlistDataSource =
+      SuggestedPlaylistDataSourceImpl();
 
   void getPlaylist() async {
     try {
       final playlist = await playlistDataSource.getPlaylist();
       emit(PlaylistLoaded(playlistData: playlist));
     } catch (e) {
-      emit(PlaylistError(playlist: playlist, error: e.toString()));
+      emit(PlaylistError(
+          playlist: playlist, error: e.toString().split('Exception: ')[1]));
     }
   }
 

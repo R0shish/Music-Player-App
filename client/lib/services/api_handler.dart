@@ -1,14 +1,26 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<String> apiHandler(
+Future<dynamic> apiHandler(
   String url,
   String method, {
-  Map<String, String>? headers = const {"Content-Type": "application/json"},
+  Map<String, String>? headers,
   Map<String, String>? body,
+  bool authorization = false,
+  String? token,
 }) async {
   method = method.toUpperCase();
   http.Response response;
+
+  if (authorization) {
+    if (token == null) throw Exception('Token is null');
+    headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+  } else {
+    headers = {'Content-Type': 'application/json'};
+  }
 
   if (method == 'GET') {
     response = await http.get(
@@ -37,8 +49,8 @@ Future<String> apiHandler(
   }
 
   if (response.statusCode == 200) {
-    return jsonDecode(response.body)['message'];
+    return jsonDecode(response.body);
   } else {
-    return 'Error 500: Internal Server Error';
+    throw Exception('Error 500: Internal Server Error');
   }
 }
