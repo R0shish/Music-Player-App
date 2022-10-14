@@ -45,7 +45,7 @@ class TopWidget extends StatelessWidget {
               ),
               BlocBuilder<UserDataCubit, UserDataState>(
                 builder: (context, state) {
-                  if (!state.isLoggedIn || state is UserDataError) {
+                  if (!state.isLoggedIn) {
                     return Text(
                       'Guest User',
                       style: Theme.of(context).textTheme.headline2,

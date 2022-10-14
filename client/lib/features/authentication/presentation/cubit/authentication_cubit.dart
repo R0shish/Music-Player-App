@@ -57,7 +57,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
         if (!mounted) return;
         CustomSnackBars.showSuccessSnackBar(context, jsonResponse['message']);
-        context.read<UserDataCubit>().getUserData(context);
+        context
+            .read<UserDataCubit>()
+            .getUserData(context, jsonResponse['access_token']);
 
         emit(const AuthenticationState(
             currentScreen: ProfileScreen(), isLoggedIn: true));

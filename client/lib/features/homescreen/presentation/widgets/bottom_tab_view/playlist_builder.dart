@@ -18,7 +18,7 @@ class PlaylistBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: isGrid ? null : deviceHeight * 0.23,
+      height: isGrid ? null : deviceHeight * 0.25,
       child: isGrid
           ? GridView.builder(
               shrinkWrap: true,
@@ -26,6 +26,7 @@ class PlaylistBuilder extends StatelessWidget {
               itemCount: playlistData.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
                 crossAxisCount: 2,
               ),
               itemBuilder: ((context, index) {
@@ -36,7 +37,10 @@ class PlaylistBuilder extends StatelessWidget {
                       );
                 int noOfSongs = playlist.songs.length;
                 return _Container(
-                    playlist: playlist, noOfSongs: noOfSongs, index: index);
+                    playlist: playlist,
+                    noOfSongs: noOfSongs,
+                    index: index,
+                    isGrid: isGrid);
               }),
             )
           : ListView.builder(
@@ -50,7 +54,10 @@ class PlaylistBuilder extends StatelessWidget {
                       );
                 int noOfSongs = playlist.songs.length;
                 return _Container(
-                    playlist: playlist, noOfSongs: noOfSongs, index: index);
+                    playlist: playlist,
+                    noOfSongs: noOfSongs,
+                    index: index,
+                    isGrid: isGrid);
               }),
             ),
     );
@@ -63,11 +70,13 @@ class _Container extends StatelessWidget {
     required this.playlist,
     required this.noOfSongs,
     required this.index,
+    required this.isGrid,
   }) : super(key: key);
 
   final Playlist playlist;
   final int noOfSongs;
   final int index;
+  final bool isGrid;
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +99,7 @@ class _Container extends StatelessWidget {
             title: playlist.title,
             subTitle: '$noOfSongs Song${noOfSongs > 1 ? 's' : ''}',
             albumArt: playlist.image,
+            marginRight: isGrid ? 0 : 16,
             backgroundImage: null,
             onPlayTap: () {
               context.read<NowPlayingCubit>().updateSong(

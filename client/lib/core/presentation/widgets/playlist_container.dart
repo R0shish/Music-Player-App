@@ -80,33 +80,33 @@ class PlaylistContainer extends StatelessWidget {
                 )
             ],
           ),
-          const Spacer(),
-          Container(
-            alignment: Alignment.bottomRight,
-            height: deviceHeight * 0.13,
-            width: deviceWidth * 0.4,
-            decoration: albumArt != null
-                ? BoxDecoration(
-                    color: AppColor.primary,
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image: CachedNetworkImageProvider(albumArt!),
-                        fit: BoxFit.cover),
-                  )
-                : null,
+          SizedBox(height: deviceHeight * 0.01),
+          Expanded(
             child: Container(
-              margin: const EdgeInsets.all(2),
-              width: deviceWidth * 0.08,
-              height: deviceHeight * 0.04,
-              decoration: const BoxDecoration(
-                color: AppColor.lightBlack,
-                shape: BoxShape.circle,
-              ),
-              child: GestureDetector(
-                onTap: onPlayTap,
-                child: const Icon(
-                  Icons.play_arrow,
-                  color: AppColor.lightGrey,
+              alignment: Alignment.bottomRight,
+              decoration: albumArt != null
+                  ? BoxDecoration(
+                      color: AppColor.primary,
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          image: CachedNetworkImageProvider(albumArt!),
+                          fit: BoxFit.cover),
+                    )
+                  : null,
+              child: Container(
+                margin: const EdgeInsets.all(2),
+                width: deviceWidth * 0.08,
+                height: deviceHeight * 0.04,
+                decoration: const BoxDecoration(
+                  color: AppColor.lightBlack,
+                  shape: BoxShape.circle,
+                ),
+                child: GestureDetector(
+                  onTap: onPlayTap,
+                  child: const Icon(
+                    Icons.play_arrow,
+                    color: AppColor.lightGrey,
+                  ),
                 ),
               ),
             ),

@@ -13,9 +13,11 @@ class UserDataCubit extends Cubit<UserDataState> {
 
   late final UserDataSource userDataSource = UserDataSourceImpl();
 
-  void getUserData(BuildContext context) async {
+  void getUserData(BuildContext context, String accessToken) async {
     try {
-      final userData = await (userDataSource.getUserData(context));
+      emit(UserDataLoading(
+          user: User(name: '', email: '', playlists: []), isLoggedIn: false));
+      final userData = await userDataSource.getUserData(context, accessToken);
       emit(UserDataLoaded(userData: User.fromJson(userData)));
     } catch (e) {
       emit(UserDataError(
