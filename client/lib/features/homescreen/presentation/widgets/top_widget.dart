@@ -45,14 +45,19 @@ class TopWidget extends StatelessWidget {
               ),
               BlocBuilder<UserDataCubit, UserDataState>(
                 builder: (context, state) {
-                  if (state is UserDataLoading) {
+                  if (!state.isLoggedIn || state is UserDataError) {
+                    return Text(
+                      'Guest User',
+                      style: Theme.of(context).textTheme.headline2,
+                    );
+                  } else if (state is UserDataLoading) {
                     return Text(
                       'Loading...',
                       style: Theme.of(context).textTheme.headline2,
                     );
                   }
                   return Text(
-                    state.user.name == '' ? 'Guest User' : state.user.name,
+                    state.user.name,
                     style: Theme.of(context).textTheme.headline2,
                   );
                 },

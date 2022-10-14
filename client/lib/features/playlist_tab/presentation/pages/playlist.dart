@@ -20,8 +20,7 @@ class PlaylistPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: deviceHeight * 0.06),
-                Text('Your Playlist',
-                    style: Theme.of(context).textTheme.headline1),
+                Text('Playlist', style: Theme.of(context).textTheme.headline1),
                 SizedBox(height: deviceHeight * 0.02),
                 const SearchRow(),
                 SizedBox(height: deviceHeight * 0.02),

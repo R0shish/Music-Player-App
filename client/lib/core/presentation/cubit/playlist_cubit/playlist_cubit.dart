@@ -19,7 +19,8 @@ class PlaylistCubit extends Cubit<PlaylistState> {
       emit(PlaylistLoaded(playlistData: playlist));
     } catch (e) {
       emit(PlaylistError(
-          playlist: playlist, error: e.toString().split('Exception: ')[1]));
+          playlist: playlist,
+          error: 'Please check your internet\nand try again later!'));
     }
   }
 

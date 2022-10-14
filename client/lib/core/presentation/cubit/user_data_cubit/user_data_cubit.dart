@@ -8,7 +8,8 @@ part 'user_data_state.dart';
 
 class UserDataCubit extends Cubit<UserDataState> {
   UserDataCubit()
-      : super(UserDataLoading(user: User(name: '', email: '', playlists: [])));
+      : super(UserDataLoading(
+            user: User(name: '', email: '', playlists: []), isLoggedIn: false));
 
   late final UserDataSource userDataSource = UserDataSourceImpl();
 
@@ -18,12 +19,15 @@ class UserDataCubit extends Cubit<UserDataState> {
       emit(UserDataLoaded(userData: User.fromJson(userData)));
     } catch (e) {
       emit(UserDataError(
-          user: User(name: '', email: '', playlists: []), error: e.toString()));
+          user: User(name: '', email: '', playlists: []),
+          error: e.toString(),
+          isLoggedIn: false));
     }
   }
 
   void clearUserData() {
-    emit(UserDataLoading(user: User(name: '', email: '', playlists: [])));
+    emit(UserDataLoading(
+        user: User(name: '', email: '', playlists: []), isLoggedIn: false));
   }
 
   User get userData => state.user;

@@ -21,13 +21,13 @@ class PlaylistContainer extends StatelessWidget {
     required this.onPlayTap,
     this.heightFactor = 0.24,
     this.widthFactor = 0.48,
-    this.marginRight = 16.0,
+    this.marginRight = 14.0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(15),
       height: deviceHeight * heightFactor,
       width: deviceWidth * widthFactor,
       margin: EdgeInsets.only(right: marginRight),
@@ -53,7 +53,7 @@ class PlaylistContainer extends StatelessWidget {
               Container(
                 constraints: BoxConstraints(
                     maxWidth: albumArt != null
-                        ? deviceWidth * 0.3
+                        ? deviceWidth * 0.265
                         : deviceWidth * 0.38),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +83,7 @@ class PlaylistContainer extends StatelessWidget {
           const Spacer(),
           Container(
             alignment: Alignment.bottomRight,
-            height: deviceHeight * 0.11,
+            height: deviceHeight * 0.13,
             width: deviceWidth * 0.4,
             decoration: albumArt != null
                 ? BoxDecoration(
