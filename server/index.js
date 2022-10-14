@@ -18,10 +18,14 @@ mongoose.connection
 
 app.use(cors({origin: '*'}));
 
+const auth = require('./middleware/auth');
 const playlistRouter = require("./routes/playlistRouter");
-app.use("/api/playlist", playlistRouter);
+app.use("/api/playlist", auth, playlistRouter);
 
 const authRouter = require("./routes/authRouter");
 app.use("/api/auth", authRouter);
+
+const suggestedPlaylist = require("./routes/suggestedRoute");
+app.use("/api/suggestion", suggestedPlaylist);
 
 app.listen(PORT, () => console.log(`Listening to port ${PORT}`))
