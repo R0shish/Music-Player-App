@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:music_player/constants/constants.dart';
 import 'package:music_player/core/presentation/widgets/widgets.dart';
 
-import '../../../core/presentation/cubit/cubit.dart';
+import '../../../../core/presentation/cubit/cubit.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -123,7 +123,7 @@ class ProfileScreen extends StatelessWidget {
                   child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: AppColor.grey,
+                        color: AppColor.lightBlack,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: ListView.builder(

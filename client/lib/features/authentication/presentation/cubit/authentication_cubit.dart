@@ -5,7 +5,7 @@ import 'package:music_player/constants/constants.dart';
 import 'package:music_player/core/presentation/cubit/cubit.dart';
 import 'package:music_player/core/presentation/widgets/custom_snackbar.dart';
 import 'package:music_player/features/authentication/presentation/widgets/login_screen.dart';
-import 'package:music_player/features/profile/presentation/profile.dart';
+import 'package:music_player/features/profile/presentation/pages/profile.dart';
 import 'package:music_player/services/api_handler.dart';
 
 import '../widgets/register_screen.dart';
@@ -16,9 +16,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   final Box userDataBox;
   AuthenticationCubit({required this.userDataBox})
       : super(AuthenticationState(
-            currentScreen: userDataBox.containsKey('access_token')
-                ? const ProfileScreen()
-                : const LoginScreen()));
+            currentScreen: userDataBox.get('access_token') == '' ||
+                    !userDataBox.containsKey('access_token')
+                ? const LoginScreen()
+                : const ProfileScreen()));
 
   Widget get currentScreen => state.currentScreen;
 
