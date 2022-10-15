@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:music_player/constants/api_constant.dart';
 
 Future<dynamic> apiHandler(
   String url,
@@ -7,20 +9,16 @@ Future<dynamic> apiHandler(
   Map<String, String>? headers,
   Map<String, String>? body,
   bool authorization = false,
-  String? token,
+  Box? userDataBox,
 }) async {
   method = method.toUpperCase();
   http.Response response;
+  String token = userDataBox?.get('access_token') ?? '';
 
-  if (authorization) {
-    if (token == null) throw Exception('Token is null');
-    headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
-  } else {
-    headers = {'Content-Type': 'application/json'};
-  }
+  Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer $token',
+  };
 
   if (method == 'GET') {
     response = await http.get(
@@ -50,7 +48,26 @@ Future<dynamic> apiHandler(
 
   if (response.statusCode == 200) {
     return jsonDecode(response.body);
+  } else if (response.statusCode == 403) {
+    await regenerateAccessToken(headers, userDataBox!);
+    apiHandler(
+      url,
+      method,
+      headers: headers,
+      body: body,
+      authorization: authorization,
+      userDataBox: userDataBox,
+    );
   } else {
     throw Exception('Error 500: Internal Server Error');
   }
+}
+
+regenerateAccessToken(Map<String, String> headers, Box userDataBox) async {
+  Map<String, String> body = {
+    'refresh_token': userDataBox.get('refresh_token'),
+  };
+  var response = await apiHandler(Api.regenerateToken, 'POST',
+      headers: headers, body: body);
+  userDataBox.put('access_token', response['access_token']);
 }

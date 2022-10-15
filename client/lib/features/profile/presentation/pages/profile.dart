@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_player/constants/constants.dart';
 
 import '../../../../core/presentation/cubit/cubit.dart';
+import '../../data/datasource/settings_data.dart';
 import '../widgets/widgets.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -10,34 +11,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> setting = [
-      {
-        "title": 'Settings',
-        "icon": Icons.settings,
-        "onTap": () => debugPrint('TO:DO Settings'),
-      },
-      {
-        "title": 'Billing Details',
-        "icon": Icons.credit_card,
-        "onTap": () => debugPrint('TO:DO Billing Details'),
-      },
-      {
-        "title": 'User Management',
-        "icon": Icons.person,
-        "onTap": () => debugPrint('TO:DO User Management'),
-      },
-      {
-        "title": 'Information',
-        "icon": Icons.info,
-        "onTap": () => debugPrint('TO:DO Information'),
-      },
-      {
-        "title": 'Log out',
-        "icon": Icons.logout,
-        "onTap": () => context.read<AuthenticationCubit>().logout(context)
-      },
-    ];
-
     return BlocBuilder<UserDataCubit, UserDataState>(
       builder: (context, state) {
         if (state is UserDataLoading) {
@@ -57,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(height: deviceHeight * 0.01),
                 UserInfoRow(state: state),
                 SizedBox(height: deviceHeight * 0.04),
-                SettingsContainer(setting: setting),
+                SettingsContainer(setting: SettingsData.settingData(context)),
               ],
             ),
           );

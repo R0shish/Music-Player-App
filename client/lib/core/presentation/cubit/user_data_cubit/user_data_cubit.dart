@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:music_player/core/data/datasource/user_datasource.dart';
 import 'package:music_player/core/data/model/user_data_model.dart';
 
@@ -13,11 +14,12 @@ class UserDataCubit extends Cubit<UserDataState> {
 
   late final UserDataSource userDataSource = UserDataSourceImpl();
 
-  void getUserData(BuildContext context, String accessToken) async {
+  void getUserData(BuildContext context, Box userDataBox) async {
     try {
       emit(UserDataLoading(
           user: User(name: '', email: '', playlists: []), isLoggedIn: false));
-      final userData = await userDataSource.getUserData(context, accessToken);
+      final userData =
+          await userDataSource.getUserData(context, userDataBox: userDataBox);
       emit(UserDataLoaded(userData: User.fromJson(userData)));
     } catch (e) {
       emit(UserDataError(

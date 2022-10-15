@@ -46,7 +46,7 @@ class _NavigationPageState extends State<NavigationPage> {
           BlocProvider(
             create: (context) {
               final cubit = UserDataCubit();
-              cubit.getUserData(context, userDataBox.get('access_token') ?? '');
+              cubit.getUserData(context, userDataBox);
               return cubit;
             },
           ),
