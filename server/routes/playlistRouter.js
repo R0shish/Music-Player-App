@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { count } = require('../models/user');
 const User = require('../models/user');
 
 router.post('/createPlaylist', async (req, res) => {
@@ -28,9 +27,6 @@ router.delete('/deletePlaylist', async (req, res) => {
         const user = await User.findById(user_id);
         user.playlists = user.playlists.filter(playlist => playlist._id != playlist_id);
         await user.save();
-        if (count == 0) {
-            return res.status(500).json({ error: "Playlist not found" });
-        }
         res.json({ message: 'Playlist deleted' });
     } catch (error) {
         res.status(500).json({ error: error.message });
