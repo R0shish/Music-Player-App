@@ -9,13 +9,14 @@ class Api {
   static String baseURL = "https://flutter-music-player-app.herokuapp.com";
 
   // Auth
-  static String login = "$baseURL/api/auth/login";
-  static String register = "$baseURL/api/auth/register";
-  static String regenerateToken = "$baseURL/api/auth/regenerateToken";
+  static String auth = "$baseURL/api/auth";
+  static String login = "$auth/login";
+  static String register = "$auth/register";
+  static String regenerateToken = "$auth/regenerateToken";
 
   // User
   static String user = "$baseURL/api/user";
-  static String userData = "$baseURL/api/user/getUserData";
+  static String userData = "$user/getUserData";
 
   // Suggested
   static String suggestion = "$baseURL/api/suggestion";
