@@ -16,11 +16,11 @@ npm run dev
 
 ### 1. Authentication
 
-- #### GET /api/auth/register
+- #### POST /api/auth/register
 
   Register a new user.
 
-  ##### Parameters
+  ##### Body
 
   | Name     | Type   | Description |
   | -------- | ------ | ----------- |
@@ -28,19 +28,81 @@ npm run dev
   | email    | string | Email       |
   | password | string | Password    |
 
-- #### GET /api/auth/login
+- #### POST /api/auth/login
 
   Login a user.
 
-  ##### Parameters
+  ##### Body
 
   | Name     | Type   | Description |
   | -------- | ------ | ----------- |
   | email    | string | Email       |
   | password | string | Password    |
+  
+- #### POST /api/auth/regenerateToken
 
-### 2. Playlist
+  Regenerate access token.
 
-- #### GET /api/playlist/getPlaylist
+  ##### Body
 
-  Returns the playlist as JSON.
+  | Name          | Type   | Description      |
+  | ------------- | ------ | ---------------- |
+  | refresh_token | string | Refresh Token    |
+  
+
+### 2. User
+
+- #### GET /api/user/getUserData
+
+  Get user data.
+  
+  ##### Header
+
+  | Name          | Type   | Description         |
+  | ------------- | ------ | ------------------- |
+  | Authorization | string | Bearer access_token |
+  
+ ### 3. Suggested
+
+- #### GET /api/suggestion/getSuggestedPlaylist
+
+  Get suggested playlist.
+  
+ ### 4. Playlist
+
+- #### POST api/playlist/createPlaylist
+
+  Create a playlist.
+  
+  ##### Header
+
+  | Name          | Type   | Description         |
+  | ------------- | ------ | ------------------- |
+  | Authorization | string | Bearer access_token |
+
+
+  ##### Body
+
+  | Name             | Type   | Description      |
+  | ---------------- | ------ | ---------------- |
+  | title            | string | Playlist Name    |
+  | image (optional) | string | Image Url        |
+  | songs (optional) | Song   | Songs Data       |
+
+- #### DELETE api/playlist/deletePlaylist
+
+  Delete a playlist.
+  
+  ##### Header
+
+  | Name          | Type   | Description         |
+  | ------------- | ------ | ------------------- |
+  | Authorization | string | Bearer access_token |
+
+
+  ##### Body
+
+  | Name             | Type   | Description      |
+  | ---------------- | ------ | ---------------- |
+  | playlist_id      | string | Playlist ID      |
+ 
