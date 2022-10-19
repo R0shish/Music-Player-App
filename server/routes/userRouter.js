@@ -16,4 +16,14 @@ router.get('/getUserData', async (req, res) => {
     }
 });
 
+router.delete('/deleteUser', async (req, res) => {
+    const { user_id } = req.data;
+    try {
+        await User.findByIdAndDelete(user_id);
+        res.json({ message: 'User deleted' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 module.exports = router;
