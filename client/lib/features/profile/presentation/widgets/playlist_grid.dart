@@ -47,7 +47,8 @@ class PlaylistGrid extends StatelessWidget {
                       CustomRoundedButton(
                         text: 'Create Playlist',
                         onPressed: () {},
-                      )
+                      ),
+                      SizedBox(height: deviceHeight * 0.08),
                     ],
                   ),
                 );

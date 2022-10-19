@@ -26,11 +26,10 @@ class ProfileScreen extends StatelessWidget {
                 padding: EdgeInsets.all(deviceWidth * 0.02),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const LastPlayedRow(),
-                    const _PageDivider(),
-                    const PlaylistGrid(),
-                    SizedBox(height: deviceHeight * 0.08),
+                  children: const [
+                    LastPlayedRow(),
+                    _PageDivider(),
+                    PlaylistGrid(),
                   ],
                 ),
               )
