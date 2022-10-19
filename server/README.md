@@ -70,9 +70,9 @@ npm run dev
   
  ### 4. Playlist
 
-- #### POST api/playlist/createPlaylist
+- #### PUT api/playlist/addSongs
 
-  Create a playlist.
+  Add songs to playlist.
   
   ##### Header
 
@@ -85,9 +85,27 @@ npm run dev
 
   | Name             | Type   | Description      |
   | ---------------- | ------ | ---------------- |
-  | title            | string | Playlist Name    |
-  | image (optional) | string | Image Url        |
-  | songs (optional) | Song   | Songs Data       |
+  | playlist_id      | string | Playlist Name    |
+  | songs            | Song   | Songs Data       |
+  
+
+- #### DELETE api/playlist/removeSongs
+
+  Delete songs from playlist.
+  
+  ##### Header
+
+  | Name          | Type   | Description         |
+  | ------------- | ------ | ------------------- |
+  | Authorization | string | Bearer access_token |
+
+  ##### Body
+
+  | Name             | Type   | Description      |
+  | ---------------- | ------ | ---------------- |
+  | playlist_id      | string | Playlist Name    |
+  | songs            | Song   | Songs Data       |
+  
 
 - #### DELETE api/playlist/deletePlaylist
 
