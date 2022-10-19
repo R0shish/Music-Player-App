@@ -21,4 +21,11 @@ class Api {
   // Suggested
   static String suggestion = "$baseURL/api/suggestion";
   static String getSuggestedPlaylist = "$suggestion/getSuggestedPlaylist";
+
+  // Playlist
+  static String playlist = "$baseURL/api/playlist";
+  static String createPlaylist = "$playlist/createPlaylist";
+  static String addSongs = "$playlist/addSongs";
+  static String removeSongs = "$playlist/removeSongs";
+  static String deletePlaylist = "$playlist/deletePlaylist";
 }
