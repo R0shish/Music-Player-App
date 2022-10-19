@@ -94,12 +94,6 @@ class _NavigationPageState extends State<NavigationPage> {
                                   label: "Explore"),
                               BottomNavigationBarItem(
                                   icon: context.read<NavbarCubit>().getIcon(
-                                      index: 2,
-                                      selectedIcon: Icons.bookmark,
-                                      unselectedIcon: Icons.bookmark_outline),
-                                  label: "Playlist"),
-                              BottomNavigationBarItem(
-                                  icon: context.read<NavbarCubit>().getIcon(
                                       index: 3,
                                       selectedIcon: Icons.person,
                                       unselectedIcon: Icons.person_outline),

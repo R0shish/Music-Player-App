@@ -6,3 +6,4 @@ export 'progress_bar.dart';
 export 'title_style_text.dart';
 export 'text_title.dart';
 export 'elevated_button_style.dart';
+export 'custom_rounded_button.dart';

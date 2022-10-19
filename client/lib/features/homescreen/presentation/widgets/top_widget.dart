@@ -26,11 +26,16 @@ class TopWidget extends StatelessWidget {
       child: Row(children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: CircleAvatar(
-            radius: deviceWidth * 0.05,
-            foregroundImage: const CachedNetworkImageProvider(
-              'https://i.pinimg.com/originals/9d/0a/0e/9d0a0e0f1798ad455cb4be47f8da992d.jpg',
-            ),
+          child: BlocBuilder<UserDataCubit, UserDataState>(
+            builder: (context, state) {
+              return CircleAvatar(
+                radius: deviceWidth * 0.05,
+                foregroundImage: CachedNetworkImageProvider(
+                  state.user.avatar ??
+                      'https://sites.cns.utexas.edu/sites/default/files/geometry_lab/files/default_person.jpg?m=1654796730',
+                ),
+              );
+            },
           ),
         ),
         Expanded(

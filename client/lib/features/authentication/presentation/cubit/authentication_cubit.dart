@@ -141,6 +141,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void logout(BuildContext context) {
     userDataBox.clear();
+
     context.read<UserDataCubit>().clearUserData();
     CustomSnackBars.showSuccessSnackBar(context, 'Logged out successfully');
     goToLoginScreen();

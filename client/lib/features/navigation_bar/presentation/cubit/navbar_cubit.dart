@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_player/features/authentication/presentation/pages/authentication.dart';
 
 import '../../../homescreen/presentation/pages/homescreen.dart';
-import '../../../playlist_tab/presentation/pages/playlist.dart';
 
 part 'navbar_state.dart';
 
@@ -13,7 +12,6 @@ class NavbarCubit extends Cubit<NavbarState> {
       : super(const NavbarState(currentIndex: 0, screens: [
           Homescreen(),
           Homescreen(),
-          PlaylistPage(),
           Authentication(),
         ]));
 

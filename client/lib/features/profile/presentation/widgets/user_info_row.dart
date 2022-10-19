@@ -14,25 +14,25 @@ class UserInfoRow extends StatelessWidget {
         Expanded(
           child: TitleStyleText(
             text1: '${state.userData.playlists.length}',
-            text2: '\nPlaylists',
+            text2: '\n\nPlaylists',
             textAlign: TextAlign.center,
-            fontSize: 20,
+            fontSize: 16,
           ),
         ),
         const Expanded(
           child: TitleStyleText(
-            text1: '0\n',
-            text2: 'Followers',
+            text1: '0',
+            text2: '\n\nFollowers',
             textAlign: TextAlign.center,
-            fontSize: 20,
+            fontSize: 16,
           ),
         ),
         const Expanded(
           child: TitleStyleText(
-            text1: '0\n',
-            text2: 'Following',
+            text1: '0',
+            text2: '\n\nFollowing',
             textAlign: TextAlign.center,
-            fontSize: 20,
+            fontSize: 16,
           ),
         ),
       ],

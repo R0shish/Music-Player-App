@@ -25,8 +25,9 @@ class LastPlayedRow extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   AlbumArtContainer(
-                    height: deviceHeight * 0.1,
-                    width: deviceWidth * 0.22,
+                    height: deviceHeight * 0.07,
+                    width: deviceWidth * 0.15,
+                    borderRadius: 12,
                   ),
                   SizedBox(width: deviceWidth * 0.03),
                   Expanded(

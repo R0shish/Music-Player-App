@@ -6,11 +6,13 @@ import '../cubit/now_playing_cubit/now_playing_cubit.dart';
 class AlbumArtContainer extends StatelessWidget {
   final double width;
   final double height;
-  const AlbumArtContainer({
-    Key? key,
-    required this.width,
-    required this.height,
-  }) : super(key: key);
+  final double borderRadius;
+  const AlbumArtContainer(
+      {Key? key,
+      required this.width,
+      required this.height,
+      this.borderRadius = 20})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class AlbumArtContainer extends StatelessWidget {
               image: DecorationImage(
                   image: context.read<NowPlayingCubit>().songImage,
                   fit: BoxFit.cover),
-              borderRadius: const BorderRadius.all(Radius.circular(20))),
+              borderRadius: BorderRadius.all(Radius.circular(borderRadius))),
         );
       },
     );

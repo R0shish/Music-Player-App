@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_player/constants/constants.dart';
 
 import '../../../../core/presentation/cubit/cubit.dart';
-import '../../data/datasource/settings_data.dart';
 import '../widgets/widgets.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -16,23 +15,26 @@ class ProfileScreen extends StatelessWidget {
         if (state is UserDataLoading) {
           return const LoadingWidget();
         } else if (state is UserDataLoaded) {
-          return SizedBox(
-            height: deviceHeight * 0.85,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TopWidget(state: state),
-                Divider(
-                  color: AppColor.secondary,
-                  endIndent: deviceWidth * 0.05,
-                  indent: deviceWidth * 0.05,
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TopWidget(state: state),
+              const _PageDivider(),
+              UserInfoRow(state: state),
+              const _PageDivider(),
+              Padding(
+                padding: EdgeInsets.all(deviceWidth * 0.02),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const LastPlayedRow(),
+                    const _PageDivider(),
+                    const PlaylistGrid(),
+                    SizedBox(height: deviceHeight * 0.08),
+                  ],
                 ),
-                SizedBox(height: deviceHeight * 0.01),
-                UserInfoRow(state: state),
-                SizedBox(height: deviceHeight * 0.04),
-                SettingsContainer(setting: SettingsData.settingData(context)),
-              ],
-            ),
+              )
+            ],
           );
         } else if (state is UserDataError) {
           return Center(child: Text(state.error.toString()));
@@ -40,6 +42,23 @@ class ProfileScreen extends StatelessWidget {
           return const Center(child: Text('Something went wrong'));
         }
       },
+    );
+  }
+}
+
+class _PageDivider extends StatelessWidget {
+  const _PageDivider({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      color: AppColor.secondary,
+      thickness: 0.1,
+      endIndent: deviceWidth * 0.01,
+      indent: deviceWidth * 0.01,
+      height: MediaQuery.of(context).size.height * 0.04,
     );
   }
 }
