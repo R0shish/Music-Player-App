@@ -17,6 +17,23 @@ router.post('/createPlaylist', async (req, res) => {
     }
 });
 
+router.post('/addSongs', async (req, res) => {
+    const {playlist_id, songs} = req.body;
+    if (!playlist_id) {
+        return res.status(400).json({ error: "Please enter the id of the playlist" });
+    }
+    const {user_id} = req.data;
+    try {
+        const user = await User.findById(user_id);
+        const playlist = user.playlists.id(playlist_id);
+        playlist.songs.push(...songs);
+        await user.save();
+        res.json({ message: 'Songs added to playlist' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.delete('/deletePlaylist', async (req, res) => {
     const { playlist_id } = req.body;
     if (!playlist_id) {
