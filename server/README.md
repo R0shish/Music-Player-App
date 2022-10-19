@@ -62,6 +62,16 @@ npm run dev
   | ------------- | ------ | ------------------- |
   | Authorization | string | Bearer access_token |
   
+- #### DELETE /api/user/deleteUser
+
+  Delete user account and data.
+  
+  ##### Header
+
+  | Name          | Type   | Description         |
+  | ------------- | ------ | ------------------- |
+  | Authorization | string | Bearer access_token |
+  
  ### 3. Suggested
 
 - #### GET /api/suggestion/getSuggestedPlaylist
