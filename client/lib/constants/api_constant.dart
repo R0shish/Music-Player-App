@@ -17,6 +17,7 @@ class Api {
   // User
   static String user = "$baseURL/api/user";
   static String userData = "$user/getUserData";
+  static String deleteUser = "$user/deleteUser";
 
   // Suggested
   static String suggestion = "$baseURL/api/suggestion";
