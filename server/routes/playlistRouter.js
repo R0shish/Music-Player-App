@@ -17,7 +17,7 @@ router.post('/createPlaylist', async (req, res) => {
     }
 });
 
-router.post('/addSongs', async (req, res) => {
+router.put('/addSongs', async (req, res) => {
     const {playlist_id, songs} = req.body;
     if (!playlist_id) {
         return res.status(400).json({ error: "Please enter the id of the playlist" });
@@ -34,7 +34,7 @@ router.post('/addSongs', async (req, res) => {
     }
 });
 
-router.post('/removeSongs', async (req, res) => {
+router.delete('/removeSongs', async (req, res) => {
     const {playlist_id, songs} = req.body;
     if (!playlist_id) {
         return res.status(400).json({ error: "Please enter the id of the playlist" });
