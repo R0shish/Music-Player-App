@@ -50,7 +50,7 @@ Future<dynamic> apiHandler(
     return jsonDecode(response.body);
   } else if (response.statusCode == 403) {
     await regenerateAccessToken(headers, userDataBox!);
-    apiHandler(
+    return apiHandler(
       url,
       method,
       headers: headers,
