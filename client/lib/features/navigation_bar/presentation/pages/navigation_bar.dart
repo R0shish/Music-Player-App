@@ -29,7 +29,7 @@ class _NavigationPageState extends State<NavigationPage> {
           BlocProvider(
               create: (context) => RepeatCubit(audioPlayer: audioPlayer)),
           BlocProvider(create: (context) {
-            final cubit = PlaylistCubit();
+            final cubit = PlaylistCubit(userDataBox: userDataBox);
             cubit.getPlaylist();
             return cubit;
           }),

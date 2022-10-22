@@ -17,9 +17,21 @@ class PlaylistGrid extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const TextTitle(
-          text: 'Your Playlist',
-          fontSize: 18,
+        Row(
+          children: [
+            const TextTitle(
+              text: 'Your Playlist',
+              fontSize: 18,
+            ),
+            const Spacer(),
+            GestureDetector(
+                onTap: () {},
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                )),
+            SizedBox(width: deviceWidth * 0.04),
+          ],
         ),
         BlocBuilder<UserDataCubit, UserDataState>(
           builder: (context, state) {

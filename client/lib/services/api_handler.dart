@@ -41,6 +41,7 @@ Future<dynamic> apiHandler(
     response = await http.delete(
       Uri.parse(url),
       headers: headers,
+      body: jsonEncode(body),
     );
   } else {
     throw Exception('Invalid method');
